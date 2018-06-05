@@ -139,4 +139,9 @@ public abstract class EnemyTank {
     public int getHealth() {
         return health;
     }
+
+    public void reduceHealth(int reduce) {
+        health -= reduce ;
+        System.out.println("Reduce : " + reduce);
+    }
 }

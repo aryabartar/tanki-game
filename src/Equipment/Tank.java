@@ -86,14 +86,16 @@ public class Tank {
 
         }
 
-        if (canMove == true) {
-            this.locX = locX;
-            this.locY = locY;
+        if ((locX > 0) && (locX + xPixels< GameFrame.GAME_WIDTH) && (locY > 0) && (locY+yPixels < GameFrame.GAME_HEIGHT)) {
+            if (canMove == true) {
+                this.locX = locX;
+                this.locY = locY;
 
-            endLocX = locX + xPixels;
-            endLocY = locY + yPixels;
+                endLocX = locX + xPixels;
+                endLocY = locY + yPixels;
 
-            setGunLocation();
+                setGunLocation();
+            }
         }
 
     }

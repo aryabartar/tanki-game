@@ -1,5 +1,6 @@
 package Equipment;
 
+import Engine.GameFrame;
 import Equipment.Tank;
 
 public class Bullet {
@@ -8,6 +9,8 @@ public class Bullet {
     private int locY;
 
     public static final int BULLET_SPEED = 18;
+    public static final int DAMAGE = 2;
+
 
     private final int pixelX = 39;
     private final int pixelY = 10;
@@ -33,10 +36,16 @@ public class Bullet {
     public void move() {
         locX += Math.cos(radian) * BULLET_SPEED;
         locY += Math.sin(radian) * BULLET_SPEED;
-
     }
 
     public double getRadian() {
         return radian;
+    }
+
+    public boolean checkAlive () {
+        if ((locX > 0) && (locX < GameFrame.GAME_WIDTH) && (locY > 0) && (locY < GameFrame.GAME_HEIGHT))
+            return true ;
+        else
+            return  false ;
     }
 }

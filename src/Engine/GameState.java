@@ -39,16 +39,16 @@ public class GameState {
 
     private ArrayList<Bullet> bullets;
     private ArrayList<Rocket> rockets;
-    private static ArrayList<EnemyTank> enemyTanks ;
+    private static ArrayList<EnemyTank> enemyTanks;
 
     public GameState() {
 
         mainTank = new Tank();
         bullets = new ArrayList<>();
         rockets = new ArrayList<>();
-        enemyTanks = new ArrayList<>() ;
+        enemyTanks = new ArrayList<>();
 
-        enemyTanks.add(new StaticTankEasy(10 , 300 , 300)) ;
+        enemyTanks.add(new StaticTankEasy(10, 300, 300));
 
 
         gameOver = false;
@@ -77,7 +77,7 @@ public class GameState {
                 bullets.add(new Bullet(mainTank.getTankCenterX(), mainTank.getTankCenterY(), mainTank.getGunAndBodyRadian()));
             else {//rocket
                 rockets.add(new Rocket(mainTank.getTankCenterX(), mainTank.getTankCenterY(), mainTank.getGunAndBodyRadian()));
-        }
+            }
             mouseLeftClicked = !mouseLeftClicked;
         }
 
@@ -100,6 +100,10 @@ public class GameState {
         }
 
         setMainTankAndGunRadian();
+        checkShootHits();
+        removeDeadBullets();
+        removeDeadTanks();
+
     }
 
     private void setMainTankAndGunRadian() {
@@ -162,9 +166,57 @@ public class GameState {
                     break;
             }
         }
-
     }
 
+    /**
+     * This method will check if the bullets/rockets hit the enemy .
+     */
+    private void checkShootHits() {
+        for (EnemyTank enemyTank : enemyTanks) {
+            for (int i = 0; i < rockets.size(); i++) {
+                if ((rockets.get(i).getLocX() > enemyTank.getLocX()) && (rockets.get(i).getLocX() < enemyTank.getEndLocX()) && (rockets.get(i).getLocY() > enemyTank.getLocY()) && (rockets.get(i).getLocY() < enemyTank.getEndLocY())) {
+                    enemyTank.reduceHealth(Rocket.DAMAGE);
+                    rockets.remove(i);
+                    i--;
+                    System.out.println(enemyTank.getHealth());
+                }
+            }
+        }
+        for (EnemyTank enemyTank : enemyTanks) {
+            for (int i = 0; i < bullets.size(); i++) {
+                if ((bullets.get(i).getLocX() > enemyTank.getLocX())&& (bullets.get(i).getLocY() > enemyTank.getLocY()) && (bullets.get(i).getLocX() < enemyTank.getEndLocX())  && (bullets.get(i).getLocY() < enemyTank.getEndLocY())) {
+                    enemyTank.reduceHealth(Bullet.DAMAGE);
+                    bullets.remove(i);
+                    i--;
+                    System.out.println(enemyTank.getHealth());
+                }
+            }
+        }
+    }
+
+    private void removeDeadBullets() {
+        for (int i = 0; i < bullets.size(); i++) {
+            if (bullets.get(i).checkAlive() == false) {
+                bullets.remove(i);
+                i--;
+            }
+        }
+        for (int i = 0; i < rockets.size(); i++) {
+            if (rockets.get(i).checkAlive() == false) {
+                rockets.remove(i);
+                i--;
+            }
+        }
+    }
+
+    public void removeDeadTanks () {
+        for (int i = 0 ; i < enemyTanks.size() ; i++) {
+            if (enemyTanks.get(i).getHealth() == 0) {
+                enemyTanks.remove(i) ;
+                i-- ;
+            }
+        }
+    }
     /**
      * The mouse handler.
      */
