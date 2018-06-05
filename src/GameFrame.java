@@ -20,13 +20,14 @@ import javax.swing.JFrame;
  *
  * @author Seyed Mohammad Ghaffarian
  */
-public class GameFrame extends JFrame  {
+public class GameFrame extends JFrame {
 
     public static final int GAME_HEIGHT = 720;                  // 720p game resolution
     public static final int GAME_WIDTH = 16 * GAME_HEIGHT / 9;  // wide aspect ratio
 
     private BufferedImage mainTankImage;
     private BufferedImage mainTankGun;
+    private BufferedImage bulletImage ;
 
     private long lastRender;
     private ArrayList<Float> fpsHistory;
@@ -42,7 +43,9 @@ public class GameFrame extends JFrame  {
 
         try {
             mainTankImage = ImageIO.read(new File("./pictures/tank-body.png"));
-            mainTankGun = ImageIO.read(new File("./pictures/tank-gun.png"));
+            mainTankGun = ImageIO.read(new File("./pictures/tank-gun.jpg"));
+            bulletImage = ImageIO.read(new File("./pictures/bullet1.png")) ;
+
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -106,22 +109,25 @@ public class GameFrame extends JFrame  {
 
         g2d.drawImage(mainTankImage, state.getMainTank().getLocX(), state.getMainTank().getLocY(), null);
 
+        for (Bullet bullet : state.getBullets()) {
+//            g2d.drawImage(bulletImage , bullet.getLocX() , bullet.getLocY() , null);
 
-        float radian = (float)Math.atan2(state.getMouseMotionY() - state.getMainTank().getTankCenterY(), state.getMouseMotionX() - state.getMainTank().getTankCenterX()) ;
+            AffineTransform backup = g2d.getTransform();
+            AffineTransform trans = new AffineTransform();
+            trans.rotate(bullet.getRadian(), bullet.getLocX(), bullet.getLocY()); // the points to rotate around (the center in my example, your left side for your problem)
+
+            g2d.transform(trans);
+            g2d.drawImage(bulletImage, bullet.getLocX() , bullet.getLocY(), null);  // the actual location of the sprite
+            g2d.setTransform(backup); // restore previous transform
+        }
 
         AffineTransform backup = g2d.getTransform();
         AffineTransform trans = new AffineTransform();
-        trans.rotate( radian, state.getMainTank().getTankCenterX(), state.getMainTank().getTankCenterY() ); // the points to rotate around (the center in my example, your left side for your problem)
+        trans.rotate(state.getMainTank().getGunAndBodyRadian(), state.getMainTank().getTankCenterX(), state.getMainTank().getTankCenterY()); // the points to rotate around (the center in my example, your left side for your problem)
 
-        g2d.transform( trans );
-        g2d.drawImage( mainTankGun, state.getMainTank().getGunLocX(), state.getMainTank().getGunLocY() , null );  // the actual location of the sprite
-
-        g2d.setTransform( backup ); // restore previous transform
-
-
-
-
-
+        g2d.transform(trans);
+        g2d.drawImage(mainTankGun, state.getMainTank().getGunLocX(), state.getMainTank().getGunLocY(), null);  // the actual location of the sprite
+        g2d.setTransform(backup); // restore previous transform
 
 
 

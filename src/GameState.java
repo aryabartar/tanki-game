@@ -7,6 +7,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
 
 /**
  * This class holds the state of game and all of its elements.
@@ -28,10 +29,13 @@ public class GameState {
 
     private Tank mainTank;
 
+    private ArrayList<Bullet> bullets ;
 
     public GameState() {
 
         mainTank = new Tank();
+        bullets = new ArrayList<>() ;
+
 
         gameOver = false;
         //
@@ -53,8 +57,8 @@ public class GameState {
      */
     public void update() {
         if (mousePress) {
-//			locY = mouseY - diam / 2;
-//			locX = mouseX - diam / 2;
+            bullets.add(new Bullet(mainTank.getTankCenterX(), mainTank.getTankCenterY() , mainTank.getGunAndBodyRadian())) ;
+            mousePress = !mousePress ;
         }
 
         if (keyUP)
@@ -66,10 +70,19 @@ public class GameState {
         if (keyRIGHT)
             mainTank.moveLocX(11);
 
+        //moves bullets
+        for (Bullet bullet : bullets) {
+            bullet.move();
+        }
 
+        setMainTankAndGunRadian();
 
     }
 
+    private void setMainTankAndGunRadian () {
+        mainTank.setGunAndBodyRadian(Geometry.radian(getMainTank().getTankCenterX(), getMainTank().getTankCenterY(), getMouseMotionX(), getMouseMotionY()));
+        System.out.println(Math.toDegrees(mainTank.getGunAndBodyRadian()));
+    }
 
     public KeyListener getKeyListener() {
         return keyHandler;
@@ -137,9 +150,9 @@ public class GameState {
 
         @Override
         public void mousePressed(MouseEvent e) {
-//			mouseX = e.getX();
-//			mouseY = e.getY();
-//			mousePress = true;
+			mouseX = e.getX();
+			mouseY = e.getY();
+			mousePress = true;
         }
 
         @Override
@@ -171,6 +184,10 @@ public class GameState {
 
     public int getMouseMotionY() {
         return mouseMotionY;
+    }
+
+    public ArrayList<Bullet> getBullets() {
+        return bullets;
     }
 }
 

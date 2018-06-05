@@ -11,9 +11,10 @@ public class Tank {
 
     private final int xPixels = 128;
     private final int yPixels = 128;
-    private final int gunXPixels = 128 ;
-    private final int gunYPixels = 40 ;
+    private final static int gunXPixels = 128 ;
+    private final static int gunYPixels = 40 ;
 
+    private double gunAndBodyRadian ; //this is tank body and gun radian .
 
     public Tank() {
         initLocations();
@@ -98,5 +99,21 @@ public class Tank {
 
     public int getTankCenterY () {
         return locY + yPixels/2 ;
+    }
+
+    public void setGunAndBodyRadian(double gunAndBodyRadian) {
+        this.gunAndBodyRadian = gunAndBodyRadian;
+    }
+
+    public double getGunAndBodyRadian() {
+        return gunAndBodyRadian;
+    }
+
+    public static int getGunXPixels() {
+        return gunXPixels;
+    }
+
+    public static int getGunYPixels() {
+        return gunYPixels;
     }
 }
