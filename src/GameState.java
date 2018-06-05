@@ -1,5 +1,6 @@
 /*** In The Name of Allah ***/
 
+import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -21,20 +22,22 @@ public class GameState {
     public boolean gameOver;
 
     private boolean keyUP, keyDOWN, keyRIGHT, keyLEFT;
-    private boolean mousePress;
+    private boolean mouseLeftClicked, mouseRightClicked; //mouseRightClicked : false => bullet / true => rocket
     private int mouseX, mouseY; // for clicking
-    private int mouseMotionX , mouseMotionY ; //for mouse motion
+    private int mouseMotionX, mouseMotionY; //for mouse motion
     private KeyHandler keyHandler;
     private MouseHandler mouseHandler;
 
     private Tank mainTank;
 
-    private ArrayList<Bullet> bullets ;
+    private ArrayList<Bullet> bullets;
+    private ArrayList<Rocket> rockets;
 
     public GameState() {
 
         mainTank = new Tank();
-        bullets = new ArrayList<>() ;
+        bullets = new ArrayList<>();
+        rockets = new ArrayList<>();
 
 
         gameOver = false;
@@ -44,7 +47,9 @@ public class GameState {
         keyRIGHT = false;
         keyLEFT = false;
         //
-        mousePress = false;
+        mouseLeftClicked = false;
+        mouseRightClicked = false;
+
         mouseX = 0;
         mouseY = 0;
         //
@@ -56,9 +61,13 @@ public class GameState {
      * The method which updates the game state.
      */
     public void update() {
-        if (mousePress) {
-            bullets.add(new Bullet(mainTank.getTankCenterX(), mainTank.getTankCenterY() , mainTank.getGunAndBodyRadian())) ;
-            mousePress = !mousePress ;
+        if (mouseLeftClicked) {
+            if (mouseRightClicked == false) //bullet
+                bullets.add(new Bullet(mainTank.getTankCenterX(), mainTank.getTankCenterY(), mainTank.getGunAndBodyRadian()));
+            else {//rocket
+                rockets.add(new Rocket(mainTank.getTankCenterX(), mainTank.getTankCenterY(), mainTank.getGunAndBodyRadian()));
+        }
+            mouseLeftClicked = !mouseLeftClicked;
         }
 
         if (keyUP)
@@ -75,13 +84,16 @@ public class GameState {
             bullet.move();
         }
 
-        setMainTankAndGunRadian();
+        for (Rocket rocket : rockets) {
+            rocket.move();
+        }
 
+        setMainTankAndGunRadian();
+        System.out.println(mouseRightClicked);
     }
 
-    private void setMainTankAndGunRadian () {
+    private void setMainTankAndGunRadian() {
         mainTank.setGunAndBodyRadian(Geometry.radian(getMainTank().getTankCenterX(), getMainTank().getTankCenterY(), getMouseMotionX(), getMouseMotionY()));
-        System.out.println(Math.toDegrees(mainTank.getGunAndBodyRadian()));
     }
 
     public KeyListener getKeyListener() {
@@ -150,14 +162,19 @@ public class GameState {
 
         @Override
         public void mousePressed(MouseEvent e) {
-			mouseX = e.getX();
-			mouseY = e.getY();
-			mousePress = true;
+            mouseX = e.getX();
+            mouseY = e.getY();
+            if (SwingUtilities.isLeftMouseButton(e)) {
+                mouseLeftClicked = true;
+            }
+            if (SwingUtilities.isRightMouseButton(e)) {
+                mouseRightClicked = !mouseRightClicked;
+            }
         }
 
         @Override
         public void mouseReleased(MouseEvent e) {
-            mousePress = false;
+            mouseLeftClicked = false;
         }
 
         @Override
@@ -169,8 +186,8 @@ public class GameState {
         // for moving mouse !
         @Override
         public void mouseMoved(MouseEvent e) {
-            mouseMotionX = e.getX() ;
-            mouseMotionY = e.getY() ;
+            mouseMotionX = e.getX();
+            mouseMotionY = e.getY();
         }
     }
 
@@ -188,6 +205,10 @@ public class GameState {
 
     public ArrayList<Bullet> getBullets() {
         return bullets;
+    }
+
+    public ArrayList<Rocket> getRockets() {
+        return rockets;
     }
 }
 

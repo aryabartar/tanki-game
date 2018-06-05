@@ -28,6 +28,8 @@ public class GameFrame extends JFrame {
     private BufferedImage mainTankImage;
     private BufferedImage mainTankGun;
     private BufferedImage bulletImage ;
+    private BufferedImage rocketImage ;
+
 
     private long lastRender;
     private ArrayList<Float> fpsHistory;
@@ -45,6 +47,7 @@ public class GameFrame extends JFrame {
             mainTankImage = ImageIO.read(new File("./pictures/tank-body.png"));
             mainTankGun = ImageIO.read(new File("./pictures/tank-gun.jpg"));
             bulletImage = ImageIO.read(new File("./pictures/bullet1.png")) ;
+            rocketImage = ImageIO.read(new File("./pictures/bullet3.png")) ;
 
         } catch (IOException e) {
             System.out.println(e);
@@ -110,14 +113,23 @@ public class GameFrame extends JFrame {
         g2d.drawImage(mainTankImage, state.getMainTank().getLocX(), state.getMainTank().getLocY(), null);
 
         for (Bullet bullet : state.getBullets()) {
-//            g2d.drawImage(bulletImage , bullet.getLocX() , bullet.getLocY() , null);
-
             AffineTransform backup = g2d.getTransform();
             AffineTransform trans = new AffineTransform();
             trans.rotate(bullet.getRadian(), bullet.getLocX(), bullet.getLocY()); // the points to rotate around (the center in my example, your left side for your problem)
 
             g2d.transform(trans);
             g2d.drawImage(bulletImage, bullet.getLocX() , bullet.getLocY(), null);  // the actual location of the sprite
+            g2d.setTransform(backup); // restore previous transform
+        }
+
+        for (Rocket rocket : state.getRockets()) {
+
+            AffineTransform trans = new AffineTransform();
+            AffineTransform backup = g2d.getTransform();
+            trans.rotate(rocket.getRadian(), rocket.getLocX(), rocket.getLocY()); // the points to rotate around (the center in my example, your left side for your problem)
+
+            g2d.transform(trans);
+            g2d.drawImage(rocketImage, rocket.getLocX() , rocket.getLocY(), null);  // the actual location of the sprite
             g2d.setTransform(backup); // restore previous transform
         }
 
