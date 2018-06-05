@@ -1,6 +1,11 @@
+package Engine;
+
+import EnemyTanks.EnemyTank;
+import EnemyTanks.StaticTankEasy;
+import Equipment.Bullet;
+import Equipment.Rocket;
+
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
@@ -29,7 +34,7 @@ public class GameFrame extends JFrame {
     private BufferedImage mainTankGun;
     private BufferedImage bulletImage ;
     private BufferedImage rocketImage ;
-
+    private BufferedImage staticTankEasyBodyImage ;
 
     private long lastRender;
     private ArrayList<Float> fpsHistory;
@@ -48,6 +53,8 @@ public class GameFrame extends JFrame {
             mainTankGun = ImageIO.read(new File("./pictures/tank-gun.jpg"));
             bulletImage = ImageIO.read(new File("./pictures/bullet1.png")) ;
             rocketImage = ImageIO.read(new File("./pictures/bullet3.png")) ;
+            staticTankEasyBodyImage = ImageIO.read(new File("./pictures/enemy-tank-body1.png")) ;
+
 
         } catch (IOException e) {
             System.out.println(e);
@@ -131,6 +138,12 @@ public class GameFrame extends JFrame {
             g2d.transform(trans);
             g2d.drawImage(rocketImage, rocket.getLocX() , rocket.getLocY(), null);  // the actual location of the sprite
             g2d.setTransform(backup); // restore previous transform
+        }
+
+        for (EnemyTank enemyTank : state.getEnemyTanks()) {
+            if (enemyTank instanceof StaticTankEasy) {
+                g2d.drawImage(staticTankEasyBodyImage, enemyTank.getLocX(),enemyTank.getLocY(), null);
+            }
         }
 
         AffineTransform backup = g2d.getTransform();

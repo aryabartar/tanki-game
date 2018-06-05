@@ -1,3 +1,7 @@
+package Equipment;
+
+import Equipment.Tank;
+
 public class Rocket {
 
     private int locX;

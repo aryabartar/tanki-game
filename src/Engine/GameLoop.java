@@ -1,3 +1,7 @@
+package Engine;
+
+import Engine.GameFrame;
+
 /**
  * A very simple structure for the main game loop.
  * THIS IS NOT PERFECT, but works for most situations.

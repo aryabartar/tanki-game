@@ -1,4 +1,11 @@
-/*** In The Name of Allah ***/
+package Engine; /*** In The Name of Allah ***/
+
+import EnemyTanks.EnemyTank;
+import EnemyTanks.StaticTankEasy;
+import Equipment.Bullet;
+import Equipment.Rocket;
+import Equipment.Tank;
+import Others.Geometry;
 
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
@@ -32,12 +39,16 @@ public class GameState {
 
     private ArrayList<Bullet> bullets;
     private ArrayList<Rocket> rockets;
+    private static ArrayList<EnemyTank> enemyTanks ;
 
     public GameState() {
 
         mainTank = new Tank();
         bullets = new ArrayList<>();
         rockets = new ArrayList<>();
+        enemyTanks = new ArrayList<>() ;
+
+        enemyTanks.add(new StaticTankEasy(10 , 300 , 300)) ;
 
 
         gameOver = false;
@@ -89,7 +100,6 @@ public class GameState {
         }
 
         setMainTankAndGunRadian();
-        System.out.println(mouseRightClicked);
     }
 
     private void setMainTankAndGunRadian() {
@@ -209,6 +219,10 @@ public class GameState {
 
     public ArrayList<Rocket> getRockets() {
         return rockets;
+    }
+
+    public static ArrayList<EnemyTank> getEnemyTanks() {
+        return enemyTanks;
     }
 }
 
