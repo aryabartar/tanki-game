@@ -35,6 +35,7 @@ public class GameFrame extends JFrame {
     private BufferedImage bulletImage ;
     private BufferedImage rocketImage ;
     private BufferedImage staticTankEasyBodyImage ;
+    private BufferedImage enemyTankGunImage ;
 
     private long lastRender;
     private ArrayList<Float> fpsHistory;
@@ -54,6 +55,7 @@ public class GameFrame extends JFrame {
             bulletImage = ImageIO.read(new File("./pictures/bullet1.png")) ;
             rocketImage = ImageIO.read(new File("./pictures/bullet3.png")) ;
             staticTankEasyBodyImage = ImageIO.read(new File("./pictures/enemy-tank-body1.png")) ;
+            enemyTankGunImage = ImageIO.read(new File("./pictures/enemy-gun.jpg")) ;
 
 
         } catch (IOException e) {
@@ -144,6 +146,18 @@ public class GameFrame extends JFrame {
             if (enemyTank instanceof StaticTankEasy) {
                 g2d.drawImage(staticTankEasyBodyImage, enemyTank.getLocX(),enemyTank.getLocY(), null);
             }
+
+
+
+            AffineTransform backup = g2d.getTransform();
+            AffineTransform trans = new AffineTransform();
+            trans.rotate(enemyTank.getGunAndBodyRadian(), enemyTank.getTankCenterX(),enemyTank.getTankCenterY()); // the points to rotate around (the center in my example, your left side for your problem)
+
+            g2d.transform(trans);
+            g2d.drawImage(enemyTankGunImage, enemyTank.getGunLocX(), enemyTank.getGunLocY(), null);  // the actual location of the sprite
+            g2d.setTransform(backup); // restore previous transform
+
+
         }
 
         AffineTransform backup = g2d.getTransform();

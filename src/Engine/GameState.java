@@ -37,8 +37,8 @@ public class GameState {
 
     private Tank mainTank;
 
-    private ArrayList<Bullet> bullets;
-    private ArrayList<Rocket> rockets;
+    private static ArrayList<Bullet> bullets;
+    private static ArrayList<Rocket> rockets;
     private static ArrayList<EnemyTank> enemyTanks;
 
     public GameState() {
@@ -100,14 +100,27 @@ public class GameState {
         }
 
         setMainTankAndGunRadian();
+        setEnemyTanksRadian();
+
         checkShootHits();
         removeDeadBullets();
         removeDeadTanks();
 
+
+//        System.out.println("Bullets : " + bullets.size() + " | Rockets : " + rockets.size() + " | Enemy : " + enemyTanks.size());
+
+    }
+
+    private void setEnemyTanksRadian() {
+        for (EnemyTank enemyTank : enemyTanks) {
+            enemyTank.setGunAndBodyRadian(Geometry.radian(enemyTank.getTankCenterX(), enemyTank.getTankCenterY(),
+                    mainTank.getTankCenterX(), mainTank.getTankCenterY()));
+        }
     }
 
     private void setMainTankAndGunRadian() {
-        mainTank.setGunAndBodyRadian(Geometry.radian(getMainTank().getTankCenterX(), getMainTank().getTankCenterY(), getMouseMotionX(), getMouseMotionY()));
+        mainTank.setGunAndBodyRadian(Geometry.radian(getMainTank().getTankCenterX(), getMainTank().getTankCenterY(),
+                getMouseMotionX(), getMouseMotionY()));
     }
 
     public KeyListener getKeyListener() {
@@ -174,7 +187,8 @@ public class GameState {
     private void checkShootHits() {
         for (EnemyTank enemyTank : enemyTanks) {
             for (int i = 0; i < rockets.size(); i++) {
-                if ((rockets.get(i).getLocX() > enemyTank.getLocX()) && (rockets.get(i).getLocX() < enemyTank.getEndLocX()) && (rockets.get(i).getLocY() > enemyTank.getLocY()) && (rockets.get(i).getLocY() < enemyTank.getEndLocY())) {
+                if ((rockets.get(i).getLocX() > enemyTank.getLocX()) && (rockets.get(i).getLocX() < enemyTank.getEndLocX()) &&
+                        (rockets.get(i).getLocY() > enemyTank.getLocY()) && (rockets.get(i).getLocY() < enemyTank.getEndLocY())) {
                     enemyTank.reduceHealth(Rocket.DAMAGE);
                     rockets.remove(i);
                     i--;
@@ -184,7 +198,8 @@ public class GameState {
         }
         for (EnemyTank enemyTank : enemyTanks) {
             for (int i = 0; i < bullets.size(); i++) {
-                if ((bullets.get(i).getLocX() > enemyTank.getLocX())&& (bullets.get(i).getLocY() > enemyTank.getLocY()) && (bullets.get(i).getLocX() < enemyTank.getEndLocX())  && (bullets.get(i).getLocY() < enemyTank.getEndLocY())) {
+                if ((bullets.get(i).getLocX() > enemyTank.getLocX()) && (bullets.get(i).getLocY() > enemyTank.getLocY()) &&
+                        (bullets.get(i).getLocX() < enemyTank.getEndLocX()) && (bullets.get(i).getLocY() < enemyTank.getEndLocY())) {
                     enemyTank.reduceHealth(Bullet.DAMAGE);
                     bullets.remove(i);
                     i--;
@@ -209,14 +224,15 @@ public class GameState {
         }
     }
 
-    public void removeDeadTanks () {
-        for (int i = 0 ; i < enemyTanks.size() ; i++) {
+    public void removeDeadTanks() {
+        for (int i = 0; i < enemyTanks.size(); i++) {
             if (enemyTanks.get(i).getHealth() < 1) {
-                enemyTanks.remove(i) ;
-                i-- ;
+                enemyTanks.remove(i);
+                i--;
             }
         }
     }
+
     /**
      * The mouse handler.
      */
@@ -265,16 +281,25 @@ public class GameState {
         return mouseMotionY;
     }
 
-    public ArrayList<Bullet> getBullets() {
+    public static ArrayList<Bullet> getBullets() {
         return bullets;
     }
 
-    public ArrayList<Rocket> getRockets() {
+    public static ArrayList<Rocket> getRockets() {
         return rockets;
     }
 
     public static ArrayList<EnemyTank> getEnemyTanks() {
         return enemyTanks;
     }
+
+    public static void addToBullets (Bullet bullet) {
+        bullets.add(bullet) ;
+    }
+
+    public static void addToRockets (Rocket rocket) {
+        rockets.add(rocket) ;
+    }
+
 }
 

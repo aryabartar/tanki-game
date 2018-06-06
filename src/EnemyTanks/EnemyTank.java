@@ -1,11 +1,20 @@
 package EnemyTanks;
 
 import Engine.GameFrame;
+import Engine.GameState;
+import Equipment.Bullet;
+import Equipment.Rocket;
+
+import java.awt.*;
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public abstract class EnemyTank {
 
-    protected int health ;
-    protected boolean isAlive ;
+    protected int health;
+    protected boolean isAlive;
 
     protected int locX;
     protected int locY;
@@ -18,19 +27,50 @@ public abstract class EnemyTank {
 
     protected final int xPixels = 100;
     protected final int yPixels = 100;
-    protected final int gunXPixels = 128 ;
-    protected final int gunYPixels = 40 ;
+    protected final int gunXPixels = 110;
+    protected final int gunYPixels = 33;
 
-    protected double gunAndBodyRadian ; //this is tank body and gun radian .
+    protected double gunAndBodyRadian; //this is tank body and gun radian .
+    private TimerTask task;
+    private SecureRandom random = new SecureRandom();
 
-    public EnemyTank (int health , int locX , int locY) {
-        this.health = health ;
-        this.locX = locX ;
-        this.locY = locY ;
+    public EnemyTank(int health, int locX, int locY) {
+        this.health = health;
+        this.locX = locX;
+        this.locY = locY;
 
-        isAlive = true ;
+        isAlive = true;
 
         initLocations();
+        initTask();
+
+        Timer timer = new Timer();
+        long delay = 0;
+        long intervalPeriod = 1 * 1000;
+
+        // schedules the task to be run in an interval
+        timer.scheduleAtFixedRate(task, delay,
+                intervalPeriod);
+
+    }
+
+
+    public void initTask() {
+        task = new TimerTask() {
+            @Override
+            public void run() {
+                if (isAlive == true) {
+
+
+                    if (random.nextInt(4) != 3) {
+                        GameState.addToBullets(new Bullet(getTankCenterX(), getTankCenterY(), getGunAndBodyRadian()));
+                    } else {
+                        GameState.addToRockets(new Rocket(getTankCenterX(), getTankCenterY(), getGunAndBodyRadian()));
+                    }
+                }
+            }
+        };
+
     }
 
 
@@ -51,8 +91,8 @@ public abstract class EnemyTank {
     }
 
     private void setGunLocation() {
-        gunLocX = locX + xPixels / 2 ;
-        gunLocY = locY + yPixels / 2 - gunYPixels/2;
+        gunLocX = locX + xPixels / 2;
+        gunLocY = locY + yPixels / 2 - gunYPixels / 2;
 
     }
 
@@ -72,28 +112,41 @@ public abstract class EnemyTank {
         return locY;
     }
 
-    public void setLocX(int locX) {
-        if ((locX >= 0) && ((locX + xPixels) <= GameFrame.GAME_WIDTH)) {
-            this.locX = locX;
-            endLocX = locX + xPixels;
-            setGunLocation();
+    public void setLocation(int locX, int locY) {
+        ArrayList<EnemyTank> enemyTanks = GameState.getEnemyTanks();
+        boolean canMove = true;
+
+        for (EnemyTank enemyTank : enemyTanks) {
+
+            Rectangle p = new Rectangle(enemyTank.getLocX(), enemyTank.getLocY(), enemyTank.getGunXPixels() - 20, enemyTank.getyPixels());
+            Rectangle r = new Rectangle(locX, locY, xPixels, yPixels);
+
+            // Assuming there is an intersect method
+            if (r.intersects(p))
+                canMove = false;
         }
+
+        if ((locX > 0) && (locX + xPixels < GameFrame.GAME_WIDTH) && (locY > 0) && (locY + yPixels < GameFrame.GAME_HEIGHT)) {
+            if (canMove == true) {
+                this.locY = locY;
+                this.locX = locX;
+
+                endLocX = locX + xPixels;
+                endLocY = locY + yPixels;
+
+                setGunLocation();
+            }
+        }
+
     }
 
-    public void setLocY(int locY) {
-        if ((locY >= 0) && ((locY + yPixels) <= GameFrame.GAME_HEIGHT)) {
-            this.locY = locY;
-            endLocY = locY + yPixels;
-            setGunLocation();
-        }
-    }
 
     public void moveLocX(int moveX) {
-        this.setLocX(locX + moveX);
+        this.setLocation(locX + moveX, locY);
     }
 
     public void moveLocY(int moveY) {
-        this.setLocY(locY + moveY);
+        this.setLocation(locX, locY + moveY);
     }
 
     public int getGunLocX() {
@@ -104,12 +157,12 @@ public abstract class EnemyTank {
         return gunLocY;
     }
 
-    public int getTankCenterX () {
-        return locX + xPixels/2 ;
+    public int getTankCenterX() {
+        return locX + xPixels / 2;
     }
 
-    public int getTankCenterY () {
-        return locY + yPixels/2 ;
+    public int getTankCenterY() {
+        return locY + yPixels / 2;
     }
 
     public void setGunAndBodyRadian(double gunAndBodyRadian) {
@@ -141,7 +194,9 @@ public abstract class EnemyTank {
     }
 
     public void reduceHealth(int reduce) {
-        health -= reduce ;
+        health -= reduce;
+        if (health < 1)
+            isAlive = false;
         System.out.println("Reduce : " + reduce);
     }
 }
