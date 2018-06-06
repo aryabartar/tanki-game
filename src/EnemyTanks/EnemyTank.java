@@ -223,6 +223,5 @@ public abstract class EnemyTank {
         health -= reduce;
         if (health < 1)
             isAlive = false;
-        System.out.println("Reduce : " + reduce);
     }
 }

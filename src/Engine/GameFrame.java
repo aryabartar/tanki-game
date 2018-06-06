@@ -4,8 +4,7 @@ import Blocks.Block;
 import Blocks.DestroyableBlock;
 import Blocks.UnDestroyableBlock;
 import EnemyTanks.*;
-import Equipment.Bullet;
-import Equipment.Rocket;
+import Equipment.*;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -44,6 +43,8 @@ public class GameFrame extends JFrame {
     private BufferedImage enemyTankGunImage;
     private BufferedImage unDestroyableBlockImage ;
     private BufferedImage destroyableBlockImage ;
+    private BufferedImage updateWeaponImage ;
+    private BufferedImage repairImage ;
 
     private long lastRender;
     private ArrayList<Float> fpsHistory;
@@ -69,6 +70,8 @@ public class GameFrame extends JFrame {
             enemyTankGunImage = ImageIO.read(new File("./pictures/enemy-gun.jpg"));
             unDestroyableBlockImage = ImageIO.read(new File("./pictures/wall1.png"));
             destroyableBlockImage = ImageIO.read(new File("./pictures/wall2.png"));
+            updateWeaponImage = ImageIO.read(new File("./pictures/update-weapon.png"));
+            repairImage = ImageIO.read(new File("./pictures/repair.png"));
 
 
         } catch (IOException e) {
@@ -172,6 +175,25 @@ public class GameFrame extends JFrame {
 
         }
 
+        for (Equipment equipment : state.getEquipments()){
+            Composite backupComposite = g2d.getComposite() ;
+
+            if (equipment instanceof UpdateWeapon) {
+                double alpha = equipment.getAlpha() ; //draw half transparent
+                AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,(float)alpha);
+                g2d.setComposite(ac);
+                g2d.drawImage(updateWeaponImage, equipment.getLocX(), equipment.getLocY(), null);
+            }
+
+            if (equipment instanceof Repair) {
+                double alpha = equipment.getAlpha() ; //draw half transparent
+                AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,(float)alpha);
+                g2d.setComposite(ac);
+                g2d.drawImage(repairImage, equipment.getLocX(), equipment.getLocY(), null);
+            }
+            g2d.setComposite(backupComposite);
+
+        }
 
         for (Block block : state.getBlocks()){
             if (block instanceof UnDestroyableBlock) {

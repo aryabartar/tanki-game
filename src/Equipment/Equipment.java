@@ -1,5 +1,7 @@
 package Equipment;
 
+import java.security.SecureRandom;
+
 public class Equipment {
 
     private int locX ;
@@ -16,6 +18,9 @@ public class Equipment {
     private final int xPixels  ;
     private final int yPixels  ;
 
+    private float alpha  ;
+    private boolean isAlphaUp ;
+
     public Equipment (int locX , int locY , int xPixels , int yPixels ) {
         this.locX = locX ;
         this.locY = locY ;
@@ -29,7 +34,31 @@ public class Equipment {
         this.xPixels = xPixels;
         this.yPixels = yPixels ;
 
+        isAlphaUp = true ;
+
+        SecureRandom random = new SecureRandom() ;
+        int tempValue = random.nextInt(50) + 40 ;
+        alpha = (float) tempValue/ 100 ;
+
         isTaken = false ;
+    }
+
+    public void updateAlpha () {
+
+        if (alpha < 0.2)
+            isAlphaUp = true ;
+        if (alpha > 0.95)
+            isAlphaUp = false ;
+        System.out.println(alpha);
+        if (isAlphaUp == true) {
+            alpha += 0.02 ;
+        }
+        else {
+            alpha -= 0.02;
+        }
+
+
+
     }
 
     public int getEndY() {
@@ -70,5 +99,9 @@ public class Equipment {
 
     public void takeEquipment () {
         isTaken = true ;
+    }
+
+    public float getAlpha() {
+        return alpha;
     }
 }

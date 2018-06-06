@@ -91,7 +91,8 @@ public class GameState {
         blocks.add(new DestroyableBlock(500, 500));
 
         // add equipment here
-        equipments.add(new UpdateWeapon(420 , 100)) ;
+        equipments.add(new UpdateWeapon(800 , 100)) ;
+        equipments.add(new Repair(800, 200)) ;
     }
 
     /**
@@ -141,14 +142,32 @@ public class GameState {
         setEnemyTanksRadian();
 
         moveDynamicTanks();
+        updateAlphaInEquipments();
 
         checkShootHits();
+
         removeDeadBullets();
         removeDeadTanks();
         removeDestroyedBlocks();
+        checkHitToEquipments();
+    }
 
-//        System.out.println("Bullets : " + bullets.size() + " | Rockets : " + rockets.size() + " | Enemy : " + enemyTanks.size());
+    private void checkHitToEquipments () {
+        for (int i = 0 ; i < equipments.size() ; i++) {
+            if ((mainTank.getTankCenterX() > equipments.get(i).getLocX()) && (mainTank.getTankCenterX() < equipments.get(i).getEndX()) &&
+                    (mainTank.getTankCenterY() > equipments.get(i).getLocY()) && (mainTank.getTankCenterY()<equipments.get(i).getEndY())){
+               //complete here later.
+                equipments.remove(i) ;
+                i-- ;
+                System.out.println("Hit to equipment . Do sth later !");
+            }
+        }
+    }
 
+    private void updateAlphaInEquipments () {
+        for (Equipment equipment : equipments) {
+            equipment.updateAlpha();
+        }
     }
 
     private void removeDestroyedBlocks() {
@@ -255,7 +274,6 @@ public class GameState {
 
                         if (rockets.get(i).isFromEnemy() == false) {
                             enemyTank.reduceHealth(Rocket.DAMAGE);
-                            System.out.println(enemyTank.getHealth());
                         }
 
                         rockets.remove(i);
@@ -273,7 +291,6 @@ public class GameState {
                             (bullets.get(i).getLocX() < enemyTank.getEndLocX()) && (bullets.get(i).getLocY() < enemyTank.getEndLocY())) {
                         if (bullets.get(i).isFromEnemy() == false) {
                             enemyTank.reduceHealth(Bullet.DAMAGE);
-                            System.out.println(enemyTank.getHealth());
                         }
 
                         bullets.remove(i);
@@ -414,5 +431,9 @@ public class GameState {
 
     public static ArrayList<Block> getBlocks() {
         return blocks;
+    }
+
+    public static ArrayList<Equipment> getEquipments() {
+        return equipments;
     }
 }
