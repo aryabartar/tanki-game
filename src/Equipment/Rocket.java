@@ -16,13 +16,16 @@ public class Rocket {
     private final int pixelY = 20;
     private final double radian;
 
-    public Rocket(int locX, int locY, double radian) {
+    private final boolean isFromEnemy ;
+
+    public Rocket(int locX, int locY, double radian, boolean isFromEnemy) {
 
         this.locX = locX +
                 (int) ((Tank.getGunXPixels() - 15) * Math.cos(radian));
         this.locY = locY +
                 (int) ((Tank.getGunXPixels() - 15) * Math.sin(radian));
         this.radian = radian;
+        this.isFromEnemy = isFromEnemy ;
     }
 
     public int getLocX() {
@@ -48,6 +51,10 @@ public class Rocket {
             return true;
         else
             return false;
+    }
+
+    public boolean isFromEnemy() {
+        return isFromEnemy;
     }
 }
 

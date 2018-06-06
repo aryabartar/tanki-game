@@ -1,7 +1,9 @@
 package Engine;
 
+import EnemyTanks.DynamicTankEasy;
 import EnemyTanks.EnemyTank;
 import EnemyTanks.StaticTankEasy;
+import EnemyTanks.StaticTankHard;
 import Equipment.Bullet;
 import Equipment.Rocket;
 
@@ -12,6 +14,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
@@ -32,10 +35,12 @@ public class GameFrame extends JFrame {
 
     private BufferedImage mainTankImage;
     private BufferedImage mainTankGun;
-    private BufferedImage bulletImage ;
-    private BufferedImage rocketImage ;
-    private BufferedImage staticTankEasyBodyImage ;
-    private BufferedImage enemyTankGunImage ;
+    private BufferedImage bulletImage;
+    private BufferedImage rocketImage;
+    private BufferedImage staticTankEasyBodyImage;
+    private BufferedImage staticTankHardBodyImage;
+    private BufferedImage enemyTankGunImage;
+    private BufferedImage dynamicTankEasyBodyImage;
 
     private long lastRender;
     private ArrayList<Float> fpsHistory;
@@ -52,10 +57,12 @@ public class GameFrame extends JFrame {
         try {
             mainTankImage = ImageIO.read(new File("./pictures/tank-body.png"));
             mainTankGun = ImageIO.read(new File("./pictures/tank-gun.jpg"));
-            bulletImage = ImageIO.read(new File("./pictures/bullet1.png")) ;
-            rocketImage = ImageIO.read(new File("./pictures/bullet3.png")) ;
-            staticTankEasyBodyImage = ImageIO.read(new File("./pictures/enemy-tank-body1.png")) ;
-            enemyTankGunImage = ImageIO.read(new File("./pictures/enemy-gun.jpg")) ;
+            bulletImage = ImageIO.read(new File("./pictures/bullet1.png"));
+            rocketImage = ImageIO.read(new File("./pictures/bullet3.png"));
+            staticTankEasyBodyImage = ImageIO.read(new File("./pictures/enemy-tank-body1.png"));
+            staticTankHardBodyImage = ImageIO.read(new File("./pictures/enemy-tank-body4.png"));
+            dynamicTankEasyBodyImage = ImageIO.read(new File("./pictures/enemy-tank-body2.png"));
+            enemyTankGunImage = ImageIO.read(new File("./pictures/enemy-gun.jpg"));
 
 
         } catch (IOException e) {
@@ -121,37 +128,60 @@ public class GameFrame extends JFrame {
 
         g2d.drawImage(mainTankImage, state.getMainTank().getLocX(), state.getMainTank().getLocY(), null);
 
-        for (Bullet bullet : state.getBullets()) {
-            AffineTransform backup = g2d.getTransform();
-            AffineTransform trans = new AffineTransform();
-            trans.rotate(bullet.getRadian(), bullet.getLocX(), bullet.getLocY()); // the points to rotate around (the center in my example, your left side for your problem)
+        try {
+            for (Bullet bullet : state.getBullets()) {
+                try {
+                    AffineTransform backup = g2d.getTransform();
+                    AffineTransform trans = new AffineTransform();
+                    trans.rotate(bullet.getRadian(), bullet.getLocX(), bullet.getLocY()); // the points to rotate around (the center in my example, your left side for your problem)
 
-            g2d.transform(trans);
-            g2d.drawImage(bulletImage, bullet.getLocX() , bullet.getLocY(), null);  // the actual location of the sprite
-            g2d.setTransform(backup); // restore previous transform
+                    g2d.transform(trans);
+                    g2d.drawImage(bulletImage, bullet.getLocX(), bullet.getLocY(), null);  // the actual location of the sprite
+                    g2d.setTransform(backup); // restore previous transform
+                } catch (NullPointerException | ConcurrentModificationException e) {
+
+                }
+            }
+        } catch (ConcurrentModificationException e) {
+
         }
 
-        for (Rocket rocket : state.getRockets()) {
+        try {
+            for (Rocket rocket : state.getRockets()) {
+                try {
 
-            AffineTransform trans = new AffineTransform();
-            AffineTransform backup = g2d.getTransform();
-            trans.rotate(rocket.getRadian(), rocket.getLocX(), rocket.getLocY()); // the points to rotate around (the center in my example, your left side for your problem)
 
-            g2d.transform(trans);
-            g2d.drawImage(rocketImage, rocket.getLocX() , rocket.getLocY(), null);  // the actual location of the sprite
-            g2d.setTransform(backup); // restore previous transform
+                    AffineTransform trans = new AffineTransform();
+                    AffineTransform backup = g2d.getTransform();
+                    trans.rotate(rocket.getRadian(), rocket.getLocX(), rocket.getLocY()); // the points to rotate around (the center in my example, your left side for your problem)
+
+                    g2d.transform(trans);
+                    g2d.drawImage(rocketImage, rocket.getLocX(), rocket.getLocY(), null);  // the actual location of the sprite
+                    g2d.setTransform(backup); // restore previous transform
+                } catch (NullPointerException | ConcurrentModificationException e) {
+
+                }
+            }
+        } catch (ConcurrentModificationException e) {
+
         }
+
 
         for (EnemyTank enemyTank : state.getEnemyTanks()) {
             if (enemyTank instanceof StaticTankEasy) {
-                g2d.drawImage(staticTankEasyBodyImage, enemyTank.getLocX(),enemyTank.getLocY(), null);
+                g2d.drawImage(staticTankEasyBodyImage, enemyTank.getLocX(), enemyTank.getLocY(), null);
             }
+            if (enemyTank instanceof StaticTankHard) {
+                g2d.drawImage(staticTankHardBodyImage, enemyTank.getLocX(), enemyTank.getLocY(), null);
+            }
+            if (enemyTank instanceof DynamicTankEasy) {
+                g2d.drawImage(dynamicTankEasyBodyImage, enemyTank.getLocX(), enemyTank.getLocY(), null);
 
-
+            }
 
             AffineTransform backup = g2d.getTransform();
             AffineTransform trans = new AffineTransform();
-            trans.rotate(enemyTank.getGunAndBodyRadian(), enemyTank.getTankCenterX(),enemyTank.getTankCenterY()); // the points to rotate around (the center in my example, your left side for your problem)
+            trans.rotate(enemyTank.getGunAndBodyRadian(), enemyTank.getTankCenterX(), enemyTank.getTankCenterY()); // the points to rotate around (the center in my example, your left side for your problem)
 
             g2d.transform(trans);
             g2d.drawImage(enemyTankGunImage, enemyTank.getGunLocX(), enemyTank.getGunLocY(), null);  // the actual location of the sprite
@@ -167,9 +197,6 @@ public class GameFrame extends JFrame {
         g2d.transform(trans);
         g2d.drawImage(mainTankGun, state.getMainTank().getGunLocX(), state.getMainTank().getGunLocY(), null);  // the actual location of the sprite
         g2d.setTransform(backup); // restore previous transform
-
-
-
 
 
         // Draw GAME OVER

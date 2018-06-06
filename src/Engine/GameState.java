@@ -1,7 +1,9 @@
 package Engine; /*** In The Name of Allah ***/
 
+import EnemyTanks.DynamicTankEasy;
 import EnemyTanks.EnemyTank;
 import EnemyTanks.StaticTankEasy;
+import EnemyTanks.StaticTankHard;
 import Equipment.Bullet;
 import Equipment.Rocket;
 import Equipment.Tank;
@@ -16,6 +18,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 
 /**
  * This class holds the state of game and all of its elements.
@@ -48,8 +51,7 @@ public class GameState {
         rockets = new ArrayList<>();
         enemyTanks = new ArrayList<>();
 
-        enemyTanks.add(new StaticTankEasy(10, 300, 300));
-
+        addMapObjects();
 
         gameOver = false;
         //
@@ -68,15 +70,24 @@ public class GameState {
         mouseHandler = new MouseHandler();
     }
 
+    private void addMapObjects() {
+        enemyTanks.add(new StaticTankEasy(300, 300));
+        enemyTanks.add(new StaticTankEasy(500, 100));
+        enemyTanks.add(new StaticTankHard(600, 600));
+        enemyTanks.add(new StaticTankHard(100, 400));
+        enemyTanks.add(new DynamicTankEasy(1000, 200)) ;
+
+    }
+
     /**
      * The method which updates the game state.
      */
     public void update() {
         if (mouseLeftClicked) {
             if (mouseRightClicked == false) //bullet
-                bullets.add(new Bullet(mainTank.getTankCenterX(), mainTank.getTankCenterY(), mainTank.getGunAndBodyRadian()));
+                bullets.add(new Bullet(mainTank.getTankCenterX(), mainTank.getTankCenterY(), mainTank.getGunAndBodyRadian(), false));
             else {//rocket
-                rockets.add(new Rocket(mainTank.getTankCenterX(), mainTank.getTankCenterY(), mainTank.getGunAndBodyRadian()));
+                rockets.add(new Rocket(mainTank.getTankCenterX(), mainTank.getTankCenterY(), mainTank.getGunAndBodyRadian(), false));
             }
             mouseLeftClicked = !mouseLeftClicked;
         }
@@ -90,27 +101,51 @@ public class GameState {
         if (keyRIGHT)
             mainTank.moveLocX(11);
 
-        //moves bullets
-        for (Bullet bullet : bullets) {
-            bullet.move();
+        try {
+
+            //moves bullets
+            for (Bullet bullet : bullets) {
+                if (bullet != null)
+                    bullet.move();
+            }
+        } catch (ConcurrentModificationException e) {
+
         }
 
-        for (Rocket rocket : rockets) {
-            rocket.move();
+        try {
+            for (Rocket rocket : rockets) {
+                if (rocket != null)
+                    rocket.move();
+
+            }
+        }catch (ConcurrentModificationException e) {
+
         }
 
         setMainTankAndGunRadian();
         setEnemyTanksRadian();
+
+        moveDynamicTanks();
 
         checkShootHits();
         removeDeadBullets();
         removeDeadTanks();
 
 
+
 //        System.out.println("Bullets : " + bullets.size() + " | Rockets : " + rockets.size() + " | Enemy : " + enemyTanks.size());
 
     }
 
+
+    private void moveDynamicTanks () {
+        for (EnemyTank enemyTank : enemyTanks) {
+            if (enemyTank instanceof DynamicTankEasy) {
+                ((DynamicTankEasy) enemyTank).moveAutomaticHorizontally();
+
+            }
+        }
+    }
     private void setEnemyTanksRadian() {
         for (EnemyTank enemyTank : enemyTanks) {
             enemyTank.setGunAndBodyRadian(Geometry.radian(enemyTank.getTankCenterX(), enemyTank.getTankCenterY(),
@@ -187,23 +222,37 @@ public class GameState {
     private void checkShootHits() {
         for (EnemyTank enemyTank : enemyTanks) {
             for (int i = 0; i < rockets.size(); i++) {
-                if ((rockets.get(i).getLocX() > enemyTank.getLocX()) && (rockets.get(i).getLocX() < enemyTank.getEndLocX()) &&
-                        (rockets.get(i).getLocY() > enemyTank.getLocY()) && (rockets.get(i).getLocY() < enemyTank.getEndLocY())) {
-                    enemyTank.reduceHealth(Rocket.DAMAGE);
-                    rockets.remove(i);
-                    i--;
-                    System.out.println(enemyTank.getHealth());
+                if (rockets.get(i) != null) {
+                    if ((rockets.get(i).getLocX() > enemyTank.getLocX()) && (rockets.get(i).getLocX() < enemyTank.getEndLocX()) &&
+                            (rockets.get(i).getLocY() > enemyTank.getLocY()) && (rockets.get(i).getLocY() < enemyTank.getEndLocY())) {
+
+                        if (rockets.get(i).isFromEnemy() == false) {
+                            enemyTank.reduceHealth(Rocket.DAMAGE);
+                            System.out.println(enemyTank.getHealth());
+                        }
+
+                        rockets.remove(i);
+
+                    }
                 }
+
             }
         }
         for (EnemyTank enemyTank : enemyTanks) {
             for (int i = 0; i < bullets.size(); i++) {
-                if ((bullets.get(i).getLocX() > enemyTank.getLocX()) && (bullets.get(i).getLocY() > enemyTank.getLocY()) &&
-                        (bullets.get(i).getLocX() < enemyTank.getEndLocX()) && (bullets.get(i).getLocY() < enemyTank.getEndLocY())) {
-                    enemyTank.reduceHealth(Bullet.DAMAGE);
-                    bullets.remove(i);
-                    i--;
-                    System.out.println(enemyTank.getHealth());
+
+                if (bullets.get(i) != null) {
+                    if ((bullets.get(i).getLocX() > enemyTank.getLocX()) && (bullets.get(i).getLocY() > enemyTank.getLocY()) &&
+                            (bullets.get(i).getLocX() < enemyTank.getEndLocX()) && (bullets.get(i).getLocY() < enemyTank.getEndLocY())) {
+                        if (bullets.get(i).isFromEnemy() == false) {
+                            enemyTank.reduceHealth(Bullet.DAMAGE);
+                            System.out.println(enemyTank.getHealth());
+                        }
+
+                        bullets.remove(i);
+
+
+                    }
                 }
             }
         }
@@ -211,16 +260,18 @@ public class GameState {
 
     private void removeDeadBullets() {
         for (int i = 0; i < bullets.size(); i++) {
-            if (bullets.get(i).checkAlive() == false) {
-                bullets.remove(i);
-                i--;
-            }
+            if (bullets.get(i) != null)
+                if (bullets.get(i).checkAlive() == false) {
+                    bullets.remove(i);
+                    i -= 1;
+                }
         }
         for (int i = 0; i < rockets.size(); i++) {
-            if (rockets.get(i).checkAlive() == false) {
-                rockets.remove(i);
-                i--;
-            }
+            if (rockets.get(i) != null)
+                if (rockets.get(i).checkAlive() == false) {
+                    rockets.remove(i);
+                    i--;
+                }
         }
     }
 
@@ -293,12 +344,12 @@ public class GameState {
         return enemyTanks;
     }
 
-    public static void addToBullets (Bullet bullet) {
-        bullets.add(bullet) ;
+    public static void addToBullets(Bullet bullet) {
+        bullets.add(bullet);
     }
 
-    public static void addToRockets (Rocket rocket) {
-        rockets.add(rocket) ;
+    public static void addToRockets(Rocket rocket) {
+        rockets.add(rocket);
     }
 
 }

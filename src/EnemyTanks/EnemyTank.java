@@ -32,12 +32,15 @@ public abstract class EnemyTank {
 
     protected double gunAndBodyRadian; //this is tank body and gun radian .
     private TimerTask task;
-    private SecureRandom random = new SecureRandom();
 
-    public EnemyTank(int health, int locX, int locY) {
+    private SecureRandom random = new SecureRandom();
+    private final int wholeProbability;
+
+    public EnemyTank(int health, int locX, int locY, int wholeProbability) {
         this.health = health;
         this.locX = locX;
         this.locY = locY;
+        this.wholeProbability = wholeProbability;
 
         isAlive = true;
 
@@ -60,12 +63,10 @@ public abstract class EnemyTank {
             @Override
             public void run() {
                 if (isAlive == true) {
-
-
-                    if (random.nextInt(4) != 3) {
-                        GameState.addToBullets(new Bullet(getTankCenterX(), getTankCenterY(), getGunAndBodyRadian()));
+                    if (random.nextInt(wholeProbability) != 0) {
+                        GameState.addToBullets(new Bullet(getTankCenterX(), getTankCenterY(), getGunAndBodyRadian(), true));
                     } else {
-                        GameState.addToRockets(new Rocket(getTankCenterX(), getTankCenterY(), getGunAndBodyRadian()));
+                        GameState.addToRockets(new Rocket(getTankCenterX(), getTankCenterY(), getGunAndBodyRadian(), true));
                     }
                 }
             }
@@ -122,14 +123,40 @@ public abstract class EnemyTank {
             Rectangle r = new Rectangle(locX, locY, xPixels, yPixels);
 
             // Assuming there is an intersect method
-            if (r.intersects(p))
+            if (r.intersects(p)) {
                 canMove = false;
+            }
         }
+
+        justMove(locX , locY , canMove);
+
+    }
+
+    public void setLocation(int locX, int locY, EnemyTank et) {
+        ArrayList<EnemyTank> enemyTanks = GameState.getEnemyTanks();
+        boolean canMove = true;
+
+        for (EnemyTank enemyTank : enemyTanks) {
+
+            Rectangle p = new Rectangle(enemyTank.getLocX(), enemyTank.getLocY(), enemyTank.getGunXPixels() - 20, enemyTank.getyPixels());
+            Rectangle r = new Rectangle(locX, locY, xPixels, yPixels);
+
+            // Assuming there is an intersect method
+            if (r.intersects(p)) {
+                if (enemyTank.equals(et) == false)
+                    canMove = false;
+            }
+        }
+
+        justMove(locX , locY , canMove);
+    }
+
+    private void justMove (int locX , int locY , boolean canMove) {
 
         if ((locX > 0) && (locX + xPixels < GameFrame.GAME_WIDTH) && (locY > 0) && (locY + yPixels < GameFrame.GAME_HEIGHT)) {
             if (canMove == true) {
-                this.locY = locY;
                 this.locX = locX;
+                this.locY = locY;
 
                 endLocX = locX + xPixels;
                 endLocY = locY + yPixels;
@@ -137,7 +164,6 @@ public abstract class EnemyTank {
                 setGunLocation();
             }
         }
-
     }
 
 
