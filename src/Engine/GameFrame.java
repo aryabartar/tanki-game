@@ -1,5 +1,7 @@
 package Engine;
 
+import Blocks.Block;
+import Blocks.UndestroyableBlock;
 import EnemyTanks.*;
 import Equipment.Bullet;
 import Equipment.Rocket;
@@ -39,6 +41,7 @@ public class GameFrame extends JFrame {
     private BufferedImage dynamicTankEasyBodyImage;
     private BufferedImage dynamicTankHardBodyImage;
     private BufferedImage enemyTankGunImage;
+    private BufferedImage undestroyableBlockImage ;
 
     private long lastRender;
     private ArrayList<Float> fpsHistory;
@@ -62,7 +65,7 @@ public class GameFrame extends JFrame {
             dynamicTankEasyBodyImage = ImageIO.read(new File("./pictures/enemy-tank-body2.png"));
             dynamicTankHardBodyImage = ImageIO.read(new File("./pictures/enemy-tank-body3.png"));
             enemyTankGunImage = ImageIO.read(new File("./pictures/enemy-gun.jpg"));
-
+            undestroyableBlockImage = ImageIO.read(new File("./pictures/wall1.png"));
 
         } catch (IOException e) {
             System.out.println(e);
@@ -187,8 +190,13 @@ public class GameFrame extends JFrame {
             g2d.transform(trans);
             g2d.drawImage(enemyTankGunImage, enemyTank.getGunLocX(), enemyTank.getGunLocY(), null);  // the actual location of the sprite
             g2d.setTransform(backup); // restore previous transform
+        }
 
+        for (Block block : state.getBlocks()){
+            if (block instanceof UndestroyableBlock) {
+                g2d.drawImage(undestroyableBlockImage, block.getLocX(), block.getLocY(), null);
 
+            }
         }
 
         AffineTransform backup = g2d.getTransform();
@@ -209,6 +217,4 @@ public class GameFrame extends JFrame {
             g2d.drawString(str, (GAME_WIDTH - strWidth) / 2, GAME_HEIGHT / 2);
         }
     }
-
-
 }

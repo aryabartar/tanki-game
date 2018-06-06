@@ -1,5 +1,7 @@
 package Engine; /*** In The Name of Allah ***/
 
+import Blocks.Block;
+import Blocks.UndestroyableBlock;
 import EnemyTanks.*;
 import Equipment.Bullet;
 import Equipment.Rocket;
@@ -40,6 +42,7 @@ public class GameState {
     private static ArrayList<Bullet> bullets;
     private static ArrayList<Rocket> rockets;
     private static ArrayList<EnemyTank> enemyTanks;
+    private static ArrayList<Block> blocks;
 
     public GameState() {
 
@@ -47,6 +50,7 @@ public class GameState {
         bullets = new ArrayList<>();
         rockets = new ArrayList<>();
         enemyTanks = new ArrayList<>();
+        blocks = new ArrayList<>();
 
         addMapObjects();
 
@@ -68,11 +72,15 @@ public class GameState {
     }
 
     private void addMapObjects() {
+
+        //add tanks here
         enemyTanks.add(new StaticTankEasy(300, 300));
-        enemyTanks.add(new StaticTankEasy(500, 100));
         enemyTanks.add(new StaticTankHard(100, 400));
-        enemyTanks.add(new DynamicTankEasy(1000, 200 , 1000 , 500)) ;
-        enemyTanks.add(new DynamicTankHard(600 , 600 , 1000 , 600)) ;
+        enemyTanks.add(new DynamicTankEasy(1000, 200, 1000, 500));
+        enemyTanks.add(new DynamicTankHard(600, 600, 1000, 600));
+
+        // add blocks here
+        blocks.add(new UndestroyableBlock(500, 100));
 
     }
 
@@ -115,7 +123,7 @@ public class GameState {
                     rocket.move();
 
             }
-        }catch (ConcurrentModificationException e) {
+        } catch (ConcurrentModificationException e) {
 
         }
 
@@ -129,13 +137,12 @@ public class GameState {
         removeDeadTanks();
 
 
-
 //        System.out.println("Bullets : " + bullets.size() + " | Rockets : " + rockets.size() + " | Enemy : " + enemyTanks.size());
 
     }
 
 
-    private void moveDynamicTanks () {
+    private void moveDynamicTanks() {
         for (EnemyTank enemyTank : enemyTanks) {
             if (enemyTank instanceof DynamicTankEasy) {
                 ((DynamicTankEasy) enemyTank).moveAutomatic(mainTank);
@@ -145,6 +152,7 @@ public class GameState {
             }
         }
     }
+
     private void setEnemyTanksRadian() {
         for (EnemyTank enemyTank : enemyTanks) {
             enemyTank.setGunAndBodyRadian(Geometry.radian(enemyTank.getTankCenterX(), enemyTank.getTankCenterY(),
@@ -351,5 +359,8 @@ public class GameState {
         rockets.add(rocket);
     }
 
+    public static ArrayList<Block> getBlocks() {
+        return blocks;
+    }
 }
 
