@@ -4,9 +4,7 @@ import Blocks.Block;
 import Blocks.DestroyableBlock;
 import Blocks.UnDestroyableBlock;
 import EnemyTanks.*;
-import Equipment.Bullet;
-import Equipment.Rocket;
-import Equipment.Tank;
+import Equipment.*;
 import Others.Geometry;
 
 import javax.swing.*;
@@ -44,6 +42,7 @@ public class GameState {
     private static ArrayList<Rocket> rockets;
     private static ArrayList<EnemyTank> enemyTanks;
     private static ArrayList<Block> blocks;
+    private static ArrayList<Equipment> equipments ;
 
     public GameState() {
 
@@ -52,6 +51,7 @@ public class GameState {
         rockets = new ArrayList<>();
         enemyTanks = new ArrayList<>();
         blocks = new ArrayList<>();
+        equipments = new ArrayList<>() ;
 
         addMapObjects();
 
@@ -87,10 +87,11 @@ public class GameState {
         blocks.add(new UnDestroyableBlock(600, 300));
         blocks.add(new UnDestroyableBlock(600, 200));
         blocks.add(new UnDestroyableBlock(600, 100));
-
         blocks.add(new DestroyableBlock(500, 400));
         blocks.add(new DestroyableBlock(500, 500));
 
+        // add equipment here
+        equipments.add(new UpdateWeapon(420 , 100)) ;
     }
 
     /**

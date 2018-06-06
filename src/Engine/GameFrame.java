@@ -70,6 +70,7 @@ public class GameFrame extends JFrame {
             unDestroyableBlockImage = ImageIO.read(new File("./pictures/wall1.png"));
             destroyableBlockImage = ImageIO.read(new File("./pictures/wall2.png"));
 
+
         } catch (IOException e) {
             System.out.println(e);
         }
