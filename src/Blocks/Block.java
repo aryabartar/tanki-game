@@ -70,4 +70,8 @@ public class Block {
     public int getEndY() {
         return endY;
     }
+
+    public boolean isAlive() {
+        return isAlive;
+    }
 }

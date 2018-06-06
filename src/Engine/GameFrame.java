@@ -1,7 +1,8 @@
 package Engine;
 
 import Blocks.Block;
-import Blocks.UndestroyableBlock;
+import Blocks.DestroyableBlock;
+import Blocks.UnDestroyableBlock;
 import EnemyTanks.*;
 import Equipment.Bullet;
 import Equipment.Rocket;
@@ -41,7 +42,8 @@ public class GameFrame extends JFrame {
     private BufferedImage dynamicTankEasyBodyImage;
     private BufferedImage dynamicTankHardBodyImage;
     private BufferedImage enemyTankGunImage;
-    private BufferedImage undestroyableBlockImage ;
+    private BufferedImage unDestroyableBlockImage ;
+    private BufferedImage destroyableBlockImage ;
 
     private long lastRender;
     private ArrayList<Float> fpsHistory;
@@ -65,7 +67,8 @@ public class GameFrame extends JFrame {
             dynamicTankEasyBodyImage = ImageIO.read(new File("./pictures/enemy-tank-body2.png"));
             dynamicTankHardBodyImage = ImageIO.read(new File("./pictures/enemy-tank-body3.png"));
             enemyTankGunImage = ImageIO.read(new File("./pictures/enemy-gun.jpg"));
-            undestroyableBlockImage = ImageIO.read(new File("./pictures/wall1.png"));
+            unDestroyableBlockImage = ImageIO.read(new File("./pictures/wall1.png"));
+            destroyableBlockImage = ImageIO.read(new File("./pictures/wall2.png"));
 
         } catch (IOException e) {
             System.out.println(e);
@@ -169,6 +172,15 @@ public class GameFrame extends JFrame {
         }
 
 
+        for (Block block : state.getBlocks()){
+            if (block instanceof UnDestroyableBlock) {
+                g2d.drawImage(unDestroyableBlockImage, block.getLocX(), block.getLocY(), null);
+            }
+            if (block instanceof DestroyableBlock) {
+                g2d.drawImage(destroyableBlockImage, block.getLocX(), block.getLocY(), null);
+            }
+        }
+
         for (EnemyTank enemyTank : state.getEnemyTanks()) {
             if (enemyTank instanceof StaticTankEasy) {
                 g2d.drawImage(staticTankEasyBodyImage, enemyTank.getLocX(), enemyTank.getLocY(), null);
@@ -192,12 +204,7 @@ public class GameFrame extends JFrame {
             g2d.setTransform(backup); // restore previous transform
         }
 
-        for (Block block : state.getBlocks()){
-            if (block instanceof UndestroyableBlock) {
-                g2d.drawImage(undestroyableBlockImage, block.getLocX(), block.getLocY(), null);
 
-            }
-        }
 
         AffineTransform backup = g2d.getTransform();
         AffineTransform trans = new AffineTransform();

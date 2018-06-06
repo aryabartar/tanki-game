@@ -1,7 +1,7 @@
 package Blocks;
 
-public class UndestroyableBlock extends Block {
-    public UndestroyableBlock(int locX, int locY) {
+public class UnDestroyableBlock extends Block {
+    public UnDestroyableBlock(int locX, int locY) {
         super(locX, locY);
     }
 

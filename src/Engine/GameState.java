@@ -1,7 +1,8 @@
 package Engine; /*** In The Name of Allah ***/
 
 import Blocks.Block;
-import Blocks.UndestroyableBlock;
+import Blocks.DestroyableBlock;
+import Blocks.UnDestroyableBlock;
 import EnemyTanks.*;
 import Equipment.Bullet;
 import Equipment.Rocket;
@@ -74,13 +75,21 @@ public class GameState {
     private void addMapObjects() {
 
         //add tanks here
-        enemyTanks.add(new StaticTankEasy(300, 300));
-        enemyTanks.add(new StaticTankHard(100, 400));
+        enemyTanks.add(new StaticTankEasy(300, 600));
+        enemyTanks.add(new StaticTankHard(100, 600));
         enemyTanks.add(new DynamicTankEasy(1000, 200, 1000, 500));
         enemyTanks.add(new DynamicTankHard(600, 600, 1000, 600));
 
         // add blocks here
-        blocks.add(new UndestroyableBlock(500, 100));
+        blocks.add(new UnDestroyableBlock(500, 100));
+        blocks.add(new UnDestroyableBlock(500, 200));
+        blocks.add(new UnDestroyableBlock(500, 300));
+        blocks.add(new UnDestroyableBlock(600, 300));
+        blocks.add(new UnDestroyableBlock(600, 200));
+        blocks.add(new UnDestroyableBlock(600, 100));
+
+        blocks.add(new DestroyableBlock(500, 400));
+        blocks.add(new DestroyableBlock(500, 500));
 
     }
 
@@ -135,12 +144,22 @@ public class GameState {
         checkShootHits();
         removeDeadBullets();
         removeDeadTanks();
-
+        removeDestroyedBlocks();
 
 //        System.out.println("Bullets : " + bullets.size() + " | Rockets : " + rockets.size() + " | Enemy : " + enemyTanks.size());
 
     }
 
+    private void removeDestroyedBlocks() {
+
+        for (int i = 0; i < blocks.size(); i++) {
+            if (blocks.get(i).isAlive() == false) {
+                blocks.remove(i) ;
+                i-- ;
+            }
+        }
+
+    }
 
     private void moveDynamicTanks() {
         for (EnemyTank enemyTank : enemyTanks) {
@@ -263,6 +282,39 @@ public class GameState {
                 }
             }
         }
+
+
+        for (Block block : blocks) {
+            for (int i = 0; i < rockets.size(); i++) {
+                if (rockets.get(i) != null) {
+                    if ((rockets.get(i).getLocX() > block.getLocX()) && (rockets.get(i).getLocX() < block.getEndX()) &&
+                            (rockets.get(i).getLocY() > block.getLocY()) && (rockets.get(i).getLocY() < block.getEndY())) {
+
+                        if (rockets.get(i).isFromEnemy() == false)
+                            block.reduceHealth(Rocket.DAMAGE);
+
+                        rockets.remove(i);
+
+                    }
+                }
+
+            }
+        }
+
+        for (Block block : blocks) {
+            for (int i = 0; i < bullets.size(); i++) {
+
+                if (bullets.get(i) != null) {
+                    if ((bullets.get(i).getLocX() > block.getLocX()) && (bullets.get(i).getLocY() > block.getLocY()) &&
+                            (bullets.get(i).getLocX() < block.getEndX()) && (bullets.get(i).getLocY() < block.getEndY())) {
+                        if (bullets.get(i).isFromEnemy() == false)
+                            block.reduceHealth(Bullet.DAMAGE);
+                        bullets.remove(i);
+                    }
+                }
+            }
+        }
+
     }
 
     private void removeDeadBullets() {
@@ -363,4 +415,3 @@ public class GameState {
         return blocks;
     }
 }
-

@@ -1,5 +1,6 @@
 package Equipment;
 
+import Blocks.Block;
 import EnemyTanks.EnemyTank;
 import Engine.GameFrame;
 import Engine.GameState;
@@ -81,6 +82,14 @@ public class Tank {
             Rectangle p = new Rectangle(enemyTank.getLocX(),enemyTank.getLocY(),enemyTank.getGunXPixels()-20,enemyTank.getyPixels());
 
             // Assuming there is an intersect method
+            if (r.intersects(p))
+                canMove = false ;
+        }
+
+        for (Block block : GameState.getBlocks()) {
+            Rectangle p = new Rectangle(block.getLocX(),block.getLocY(),block.getxPixels(),block.getyPixels());
+            Rectangle r = new Rectangle(locX,locY,xPixels,yPixels);
+
             if (r.intersects(p))
                 canMove = false ;
 
