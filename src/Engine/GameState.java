@@ -211,7 +211,7 @@ public class GameState {
 
     public void removeDeadTanks () {
         for (int i = 0 ; i < enemyTanks.size() ; i++) {
-            if (enemyTanks.get(i).getHealth() == 0) {
+            if (enemyTanks.get(i).getHealth() < 1) {
                 enemyTanks.remove(i) ;
                 i-- ;
             }
