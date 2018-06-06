@@ -73,9 +73,9 @@ public class GameState {
     private void addMapObjects() {
         enemyTanks.add(new StaticTankEasy(300, 300));
         enemyTanks.add(new StaticTankEasy(500, 100));
-        enemyTanks.add(new StaticTankHard(600, 600));
         enemyTanks.add(new StaticTankHard(100, 400));
-        enemyTanks.add(new DynamicTankEasy(1000, 200)) ;
+        enemyTanks.add(new DynamicTankEasy(1000, 200 , 1000 , 500)) ;
+        enemyTanks.add(new DynamicTankEasy(600 , 600 , 1000 , 600)) ;
 
     }
 
@@ -141,8 +141,7 @@ public class GameState {
     private void moveDynamicTanks () {
         for (EnemyTank enemyTank : enemyTanks) {
             if (enemyTank instanceof DynamicTankEasy) {
-                ((DynamicTankEasy) enemyTank).moveAutomaticHorizontally();
-
+                ((DynamicTankEasy) enemyTank).moveAutomatic();
             }
         }
     }
