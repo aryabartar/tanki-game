@@ -1,9 +1,6 @@
 package Engine; /*** In The Name of Allah ***/
 
-import EnemyTanks.DynamicTankEasy;
-import EnemyTanks.EnemyTank;
-import EnemyTanks.StaticTankEasy;
-import EnemyTanks.StaticTankHard;
+import EnemyTanks.*;
 import Equipment.Bullet;
 import Equipment.Rocket;
 import Equipment.Tank;
@@ -75,7 +72,7 @@ public class GameState {
         enemyTanks.add(new StaticTankEasy(500, 100));
         enemyTanks.add(new StaticTankHard(100, 400));
         enemyTanks.add(new DynamicTankEasy(1000, 200 , 1000 , 500)) ;
-        enemyTanks.add(new DynamicTankEasy(600 , 600 , 1000 , 600)) ;
+        enemyTanks.add(new DynamicTankHard(600 , 600 , 1000 , 600)) ;
 
     }
 
@@ -141,7 +138,10 @@ public class GameState {
     private void moveDynamicTanks () {
         for (EnemyTank enemyTank : enemyTanks) {
             if (enemyTank instanceof DynamicTankEasy) {
-                ((DynamicTankEasy) enemyTank).moveAutomatic();
+                ((DynamicTankEasy) enemyTank).moveAutomatic(mainTank);
+            }
+            if (enemyTank instanceof DynamicTankHard) {
+                ((DynamicTankHard) enemyTank).moveAutomatic(mainTank);
             }
         }
     }

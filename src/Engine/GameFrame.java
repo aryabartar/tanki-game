@@ -1,9 +1,6 @@
 package Engine;
 
-import EnemyTanks.DynamicTankEasy;
-import EnemyTanks.EnemyTank;
-import EnemyTanks.StaticTankEasy;
-import EnemyTanks.StaticTankHard;
+import EnemyTanks.*;
 import Equipment.Bullet;
 import Equipment.Rocket;
 
@@ -39,8 +36,9 @@ public class GameFrame extends JFrame {
     private BufferedImage rocketImage;
     private BufferedImage staticTankEasyBodyImage;
     private BufferedImage staticTankHardBodyImage;
-    private BufferedImage enemyTankGunImage;
     private BufferedImage dynamicTankEasyBodyImage;
+    private BufferedImage dynamicTankHardBodyImage;
+    private BufferedImage enemyTankGunImage;
 
     private long lastRender;
     private ArrayList<Float> fpsHistory;
@@ -62,6 +60,7 @@ public class GameFrame extends JFrame {
             staticTankEasyBodyImage = ImageIO.read(new File("./pictures/enemy-tank-body1.png"));
             staticTankHardBodyImage = ImageIO.read(new File("./pictures/enemy-tank-body4.png"));
             dynamicTankEasyBodyImage = ImageIO.read(new File("./pictures/enemy-tank-body2.png"));
+            dynamicTankHardBodyImage = ImageIO.read(new File("./pictures/enemy-tank-body3.png"));
             enemyTankGunImage = ImageIO.read(new File("./pictures/enemy-gun.jpg"));
 
 
@@ -176,7 +175,9 @@ public class GameFrame extends JFrame {
             }
             if (enemyTank instanceof DynamicTankEasy) {
                 g2d.drawImage(dynamicTankEasyBodyImage, enemyTank.getLocX(), enemyTank.getLocY(), null);
-
+            }
+            if (enemyTank instanceof DynamicTankHard) {
+                g2d.drawImage(dynamicTankHardBodyImage,enemyTank.getLocX(), enemyTank.getLocY(), null);
             }
 
             AffineTransform backup = g2d.getTransform();

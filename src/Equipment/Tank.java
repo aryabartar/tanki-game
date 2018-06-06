@@ -151,4 +151,13 @@ public class Tank {
     public static int getGunYPixels() {
         return gunYPixels;
     }
+
+    public int getyPixels() {
+        return yPixels;
+    }
+
+    public int getxPixels() {
+        return xPixels;
+    }
 }
+
