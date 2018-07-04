@@ -4,6 +4,7 @@ import Engine.GameFrame;
 import Engine.GameState;
 import Equipment.Bullet;
 import Equipment.Rocket;
+import Others.Point;
 
 import java.awt.*;
 import java.security.SecureRandom;

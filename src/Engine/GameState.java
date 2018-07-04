@@ -6,6 +6,7 @@ import Blocks.UnDestroyableBlock;
 import EnemyTanks.*;
 import Equipment.*;
 import Others.Geometry;
+import Others.Point;
 
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
@@ -43,6 +44,7 @@ public class GameState {
     private static ArrayList<EnemyTank> enemyTanks;
     private static ArrayList<Block> blocks;
     private static ArrayList<Equipment> equipments;
+    private static ArrayList<Point> destroyedTankTemproryTrashPoint ;
 
     public GameState() {
 
@@ -52,6 +54,7 @@ public class GameState {
         enemyTanks = new ArrayList<>();
         blocks = new ArrayList<>();
         equipments = new ArrayList<>();
+        destroyedTankTemproryTrashPoint = new ArrayList<>() ;
 
         addMapObjects();
 
@@ -152,8 +155,15 @@ public class GameState {
         removeDeadTanks();
         removeDestroyedBlocks();
         checkHitToEquipments();
+        printTemp();
+
     }
 
+    private void printTemp () {
+        for (Point point : destroyedTankTemproryTrashPoint) {
+            System.out.println(point.getX() + " " + point.getY() + " " + point.getTimeToRemove());
+        }
+    }
     private void checkHitToEquipments() {
         for (int i = 0; i < equipments.size(); i++) {
             if ((mainTank.getTankCenterX() > equipments.get(i).getLocX()) && (mainTank.getTankCenterX() < equipments.get(i).getEndX()) &&
@@ -374,6 +384,8 @@ public class GameState {
     public void removeDeadTanks() {
         for (int i = 0; i < enemyTanks.size(); i++) {
             if (enemyTanks.get(i).getHealth() < 1) {
+                Point tempPoint = new Point(enemyTanks.get(i).getLocX() , enemyTanks.get(i).getLocY()) ;
+                destroyedTankTemproryTrashPoint.add(tempPoint) ;
                 enemyTanks.remove(i);
                 i--;
             }
