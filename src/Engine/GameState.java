@@ -23,7 +23,7 @@ import java.util.ConcurrentModificationException;
  * This class holds the state of game and all of its elements.
  * This class also handles user inputs, which affect the game state.
  *
- * @author Seyed Mohammad Ghaffarian
+ * @author ... :D
  */
 public class GameState {
 
@@ -44,7 +44,7 @@ public class GameState {
     private static ArrayList<EnemyTank> enemyTanks;
     private static ArrayList<Block> blocks;
     private static ArrayList<Equipment> equipments;
-    private static ArrayList<Point> destroyedTankTemproryTrashPoint ;
+    private static ArrayList<Point> destroyedTankTemporaryTrashPoints;
 
     public GameState() {
 
@@ -54,7 +54,7 @@ public class GameState {
         enemyTanks = new ArrayList<>();
         blocks = new ArrayList<>();
         equipments = new ArrayList<>();
-        destroyedTankTemproryTrashPoint = new ArrayList<>() ;
+        destroyedTankTemporaryTrashPoints = new ArrayList<>() ;
 
         addMapObjects();
 
@@ -155,15 +155,19 @@ public class GameState {
         removeDeadTanks();
         removeDestroyedBlocks();
         checkHitToEquipments();
-        printTemp();
+        renderDestroyedTankPoints() ;
 
     }
 
-    private void printTemp () {
-        for (Point point : destroyedTankTemproryTrashPoint) {
-            System.out.println(point.getX() + " " + point.getY() + " " + point.getTimeToRemove());
+    private void renderDestroyedTankPoints () {
+        for (int i = 0 ; i < destroyedTankTemporaryTrashPoints.size() ; i++) {
+            destroyedTankTemporaryTrashPoints.get(i).reduceTimeToRemove(2);
+
+            if (destroyedTankTemporaryTrashPoints.get(i).getTimeToRemove() < 1)
+                destroyedTankTemporaryTrashPoints.remove(i) ;
         }
     }
+
     private void checkHitToEquipments() {
         for (int i = 0; i < equipments.size(); i++) {
             if ((mainTank.getTankCenterX() > equipments.get(i).getLocX()) && (mainTank.getTankCenterX() < equipments.get(i).getEndX()) &&
@@ -385,7 +389,7 @@ public class GameState {
         for (int i = 0; i < enemyTanks.size(); i++) {
             if (enemyTanks.get(i).getHealth() < 1) {
                 Point tempPoint = new Point(enemyTanks.get(i).getLocX() , enemyTanks.get(i).getLocY()) ;
-                destroyedTankTemproryTrashPoint.add(tempPoint) ;
+                destroyedTankTemporaryTrashPoints.add(tempPoint) ;
                 enemyTanks.remove(i);
                 i--;
             }
@@ -466,5 +470,9 @@ public class GameState {
 
     public static ArrayList<Equipment> getEquipments() {
         return equipments;
+    }
+
+    public static ArrayList<Point> getDestroyedTankTemporaryTrashPoints() {
+        return destroyedTankTemporaryTrashPoints;
     }
 }

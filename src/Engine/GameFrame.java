@@ -5,6 +5,7 @@ import Blocks.DestroyableBlock;
 import Blocks.UnDestroyableBlock;
 import EnemyTanks.*;
 import Equipment.*;
+import Others.Point;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -46,6 +47,7 @@ public class GameFrame extends JFrame {
     private BufferedImage updateWeaponImage;
     private BufferedImage repairImage;
     private BufferedImage cartridgeImage;
+    private BufferedImage destroyedTankImage;
 
     private long lastRender;
     private ArrayList<Float> fpsHistory;
@@ -74,6 +76,7 @@ public class GameFrame extends JFrame {
             updateWeaponImage = ImageIO.read(new File("./pictures/update-weapon.png"));
             repairImage = ImageIO.read(new File("./pictures/repair.png"));
             cartridgeImage = ImageIO.read(new File("./pictures/cartridge.png"));
+            destroyedTankImage = ImageIO.read(new File("./pictures/destroyed-tank.png"));
 
 
         } catch (IOException e) {
@@ -137,6 +140,18 @@ public class GameFrame extends JFrame {
                 RenderingHints.VALUE_RENDER_QUALITY);
 
 
+        for (Point destroyedTankPoint : state.getDestroyedTankTemporaryTrashPoints()) {
+            Composite backupComposite = g2d.getComposite();
+
+            int alpha = destroyedTankPoint.getTimeToRemove(); //draw half transparent
+            AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) alpha/100);
+            g2d.setComposite(ac);
+            g2d.drawImage(destroyedTankImage, destroyedTankPoint.getX(), destroyedTankPoint.getY(), null);
+
+            g2d.setComposite(backupComposite);
+        }
+
+
         g2d.drawImage(mainTankImage, state.getMainTank().getLocX(), state.getMainTank().getLocY(), null);
 
         try {
@@ -176,6 +191,8 @@ public class GameFrame extends JFrame {
         } catch (ConcurrentModificationException e) {
 
         }
+
+
 
         for (Equipment equipment : state.getEquipments()) {
             Composite backupComposite = g2d.getComposite();
