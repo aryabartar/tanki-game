@@ -42,7 +42,7 @@ public class GameState {
     private static ArrayList<Rocket> rockets;
     private static ArrayList<EnemyTank> enemyTanks;
     private static ArrayList<Block> blocks;
-    private static ArrayList<Equipment> equipments ;
+    private static ArrayList<Equipment> equipments;
 
     public GameState() {
 
@@ -51,7 +51,7 @@ public class GameState {
         rockets = new ArrayList<>();
         enemyTanks = new ArrayList<>();
         blocks = new ArrayList<>();
-        equipments = new ArrayList<>() ;
+        equipments = new ArrayList<>();
 
         addMapObjects();
 
@@ -91,8 +91,10 @@ public class GameState {
         blocks.add(new DestroyableBlock(500, 500));
 
         // add equipment here
-        equipments.add(new UpdateWeapon(800 , 100)) ;
-        equipments.add(new Repair(800, 200)) ;
+        equipments.add(new UpdateWeapon(800, 100));
+        equipments.add(new Repair(800, 200));
+        equipments.add(new Cartridge(800, 300));
+
     }
 
     /**
@@ -152,19 +154,19 @@ public class GameState {
         checkHitToEquipments();
     }
 
-    private void checkHitToEquipments () {
-        for (int i = 0 ; i < equipments.size() ; i++) {
+    private void checkHitToEquipments() {
+        for (int i = 0; i < equipments.size(); i++) {
             if ((mainTank.getTankCenterX() > equipments.get(i).getLocX()) && (mainTank.getTankCenterX() < equipments.get(i).getEndX()) &&
-                    (mainTank.getTankCenterY() > equipments.get(i).getLocY()) && (mainTank.getTankCenterY()<equipments.get(i).getEndY())){
-               //complete here later.
-                equipments.remove(i) ;
-                i-- ;
+                    (mainTank.getTankCenterY() > equipments.get(i).getLocY()) && (mainTank.getTankCenterY() < equipments.get(i).getEndY())) {
+                //complete here later.
+                equipments.remove(i);
+                i--;
                 System.out.println("Hit to equipment . Do sth later !");
             }
         }
     }
 
-    private void updateAlphaInEquipments () {
+    private void updateAlphaInEquipments() {
         for (Equipment equipment : equipments) {
             equipment.updateAlpha();
         }
@@ -174,8 +176,8 @@ public class GameState {
 
         for (int i = 0; i < blocks.size(); i++) {
             if (blocks.get(i).isAlive() == false) {
-                blocks.remove(i) ;
-                i-- ;
+                blocks.remove(i);
+                i--;
             }
         }
 
@@ -225,16 +227,16 @@ public class GameState {
         @Override
         public void keyPressed(KeyEvent e) {
             switch (e.getKeyCode()) {
-                case KeyEvent.VK_UP:
+                case KeyEvent.VK_W:
                     keyUP = true;
                     break;
-                case KeyEvent.VK_DOWN:
+                case KeyEvent.VK_S:
                     keyDOWN = true;
                     break;
-                case KeyEvent.VK_LEFT:
+                case KeyEvent.VK_A:
                     keyLEFT = true;
                     break;
-                case KeyEvent.VK_RIGHT:
+                case KeyEvent.VK_D:
                     keyRIGHT = true;
                     break;
                 case KeyEvent.VK_ESCAPE:
@@ -246,16 +248,16 @@ public class GameState {
         @Override
         public void keyReleased(KeyEvent e) {
             switch (e.getKeyCode()) {
-                case KeyEvent.VK_UP:
+                case KeyEvent.VK_W:
                     keyUP = false;
                     break;
-                case KeyEvent.VK_DOWN:
+                case KeyEvent.VK_S:
                     keyDOWN = false;
                     break;
-                case KeyEvent.VK_LEFT:
+                case KeyEvent.VK_A:
                     keyLEFT = false;
                     break;
-                case KeyEvent.VK_RIGHT:
+                case KeyEvent.VK_D:
                     keyRIGHT = false;
                     break;
             }
@@ -271,31 +273,23 @@ public class GameState {
                 if (rockets.get(i) != null) {
                     if ((rockets.get(i).getLocX() > enemyTank.getLocX()) && (rockets.get(i).getLocX() < enemyTank.getEndLocX()) &&
                             (rockets.get(i).getLocY() > enemyTank.getLocY()) && (rockets.get(i).getLocY() < enemyTank.getEndLocY())) {
-
                         if (rockets.get(i).isFromEnemy() == false) {
                             enemyTank.reduceHealth(Rocket.DAMAGE);
                         }
-
                         rockets.remove(i);
-
                     }
                 }
-
             }
         }
         for (EnemyTank enemyTank : enemyTanks) {
             for (int i = 0; i < bullets.size(); i++) {
-
                 if (bullets.get(i) != null) {
                     if ((bullets.get(i).getLocX() > enemyTank.getLocX()) && (bullets.get(i).getLocY() > enemyTank.getLocY()) &&
                             (bullets.get(i).getLocX() < enemyTank.getEndLocX()) && (bullets.get(i).getLocY() < enemyTank.getEndLocY())) {
                         if (bullets.get(i).isFromEnemy() == false) {
                             enemyTank.reduceHealth(Bullet.DAMAGE);
                         }
-
                         bullets.remove(i);
-
-
                     }
                 }
             }
@@ -333,6 +327,31 @@ public class GameState {
             }
         }
 
+
+        for (int i = 0; i < rockets.size(); i++) {
+            if (rockets.get(i) != null) {
+                if ((rockets.get(i).getLocX() > mainTank.getLocX()) && (rockets.get(i).getLocX() < mainTank.getEndLocX()) &&
+                        (rockets.get(i).getLocY() > mainTank.getLocY()) && (rockets.get(i).getLocY() < mainTank.getEndLocY())) {
+
+                    if (rockets.get(i).isFromEnemy() == true) {
+
+                        //do sth here later !
+                    }
+                    rockets.remove(i);
+                }
+            }
+        }
+        for (int i = 0; i < bullets.size(); i++) {
+            if (bullets.get(i) != null) {
+                if ((bullets.get(i).getLocX() > mainTank.getLocX()) && (bullets.get(i).getLocY() > mainTank.getLocY()) &&
+                        (bullets.get(i).getLocX() < mainTank.getEndLocX()) && (bullets.get(i).getLocY() < mainTank.getEndLocY())) {
+                    if (bullets.get(i).isFromEnemy() == true) {
+                    // do sth here later
+                    }
+                    bullets.remove(i);
+                }
+            }
+        }
     }
 
     private void removeDeadBullets() {

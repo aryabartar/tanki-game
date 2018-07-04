@@ -29,7 +29,7 @@ import javax.swing.JFrame;
  */
 public class GameFrame extends JFrame {
 
-    public static final int GAME_HEIGHT = 720;                  // 720p game resolution
+    public static final int GAME_HEIGHT = 1000;                  // 720p game resolution
     public static final int GAME_WIDTH = 16 * GAME_HEIGHT / 9;  // wide aspect ratio
 
     private BufferedImage mainTankImage;
@@ -41,10 +41,11 @@ public class GameFrame extends JFrame {
     private BufferedImage dynamicTankEasyBodyImage;
     private BufferedImage dynamicTankHardBodyImage;
     private BufferedImage enemyTankGunImage;
-    private BufferedImage unDestroyableBlockImage ;
-    private BufferedImage destroyableBlockImage ;
-    private BufferedImage updateWeaponImage ;
-    private BufferedImage repairImage ;
+    private BufferedImage unDestroyableBlockImage;
+    private BufferedImage destroyableBlockImage;
+    private BufferedImage updateWeaponImage;
+    private BufferedImage repairImage;
+    private BufferedImage cartridgeImage;
 
     private long lastRender;
     private ArrayList<Float> fpsHistory;
@@ -72,6 +73,7 @@ public class GameFrame extends JFrame {
             destroyableBlockImage = ImageIO.read(new File("./pictures/wall2.png"));
             updateWeaponImage = ImageIO.read(new File("./pictures/update-weapon.png"));
             repairImage = ImageIO.read(new File("./pictures/repair.png"));
+            cartridgeImage = ImageIO.read(new File("./pictures/cartridge.png"));
 
 
         } catch (IOException e) {
@@ -175,27 +177,33 @@ public class GameFrame extends JFrame {
 
         }
 
-        for (Equipment equipment : state.getEquipments()){
-            Composite backupComposite = g2d.getComposite() ;
+        for (Equipment equipment : state.getEquipments()) {
+            Composite backupComposite = g2d.getComposite();
 
             if (equipment instanceof UpdateWeapon) {
-                double alpha = equipment.getAlpha() ; //draw half transparent
-                AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,(float)alpha);
+                double alpha = equipment.getAlpha(); //draw half transparent
+                AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) alpha);
                 g2d.setComposite(ac);
                 g2d.drawImage(updateWeaponImage, equipment.getLocX(), equipment.getLocY(), null);
             }
 
             if (equipment instanceof Repair) {
-                double alpha = equipment.getAlpha() ; //draw half transparent
-                AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,(float)alpha);
+                double alpha = equipment.getAlpha(); //draw half transparent
+                AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) alpha);
                 g2d.setComposite(ac);
                 g2d.drawImage(repairImage, equipment.getLocX(), equipment.getLocY(), null);
+            }
+            if (equipment instanceof Cartridge) {
+                double alpha = equipment.getAlpha(); //draw half transparent
+                AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) alpha);
+                g2d.setComposite(ac);
+                g2d.drawImage(cartridgeImage, equipment.getLocX(), equipment.getLocY(), null);
             }
             g2d.setComposite(backupComposite);
 
         }
 
-        for (Block block : state.getBlocks()){
+        for (Block block : state.getBlocks()) {
             if (block instanceof UnDestroyableBlock) {
                 g2d.drawImage(unDestroyableBlockImage, block.getLocX(), block.getLocY(), null);
             }
@@ -215,7 +223,7 @@ public class GameFrame extends JFrame {
                 g2d.drawImage(dynamicTankEasyBodyImage, enemyTank.getLocX(), enemyTank.getLocY(), null);
             }
             if (enemyTank instanceof DynamicTankHard) {
-                g2d.drawImage(dynamicTankHardBodyImage,enemyTank.getLocX(), enemyTank.getLocY(), null);
+                g2d.drawImage(dynamicTankHardBodyImage, enemyTank.getLocX(), enemyTank.getLocY(), null);
             }
 
             AffineTransform backup = g2d.getTransform();
@@ -226,7 +234,6 @@ public class GameFrame extends JFrame {
             g2d.drawImage(enemyTankGunImage, enemyTank.getGunLocX(), enemyTank.getGunLocY(), null);  // the actual location of the sprite
             g2d.setTransform(backup); // restore previous transform
         }
-
 
 
         AffineTransform backup = g2d.getTransform();

@@ -49,7 +49,7 @@ public class Equipment {
             isAlphaUp = true ;
         if (alpha > 0.95)
             isAlphaUp = false ;
-        System.out.println(alpha);
+
         if (isAlphaUp == true) {
             alpha += 0.02 ;
         }
