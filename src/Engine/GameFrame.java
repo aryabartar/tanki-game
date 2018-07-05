@@ -48,6 +48,7 @@ public class GameFrame extends JFrame {
     private BufferedImage repairImage;
     private BufferedImage cartridgeImage;
     private BufferedImage destroyedTankImage;
+    private BufferedImage movingSmileImage;
 
     private long lastRender;
     private ArrayList<Float> fpsHistory;
@@ -77,6 +78,7 @@ public class GameFrame extends JFrame {
             repairImage = ImageIO.read(new File("./pictures/repair.png"));
             cartridgeImage = ImageIO.read(new File("./pictures/cartridge.png"));
             destroyedTankImage = ImageIO.read(new File("./pictures/destroyed-tank.png"));
+            movingSmileImage = ImageIO.read(new File("./pictures/smile.png"));
 
 
         } catch (IOException e) {
@@ -149,6 +151,11 @@ public class GameFrame extends JFrame {
             g2d.drawImage(destroyedTankImage, destroyedTankPoint.getX(), destroyedTankPoint.getY(), null);
 
             g2d.setComposite(backupComposite);
+        }
+
+        for (MovingSmile movingSmile : state.getMovingSmiles()) {
+            g2d.drawImage(movingSmileImage, movingSmile.getLocX(), movingSmile.getLocY(), null);
+            System.out.println(movingSmile.getLocX() + " " + movingSmile.getLocY());
         }
 
 

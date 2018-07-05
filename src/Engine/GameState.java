@@ -45,6 +45,7 @@ public class GameState {
     private static ArrayList<Block> blocks;
     private static ArrayList<Equipment> equipments;
     private static ArrayList<Point> destroyedTankTemporaryTrashPoints;
+    private static ArrayList<MovingSmile> movingSmiles ;
 
     public GameState() {
 
@@ -55,6 +56,7 @@ public class GameState {
         blocks = new ArrayList<>();
         equipments = new ArrayList<>();
         destroyedTankTemporaryTrashPoints = new ArrayList<>() ;
+        movingSmiles = new ArrayList<>() ;
 
         addMapObjects();
 
@@ -97,6 +99,9 @@ public class GameState {
         equipments.add(new UpdateWeapon(800, 100));
         equipments.add(new Repair(800, 200));
         equipments.add(new Cartridge(800, 300));
+
+        //Add moving smiles here :D
+        movingSmiles.add(new MovingSmile(100 , 100)) ;
 
     }
 
@@ -156,12 +161,18 @@ public class GameState {
         removeDestroyedBlocks();
         checkHitToEquipments();
         renderDestroyedTankPoints() ;
+        attackMovingSmiles();
+    }
 
+    private void attackMovingSmiles () {
+        for ( MovingSmile movingSmile : movingSmiles) {
+            movingSmile.attackToThisLocation(mainTank.getLocX() , mainTank.getEndLocY());
+        }
     }
 
     private void renderDestroyedTankPoints () {
         for (int i = 0 ; i < destroyedTankTemporaryTrashPoints.size() ; i++) {
-            destroyedTankTemporaryTrashPoints.get(i).reduceTimeToRemove(2);
+            destroyedTankTemporaryTrashPoints.get(i).reduceTimeToRemove(3);
 
             if (destroyedTankTemporaryTrashPoints.get(i).getTimeToRemove() < 1)
                 destroyedTankTemporaryTrashPoints.remove(i) ;
@@ -474,5 +485,9 @@ public class GameState {
 
     public static ArrayList<Point> getDestroyedTankTemporaryTrashPoints() {
         return destroyedTankTemporaryTrashPoints;
+    }
+
+    public static ArrayList<MovingSmile> getMovingSmiles() {
+        return movingSmiles;
     }
 }
