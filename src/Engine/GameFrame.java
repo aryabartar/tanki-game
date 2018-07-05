@@ -25,8 +25,6 @@ import javax.swing.JFrame;
  * For more information on BufferStrategy check out:
  * http://docs.oracle.com/javase/tutorial/extra/fullscreen/bufferstrategy.html
  * http://docs.oracle.com/javase/8/docs/api/java/awt/image/BufferStrategy.html
- *
- * @author Seyed Mohammad Ghaffarian
  */
 public class GameFrame extends JFrame {
 
@@ -49,6 +47,7 @@ public class GameFrame extends JFrame {
     private BufferedImage cartridgeImage;
     private BufferedImage destroyedTankImage;
     private BufferedImage movingSmileImage;
+    private BufferedImage movingSleepImage;
 
     private long lastRender;
     private ArrayList<Float> fpsHistory;
@@ -79,6 +78,7 @@ public class GameFrame extends JFrame {
             cartridgeImage = ImageIO.read(new File("./pictures/cartridge.png"));
             destroyedTankImage = ImageIO.read(new File("./pictures/destroyed-tank.png"));
             movingSmileImage = ImageIO.read(new File("./pictures/smile.png"));
+            movingSleepImage = ImageIO.read(new File("./pictures/sleep.png"));
 
 
         } catch (IOException e) {
@@ -146,17 +146,14 @@ public class GameFrame extends JFrame {
             Composite backupComposite = g2d.getComposite();
 
             int alpha = destroyedTankPoint.getTimeToRemove(); //draw half transparent
-            AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) alpha/100);
+            AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) alpha / 100);
             g2d.setComposite(ac);
             g2d.drawImage(destroyedTankImage, destroyedTankPoint.getX(), destroyedTankPoint.getY(), null);
 
             g2d.setComposite(backupComposite);
         }
 
-        for (MovingSmile movingSmile : state.getMovingSmiles()) {
-            g2d.drawImage(movingSmileImage, movingSmile.getLocX(), movingSmile.getLocY(), null);
-            System.out.println(movingSmile.getLocX() + " " + movingSmile.getLocY());
-        }
+
 
 
         g2d.drawImage(mainTankImage, state.getMainTank().getLocX(), state.getMainTank().getLocY(), null);
@@ -198,7 +195,6 @@ public class GameFrame extends JFrame {
         } catch (ConcurrentModificationException e) {
 
         }
-
 
 
         for (Equipment equipment : state.getEquipments()) {
@@ -257,6 +253,13 @@ public class GameFrame extends JFrame {
             g2d.transform(trans);
             g2d.drawImage(enemyTankGunImage, enemyTank.getGunLocX(), enemyTank.getGunLocY(), null);  // the actual location of the sprite
             g2d.setTransform(backup); // restore previous transform
+        }
+
+        for (MovingSmile movingSmile : state.getMovingSmiles()) {
+            if (movingSmile.isSmiling() == true)
+                g2d.drawImage(movingSmileImage, movingSmile.getLocX(), movingSmile.getLocY(), null);
+            else
+                g2d.drawImage(movingSleepImage, movingSmile.getLocX(), movingSmile.getLocY(), null);
         }
 
 

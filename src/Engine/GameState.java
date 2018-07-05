@@ -9,6 +9,7 @@ import Others.Geometry;
 import Others.Point;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -101,7 +102,9 @@ public class GameState {
         equipments.add(new Cartridge(800, 300));
 
         //Add moving smiles here :D
-        movingSmiles.add(new MovingSmile(100 , 100)) ;
+        movingSmiles.add(new MovingSmile(900 , 600)) ;
+        movingSmiles.add(new MovingSmile(500 , 500)) ;
+        movingSmiles.add(new MovingSmile(400 , 500)) ;
 
     }
 
@@ -162,11 +165,26 @@ public class GameState {
         checkHitToEquipments();
         renderDestroyedTankPoints() ;
         attackMovingSmiles();
+        findSmileFacesIntersects();
+    }
+
+    private void findSmileFacesIntersects() {
+        for (int i = 0 ; i < movingSmiles.size(); i++ ) {
+            Rectangle smileFaceRec = new Rectangle(movingSmiles.get(i).getLocX(), movingSmiles.get(i).getLocY(), MovingSmile.xPixels, MovingSmile.yPixels);
+            Rectangle mainTankRec = new Rectangle(mainTank.getLocX(), mainTank.getLocY(), mainTank.getxPixels(), mainTank.getyPixels());
+
+            if (smileFaceRec.intersects(mainTankRec)) {
+                Point tempPoint = new Point(movingSmiles.get(i).getLocX() , movingSmiles.get(i).getLocY()) ;
+                destroyedTankTemporaryTrashPoints.add(tempPoint) ;
+                movingSmiles.remove(i);
+                i-- ;
+            }
+        }
     }
 
     private void attackMovingSmiles () {
         for ( MovingSmile movingSmile : movingSmiles) {
-            movingSmile.attackToThisLocation(mainTank.getLocX() , mainTank.getEndLocY());
+            movingSmile.attackToThisLocation(mainTank.getTankCenterX() , mainTank.getTankCenterY());
         }
     }
 
