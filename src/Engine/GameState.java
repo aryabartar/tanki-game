@@ -46,7 +46,7 @@ public class GameState {
     private static ArrayList<Block> blocks;
     private static ArrayList<Equipment> equipments;
     private static ArrayList<Point> destroyedTankTemporaryTrashPoints;
-    private static ArrayList<MovingSmile> movingSmiles ;
+    private static ArrayList<MovingSmile> movingSmiles;
 
     public GameState() {
 
@@ -56,8 +56,8 @@ public class GameState {
         enemyTanks = new ArrayList<>();
         blocks = new ArrayList<>();
         equipments = new ArrayList<>();
-        destroyedTankTemporaryTrashPoints = new ArrayList<>() ;
-        movingSmiles = new ArrayList<>() ;
+        destroyedTankTemporaryTrashPoints = new ArrayList<>();
+        movingSmiles = new ArrayList<>();
 
         addMapObjects();
 
@@ -102,9 +102,9 @@ public class GameState {
         equipments.add(new Cartridge(800, 300));
 
         //Add moving smiles here :D
-        movingSmiles.add(new MovingSmile(900 , 600)) ;
-        movingSmiles.add(new MovingSmile(500 , 500)) ;
-        movingSmiles.add(new MovingSmile(400 , 500)) ;
+        movingSmiles.add(new MovingSmile(900, 600));
+        movingSmiles.add(new MovingSmile(500, 500));
+        movingSmiles.add(new MovingSmile(400, 500));
 
     }
 
@@ -163,37 +163,37 @@ public class GameState {
         removeDeadTanks();
         removeDestroyedBlocks();
         checkHitToEquipments();
-        renderDestroyedTankPoints() ;
+        renderDestroyedTankPoints();
         attackMovingSmiles();
         findSmileFacesIntersects();
     }
 
     private void findSmileFacesIntersects() {
-        for (int i = 0 ; i < movingSmiles.size(); i++ ) {
+        for (int i = 0; i < movingSmiles.size(); i++) {
             Rectangle smileFaceRec = new Rectangle(movingSmiles.get(i).getLocX(), movingSmiles.get(i).getLocY(), MovingSmile.xPixels, MovingSmile.yPixels);
             Rectangle mainTankRec = new Rectangle(mainTank.getLocX(), mainTank.getLocY(), mainTank.getxPixels(), mainTank.getyPixels());
 
             if (smileFaceRec.intersects(mainTankRec)) {
-                Point tempPoint = new Point(movingSmiles.get(i).getLocX() , movingSmiles.get(i).getLocY()) ;
-                destroyedTankTemporaryTrashPoints.add(tempPoint) ;
+                Point tempPoint = new Point(movingSmiles.get(i).getLocX(), movingSmiles.get(i).getLocY());
+                destroyedTankTemporaryTrashPoints.add(tempPoint);
                 movingSmiles.remove(i);
-                i-- ;
+                i--;
             }
         }
     }
 
-    private void attackMovingSmiles () {
-        for ( MovingSmile movingSmile : movingSmiles) {
-            movingSmile.attackToThisLocation(mainTank.getTankCenterX() , mainTank.getTankCenterY());
+    private void attackMovingSmiles() {
+        for (MovingSmile movingSmile : movingSmiles) {
+            movingSmile.attackToThisLocation(mainTank.getTankCenterX(), mainTank.getTankCenterY());
         }
     }
 
-    private void renderDestroyedTankPoints () {
-        for (int i = 0 ; i < destroyedTankTemporaryTrashPoints.size() ; i++) {
+    private void renderDestroyedTankPoints() {
+        for (int i = 0; i < destroyedTankTemporaryTrashPoints.size(); i++) {
             destroyedTankTemporaryTrashPoints.get(i).reduceTimeToRemove(3);
 
             if (destroyedTankTemporaryTrashPoints.get(i).getTimeToRemove() < 1)
-                destroyedTankTemporaryTrashPoints.remove(i) ;
+                destroyedTankTemporaryTrashPoints.remove(i);
         }
     }
 
@@ -324,6 +324,46 @@ public class GameState {
                 }
             }
         }
+
+        for (int j = 0; j < movingSmiles.size(); j++) {
+            for (int i = 0; i < rockets.size(); i++) {
+                if (rockets.get(i) != null) {
+                    if ((rockets.get(i).getLocX() > movingSmiles.get(j).getLocX()) && (rockets.get(i).getLocX() < movingSmiles.get(j).getLocX() + MovingSmile.xPixels) &&
+                            (rockets.get(i).getLocY() > movingSmiles.get(j).getLocY()) && (rockets.get(i).getLocY() < movingSmiles.get(j).getLocY() + MovingSmile.yPixels)) {
+                        if (rockets.get(i).isFromEnemy() == false) {
+                            Point tempPoint = new Point(movingSmiles.get(j).getLocX(), movingSmiles.get(j).getLocY());
+                            destroyedTankTemporaryTrashPoints.add(tempPoint);
+                            movingSmiles.remove(j);
+                            j--;
+                            rockets.remove(i);
+                            break;
+                        }
+                    }
+                }
+            }
+
+        }
+
+        for (int j = 0; j < movingSmiles.size(); j++) {
+            for (int i = 0; i < bullets.size(); i++) {
+                if (bullets.get(i) != null) {
+                    if ((bullets.get(i).getLocX() > movingSmiles.get(j).getLocX()) && (bullets.get(i).getLocX() < movingSmiles.get(j).getLocX() + MovingSmile.xPixels) &&
+                            (bullets.get(i).getLocY() > movingSmiles.get(j).getLocY()) && (bullets.get(i).getLocY() < movingSmiles.get(j).getLocY() + MovingSmile.yPixels)) {
+                        if (bullets.get(i).isFromEnemy() == false) {
+                            Point tempPoint = new Point(movingSmiles.get(j).getLocX(), movingSmiles.get(j).getLocY());
+                            destroyedTankTemporaryTrashPoints.add(tempPoint);
+                            movingSmiles.remove(j);
+                            j--;
+                            bullets.remove(i);
+                            break;
+                        }
+                    }
+                }
+            }
+
+        }
+
+
         for (EnemyTank enemyTank : enemyTanks) {
             for (int i = 0; i < bullets.size(); i++) {
                 if (bullets.get(i) != null) {
@@ -389,7 +429,7 @@ public class GameState {
                 if ((bullets.get(i).getLocX() > mainTank.getLocX()) && (bullets.get(i).getLocY() > mainTank.getLocY()) &&
                         (bullets.get(i).getLocX() < mainTank.getEndLocX()) && (bullets.get(i).getLocY() < mainTank.getEndLocY())) {
                     if (bullets.get(i).isFromEnemy() == true) {
-                    // do sth here later
+                        // do sth here later
                     }
                     bullets.remove(i);
                 }
@@ -417,8 +457,8 @@ public class GameState {
     public void removeDeadTanks() {
         for (int i = 0; i < enemyTanks.size(); i++) {
             if (enemyTanks.get(i).getHealth() < 1) {
-                Point tempPoint = new Point(enemyTanks.get(i).getLocX() , enemyTanks.get(i).getLocY()) ;
-                destroyedTankTemporaryTrashPoints.add(tempPoint) ;
+                Point tempPoint = new Point(enemyTanks.get(i).getLocX(), enemyTanks.get(i).getLocY());
+                destroyedTankTemporaryTrashPoints.add(tempPoint);
                 enemyTanks.remove(i);
                 i--;
             }
