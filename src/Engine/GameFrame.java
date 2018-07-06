@@ -30,6 +30,11 @@ public class GameFrame extends JFrame {
 
     public static final int GAME_HEIGHT = 1000;                  // 720p game resolution
     public static final int GAME_WIDTH = 16 * GAME_HEIGHT / 9;  // wide aspect ratio
+    public static final int GAME_FULL_HEIGH = 5000 ;
+    public static final int GAME_FULL_WIDTH = 5000 ;
+    public static final int TANK_IN_MAP_X = 888 ;
+    public static final int TANK_IN_MAP_Y = 500 ;
+
 
     private BufferedImage mainTankImage;
     private BufferedImage mainTankGun;
@@ -136,8 +141,8 @@ public class GameFrame extends JFrame {
      */
     private void doRendering(Graphics2D g2d, GameState state) {
 
-        mainX = state.getMainTank().getTankCenterX() -888 ;
-        mainY = state.getMainTank().getTankCenterY() -500 ;
+        mainX = state.getMainTank().getTankCenterX() -TANK_IN_MAP_X ;
+        mainY = state.getMainTank().getTankCenterY() -TANK_IN_MAP_Y ;
 
         // Draw background
         g2d.setColor(Color.white);

@@ -95,7 +95,7 @@ public class Tank {
 
         }
 
-        if ((locX > 0) && (locX + xPixels< GameFrame.GAME_WIDTH) && (locY > 0) && (locY+yPixels < GameFrame.GAME_HEIGHT)) {
+        if ((locX > 0) && (locX + xPixels< GameFrame.GAME_FULL_WIDTH) && (locY > 0) && (locY+yPixels < GameFrame.GAME_FULL_WIDTH)) {
             if (canMove == true) {
                 this.locX = locX;
                 this.locY = locY;

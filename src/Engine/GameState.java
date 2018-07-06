@@ -250,8 +250,8 @@ public class GameState {
     }
 
     private void setMainTankAndGunRadian() {
-        int mainX = getMainTank().getTankCenterX() - 888;
-        int mainY = getMainTank().getTankCenterY() - 500;
+        int mainX = getMainTank().getTankCenterX() - GameFrame.TANK_IN_MAP_X;
+        int mainY = getMainTank().getTankCenterY() - GameFrame.TANK_IN_MAP_Y;
 
         mainTank.setGunAndBodyRadian(Geometry.radian(getMainTank().getTankCenterX() - mainX, getMainTank().getTankCenterY() - mainY,
                 getMouseMotionX() , getMouseMotionY() ));

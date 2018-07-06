@@ -47,7 +47,7 @@ public class Rocket {
     }
 
     public boolean checkAlive() {
-        if ((locX > 0) && (locX < GameFrame.GAME_WIDTH) && (locY > 0) && (locY < GameFrame.GAME_HEIGHT))
+        if ((locX > 0) && (locX < GameFrame.GAME_FULL_WIDTH) && (locY > 0) && (locY < GameFrame.GAME_FULL_HEIGH))
             return true;
         else
             return false;
