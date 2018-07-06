@@ -94,7 +94,11 @@ public class GameState {
         blocks.add(new UnDestroyableBlock(600, 200));
         blocks.add(new UnDestroyableBlock(600, 100));
         blocks.add(new DestroyableBlock(500, 400));
-        blocks.add(new DestroyableBlock(500, 500));
+        blocks.add(new DestroyableBlock(1300, 900));
+        blocks.add(new DestroyableBlock(1300, 800));
+        blocks.add(new DestroyableBlock(1200, 800));
+        blocks.add(new UnDestroyableBlock(1200, 900));
+
 
         // add equipment here
         equipments.add(new UpdateWeapon(800, 100));
@@ -105,6 +109,7 @@ public class GameState {
         movingSmiles.add(new MovingSmile(900, 600));
         movingSmiles.add(new MovingSmile(500, 500));
         movingSmiles.add(new MovingSmile(400, 500));
+        movingSmiles.add(new MovingSmile(1000, 500));
 
     }
 
@@ -245,9 +250,14 @@ public class GameState {
     }
 
     private void setMainTankAndGunRadian() {
-        mainTank.setGunAndBodyRadian(Geometry.radian(getMainTank().getTankCenterX(), getMainTank().getTankCenterY(),
-                getMouseMotionX(), getMouseMotionY()));
+        int mainX = getMainTank().getTankCenterX() - 888;
+        int mainY = getMainTank().getTankCenterY() - 500;
+
+        mainTank.setGunAndBodyRadian(Geometry.radian(getMainTank().getTankCenterX() - mainX, getMainTank().getTankCenterY() - mainY,
+                getMouseMotionX() , getMouseMotionY() ));
+
     }
+
 
     public KeyListener getKeyListener() {
         return keyHandler;

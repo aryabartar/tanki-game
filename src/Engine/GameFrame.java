@@ -136,8 +136,8 @@ public class GameFrame extends JFrame {
      */
     private void doRendering(Graphics2D g2d, GameState state) {
 
-        mainX = state.getMainTank().getLocX() -500 ;
-        mainY = state.getMainTank().getLocY() -500 ;
+        mainX = state.getMainTank().getTankCenterX() -888 ;
+        mainY = state.getMainTank().getTankCenterY() -500 ;
 
         // Draw background
         g2d.setColor(Color.white);
