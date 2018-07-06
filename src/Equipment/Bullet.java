@@ -11,6 +11,8 @@ public class Bullet {
     public static final int BULLET_SPEED = 18;
     public static final int DAMAGE = 2;
 
+    private final int startLocX ;
+    private final int startLocY ;
 
     private final int pixelX = 39;
     private final int pixelY = 10;
@@ -26,6 +28,9 @@ public class Bullet {
                 (int) ((Tank.getGunXPixels()-15) * Math.sin(radian));
         this.radian = radian;
         this.isFromEnemy = isFromEnemy ;
+
+        startLocX = locX ;
+        startLocY = locY ;
     }
 
     public int getLocX() {
@@ -46,7 +51,15 @@ public class Bullet {
     }
 
     public boolean checkAlive () {
-        if ((locX > 0) && (locX < GameFrame.GAME_WIDTH) && (locY > 0) && (locY < GameFrame.GAME_HEIGHT))
+
+        int xDifference = Math.abs(startLocX - locX) ;
+        int yDifference = Math.abs(startLocY - locY) ;
+
+        if (Math.sqrt(xDifference * xDifference + yDifference * yDifference) > 1000) {
+            return false ;
+        }
+
+        if ((locX > 0) && (locX < GameFrame.GAME_FULL_WIDTH) && (locY > 0) && (locY < GameFrame.GAME_FULL_HEIGHT))
             return true ;
         else
             return  false ;

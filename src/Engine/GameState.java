@@ -85,6 +85,7 @@ public class GameState {
         enemyTanks.add(new StaticTankHard(100, 600));
         enemyTanks.add(new DynamicTankEasy(1000, 200, 1000, 500));
         enemyTanks.add(new DynamicTankHard(600, 600, 1000, 600));
+        enemyTanks.add(new DynamicTankHard(1000, 1000, 1000, 1500));
 
         // add blocks here
         blocks.add(new UnDestroyableBlock(500, 100));
@@ -98,6 +99,11 @@ public class GameState {
         blocks.add(new DestroyableBlock(1300, 800));
         blocks.add(new DestroyableBlock(1200, 800));
         blocks.add(new UnDestroyableBlock(1200, 900));
+        blocks.add(new UnDestroyableBlock(1500, 900));
+        blocks.add(new UnDestroyableBlock(1600, 900));
+        blocks.add(new UnDestroyableBlock(1700, 900));
+        blocks.add(new UnDestroyableBlock(1700, 1000));
+        blocks.add(new DestroyableBlock(1800, 900));
 
 
         // add equipment here
@@ -110,6 +116,7 @@ public class GameState {
         movingSmiles.add(new MovingSmile(500, 500));
         movingSmiles.add(new MovingSmile(400, 500));
         movingSmiles.add(new MovingSmile(1000, 500));
+        movingSmiles.add(new MovingSmile(1000, 2000));
 
     }
 
@@ -254,7 +261,7 @@ public class GameState {
         int mainY = getMainTank().getTankCenterY() - GameFrame.TANK_IN_MAP_Y;
 
         mainTank.setGunAndBodyRadian(Geometry.radian(getMainTank().getTankCenterX() - mainX, getMainTank().getTankCenterY() - mainY,
-                getMouseMotionX() , getMouseMotionY() ));
+                getMouseMotionX(), getMouseMotionY()));
 
     }
 
@@ -323,32 +330,42 @@ public class GameState {
     private void checkShootHits() {
         for (EnemyTank enemyTank : enemyTanks) {
             for (int i = 0; i < rockets.size(); i++) {
-                if (rockets.get(i) != null) {
-                    if ((rockets.get(i).getLocX() > enemyTank.getLocX()) && (rockets.get(i).getLocX() < enemyTank.getEndLocX()) &&
-                            (rockets.get(i).getLocY() > enemyTank.getLocY()) && (rockets.get(i).getLocY() < enemyTank.getEndLocY())) {
-                        if (rockets.get(i).isFromEnemy() == false) {
-                            enemyTank.reduceHealth(Rocket.DAMAGE);
+                try {
+
+
+                    if (rockets.get(i) != null) {
+                        if ((rockets.get(i).getLocX() > enemyTank.getLocX()) && (rockets.get(i).getLocX() < enemyTank.getEndLocX()) &&
+                                (rockets.get(i).getLocY() > enemyTank.getLocY()) && (rockets.get(i).getLocY() < enemyTank.getEndLocY())) {
+                            if (rockets.get(i).isFromEnemy() == false) {
+                                enemyTank.reduceHealth(Rocket.DAMAGE);
+                            }
+                            rockets.remove(i);
                         }
-                        rockets.remove(i);
                     }
+                } catch (ArrayIndexOutOfBoundsException e) {
+
                 }
             }
         }
 
         for (int j = 0; j < movingSmiles.size(); j++) {
             for (int i = 0; i < rockets.size(); i++) {
-                if (rockets.get(i) != null) {
-                    if ((rockets.get(i).getLocX() > movingSmiles.get(j).getLocX()) && (rockets.get(i).getLocX() < movingSmiles.get(j).getLocX() + MovingSmile.xPixels) &&
-                            (rockets.get(i).getLocY() > movingSmiles.get(j).getLocY()) && (rockets.get(i).getLocY() < movingSmiles.get(j).getLocY() + MovingSmile.yPixels)) {
-                        if (rockets.get(i).isFromEnemy() == false) {
-                            Point tempPoint = new Point(movingSmiles.get(j).getLocX(), movingSmiles.get(j).getLocY());
-                            destroyedTankTemporaryTrashPoints.add(tempPoint);
-                            movingSmiles.remove(j);
-                            j--;
-                            rockets.remove(i);
-                            break;
+                try {
+                    if (rockets.get(i) != null) {
+                        if ((rockets.get(i).getLocX() > movingSmiles.get(j).getLocX()) && (rockets.get(i).getLocX() < movingSmiles.get(j).getLocX() + MovingSmile.xPixels) &&
+                                (rockets.get(i).getLocY() > movingSmiles.get(j).getLocY()) && (rockets.get(i).getLocY() < movingSmiles.get(j).getLocY() + MovingSmile.yPixels)) {
+                            if (rockets.get(i).isFromEnemy() == false) {
+                                Point tempPoint = new Point(movingSmiles.get(j).getLocX(), movingSmiles.get(j).getLocY());
+                                destroyedTankTemporaryTrashPoints.add(tempPoint);
+                                movingSmiles.remove(j);
+                                rockets.remove(i);
+                                j--;
+                                break;
+                            }
                         }
                     }
+                } catch (ArrayIndexOutOfBoundsException e) {
+
                 }
             }
 
@@ -540,7 +557,11 @@ public class GameState {
     }
 
     public static void addToRockets(Rocket rocket) {
-        rockets.add(rocket);
+        try {
+            rockets.add(rocket);
+        } catch (ArrayIndexOutOfBoundsException e) {
+
+        }
     }
 
     public static ArrayList<Block> getBlocks() {
