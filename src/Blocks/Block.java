@@ -1,41 +1,40 @@
 package Blocks;
 
 public class Block {
-    private int locX ;
-    private int locY ;
+    private int locX;
+    private int locY;
 
-    private int centerX ;
-    private int centerY ;
+    private int centerX;
+    private int centerY;
 
-    private int endX ;
-    private int endY ;
+    private int endX;
+    private int endY;
 
-    private int health = 6 ;
-    private boolean isAlive ;
+    private int health = 6;
+    private boolean isAlive;
 
-    private final int xPixels = 100 ;
-    private final int yPixels = 100  ;
+    private final int xPixels = 100;
+    private final int yPixels = 100;
 
 
+    public Block(int locX, int locY) {
+        this.locX = locX;
+        this.locY = locY;
 
-    public Block (int locX , int locY ) {
-        this.locX = locX ;
-        this.locY = locY ;
+        endX = locX + xPixels;
+        endY = locY + yPixels;
 
-        endX = locX + xPixels ;
-        endY = locY + yPixels ;
+        centerX = locX + xPixels / 2;
+        centerY = locY + yPixels / 2;
 
-        centerX = locX + xPixels/2 ;
-        centerY = locY + yPixels/2 ;
-
-        isAlive = true ;
+        isAlive = true;
     }
 
-    public void reduceHealth (int reduce) {
-        health -= reduce ;
+    public void reduceHealth(int reduce) {
+        health -= reduce;
 
         if (health < 1) {
-            isAlive = false ;
+            isAlive = false;
         }
     }
 
@@ -52,7 +51,7 @@ public class Block {
     }
 
     public int getyPixels() {
-        return yPixels ;
+        return yPixels;
     }
 
     public int getCenterX() {
