@@ -14,6 +14,7 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import javax.imageio.ImageIO;
@@ -31,10 +32,10 @@ public class GameFrame extends JFrame {
 
     public static final int GAME_HEIGHT = 1000;                  // 720p game resolution
     public static final int GAME_WIDTH = 16 * GAME_HEIGHT / 9;  // wide aspect ratio
-    public static final int GAME_FULL_HEIGHT = 3000 ;
-    public static final int GAME_FULL_WIDTH = 5000 ;
-    public static final int TANK_IN_MAP_X = 888 ;
-    public static final int TANK_IN_MAP_Y = 500 ;
+    public static final int GAME_FULL_HEIGHT = 3000;
+    public static final int GAME_FULL_WIDTH = 5000;
+    public static final int TANK_IN_MAP_X = 888;
+    public static final int TANK_IN_MAP_Y = 500;
 
 
     private BufferedImage mainTankImage;
@@ -57,10 +58,22 @@ public class GameFrame extends JFrame {
     private BufferedImage bigRoofImage;
     private BufferedImage backOfBackground;
     private BufferedImage chariotImage;
+    private BufferedImage rock1Image;
+    private BufferedImage rock2Image;
+    private BufferedImage ratImage;
+    private BufferedImage cactusImage;
+    private BufferedImage papyrusImage;
 
     private long lastRender;
     private ArrayList<Float> fpsHistory;
     private BufferStrategy bufferStrategy;
+    private SecureRandom random;
+    private ArrayList<Point> rock1Points;
+    private ArrayList<Point> rock2Points;
+    private ArrayList<Point> ratPoints;
+    private ArrayList<Point> cactusPoints;
+    private ArrayList<Point> papyrusPoints;
+
 
     private int mainX;
     private int mainY;
@@ -71,7 +84,14 @@ public class GameFrame extends JFrame {
         setSize(GAME_WIDTH, GAME_HEIGHT);
         lastRender = -1;
         fpsHistory = new ArrayList<>(100);
+        rock1Points = new ArrayList<>();
+        rock2Points = new ArrayList<>();
+        ratPoints = new ArrayList<>();
+        papyrusPoints = new ArrayList<>();
+        cactusPoints = new ArrayList<>();
 
+
+        random = new SecureRandom();
         try {
             mainTankImage = ImageIO.read(new File("./pictures/tank-body.png"));
             mainTankGun = ImageIO.read(new File("./pictures/tank-gun.jpg"));
@@ -93,11 +113,30 @@ public class GameFrame extends JFrame {
             bigRoofImage = ImageIO.read(new File("./pictures/big-roof.jpg"));
             backOfBackground = ImageIO.read(new File("./pictures/14.jpg"));
             chariotImage = ImageIO.read(new File("./pictures/chariot.png"));
+            rock1Image = ImageIO.read(new File("./pictures/rock1.png"));
+            rock2Image = ImageIO.read(new File("./pictures/rock2.png"));
+            ratImage = ImageIO.read(new File("./pictures/rat.png"));
+            cactusImage = ImageIO.read(new File("./pictures/cactus.png"));
+            papyrusImage = ImageIO.read(new File("./pictures/papyrus.png"));
 
 
         } catch (IOException e) {
             System.out.println(e);
         }
+
+
+        for (int i = 0; i < 15; i++) {
+            rock1Points.add(new Point(random.nextInt(4800), random.nextInt(1700)));
+            rock2Points.add(new Point(random.nextInt(4800), random.nextInt(1600)));
+        }
+
+        for (int i = 0; i < 3; i++) {
+            ratPoints.add(new Point(random.nextInt(4800), random.nextInt(1700)));
+            papyrusPoints.add(new Point(random.nextInt(4800), random.nextInt(1600)));
+            cactusPoints.add(new Point(random.nextInt(4800), random.nextInt(1600)));
+        }
+
+
     }
 
     /**
@@ -148,15 +187,31 @@ public class GameFrame extends JFrame {
      */
     private void doRendering(Graphics2D g2d, GameState state) {
 
-        mainX = state.getMainTank().getTankCenterX() -TANK_IN_MAP_X ;
-        mainY = state.getMainTank().getTankCenterY() -TANK_IN_MAP_Y ;
+        mainX = state.getMainTank().getTankCenterX() - TANK_IN_MAP_X;
+        mainY = state.getMainTank().getTankCenterY() - TANK_IN_MAP_Y;
 
         // Draw background
         g2d.setColor(Color.CYAN);
         g2d.fillRect(-500, -500, GAME_WIDTH, GAME_HEIGHT);
 
-        g2d.drawImage(backOfBackground, -(mainX/3) - 500, -(mainY/3) - 500, null);
-        g2d.drawImage(bigRoofImage, 0- mainX, 0- mainY, null);
+        g2d.drawImage(backOfBackground, -(mainX / 3) - 500, -(mainY / 3) - 500, null);
+        g2d.drawImage(bigRoofImage, 0 - mainX, 0 - mainY, null);
+
+        for (Point point : rock1Points) {
+            g2d.drawImage(rock1Image, point.getX() - mainX, point.getY() - mainY, null);
+        }
+        for (Point point : rock2Points) {
+            g2d.drawImage(rock2Image, point.getX() - mainX, point.getY() - mainY, null);
+        }
+        for (Point point : ratPoints) {
+            g2d.drawImage(ratImage, point.getX() - mainX, point.getY() - mainY, null);
+        }
+        for (Point point : cactusPoints) {
+            g2d.drawImage(cactusImage, point.getX() - mainX, point.getY() - mainY, null);
+        }
+        for (Point point : papyrusPoints) {
+            g2d.drawImage(papyrusImage, point.getX() - mainX, point.getY() - mainY, null);
+        }
 
 
         g2d.setRenderingHint(
@@ -186,7 +241,7 @@ public class GameFrame extends JFrame {
                     trans.rotate(bullet.getRadian(), bullet.getLocX() - mainX, bullet.getLocY() - mainY); // the points to rotate around (the center in my example, your left side for your problem)
 
                     g2d.transform(trans);
-                    g2d.drawImage(bulletImage, bullet.getLocX()- mainX, bullet.getLocY() - mainY, null);  // the actual location of the sprite
+                    g2d.drawImage(bulletImage, bullet.getLocX() - mainX, bullet.getLocY() - mainY, null);  // the actual location of the sprite
                     g2d.setTransform(backup); // restore previous transform
                 } catch (NullPointerException | ConcurrentModificationException e) {
 
@@ -248,10 +303,10 @@ public class GameFrame extends JFrame {
                 g2d.drawImage(unDestroyableBlockImage, block.getLocX() - mainX, block.getLocY() - mainY, null);
             }
             if (block instanceof DestroyableBlock) {
-                g2d.drawImage(destroyableBlockImage, block.getLocX() - mainX , block.getLocY() - mainY, null);
+                g2d.drawImage(destroyableBlockImage, block.getLocX() - mainX, block.getLocY() - mainY, null);
             }
             if (block instanceof Chariot) {
-                g2d.drawImage(chariotImage, block.getLocX() - mainX , block.getLocY() - mainY, null);
+                g2d.drawImage(chariotImage, block.getLocX() - mainX, block.getLocY() - mainY, null);
             }
         }
 

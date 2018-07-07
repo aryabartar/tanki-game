@@ -1,6 +1,7 @@
 package Engine; /*** In The Name of Allah ***/
 
 import Blocks.Block;
+import Blocks.Chariot;
 import Blocks.DestroyableBlock;
 import Blocks.UnDestroyableBlock;
 import EnemyTanks.*;
@@ -192,6 +193,8 @@ public class GameState {
         blocks.add(new DestroyableBlock(1100, 900));
         blocks.add(new DestroyableBlock(1200, 900));
         blocks.add(new DestroyableBlock(1300, 900));
+
+        blocks.add(new Chariot(900, 100));
 
 
 
