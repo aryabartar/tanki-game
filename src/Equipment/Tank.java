@@ -22,7 +22,7 @@ public class Tank {
     private final int xPixels = 128;
     private final int yPixels = 128;
     private final static int gunXPixels = 128;
-    private final static int gunYPixels = 40;
+    private final static int gunYPixels = 40 ;
 
 
     private double gunAndBodyRadian; //this is tank body and gun radian .

@@ -30,7 +30,7 @@ public class GameFrame extends JFrame {
 
     public static final int GAME_HEIGHT = 1000;                  // 720p game resolution
     public static final int GAME_WIDTH = 16 * GAME_HEIGHT / 9;  // wide aspect ratio
-    public static final int GAME_FULL_HEIGHT = 5000 ;
+    public static final int GAME_FULL_HEIGHT = 3000 ;
     public static final int GAME_FULL_WIDTH = 5000 ;
     public static final int TANK_IN_MAP_X = 888 ;
     public static final int TANK_IN_MAP_Y = 500 ;
@@ -53,6 +53,8 @@ public class GameFrame extends JFrame {
     private BufferedImage destroyedTankImage;
     private BufferedImage movingSmileImage;
     private BufferedImage movingSleepImage;
+    private BufferedImage bigRoofImage;
+    private BufferedImage backOfBackground;
 
     private long lastRender;
     private ArrayList<Float> fpsHistory;
@@ -86,6 +88,8 @@ public class GameFrame extends JFrame {
             destroyedTankImage = ImageIO.read(new File("./pictures/destroyed-tank.png"));
             movingSmileImage = ImageIO.read(new File("./pictures/smile.png"));
             movingSleepImage = ImageIO.read(new File("./pictures/sleep.png"));
+            bigRoofImage = ImageIO.read(new File("./pictures/big-roof.jpg"));
+            backOfBackground = ImageIO.read(new File("./pictures/14.jpg"));
 
 
         } catch (IOException e) {
@@ -145,8 +149,12 @@ public class GameFrame extends JFrame {
         mainY = state.getMainTank().getTankCenterY() -TANK_IN_MAP_Y ;
 
         // Draw background
-        g2d.setColor(Color.white);
-        g2d.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+        g2d.setColor(Color.CYAN);
+        g2d.fillRect(-500, -500, GAME_WIDTH, GAME_HEIGHT);
+
+        g2d.drawImage(backOfBackground, -(mainX/3) - 500, -(mainY/3) - 500, null);
+        g2d.drawImage(bigRoofImage, 0- mainX, 0- mainY, null);
+
 
         g2d.setRenderingHint(
                 RenderingHints.KEY_RENDERING,

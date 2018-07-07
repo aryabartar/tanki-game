@@ -81,42 +81,65 @@ public class GameState {
     private void addMapObjects() {
 
         //add tanks here
-        enemyTanks.add(new StaticTankEasy(300, 600));
-        enemyTanks.add(new StaticTankHard(100, 600));
-        enemyTanks.add(new DynamicTankEasy(1000, 200, 1000, 500));
-        enemyTanks.add(new DynamicTankHard(600, 600, 1000, 600));
-        enemyTanks.add(new DynamicTankHard(1000, 1000, 1000, 1500));
+        enemyTanks.add(new StaticTankEasy(600, 100)); // ثابت آسان
+        enemyTanks.add(new StaticTankHard(100, 600)); // ثابت سخت
+        enemyTanks.add(new DynamicTankEasy(300, 500, 500, 500)); // م آ
+        enemyTanks.add(new DynamicTankHard(600, 600, 1000, 600)); // م س
 
         // add blocks here
-        blocks.add(new UnDestroyableBlock(500, 100));
-        blocks.add(new UnDestroyableBlock(500, 200));
-        blocks.add(new UnDestroyableBlock(500, 300));
-        blocks.add(new UnDestroyableBlock(600, 300));
-        blocks.add(new UnDestroyableBlock(600, 200));
-        blocks.add(new UnDestroyableBlock(600, 100));
-        blocks.add(new DestroyableBlock(500, 400));
-        blocks.add(new DestroyableBlock(1300, 900));
-        blocks.add(new DestroyableBlock(1300, 800));
-        blocks.add(new DestroyableBlock(1200, 800));
-        blocks.add(new UnDestroyableBlock(1200, 900));
-        blocks.add(new UnDestroyableBlock(1500, 900));
-        blocks.add(new UnDestroyableBlock(1600, 900));
-        blocks.add(new UnDestroyableBlock(1700, 900));
-        blocks.add(new UnDestroyableBlock(1700, 1000));
-        blocks.add(new DestroyableBlock(1800, 900));
+        blocks.add(new UnDestroyableBlock(400, 100)); // غیر تخریب پذیر
+        blocks.add(new UnDestroyableBlock(400, 200));
+        blocks.add(new UnDestroyableBlock(400, 300));
+
+        blocks.add(new DestroyableBlock(100, 300)); // تخریب پذیر
+        blocks.add(new DestroyableBlock(200, 300));
+        blocks.add(new DestroyableBlock(300, 300));
+        blocks.add(new DestroyableBlock(500, 100));
+
+        blocks.add(new UnDestroyableBlock(400, 900));
+        blocks.add(new UnDestroyableBlock(500, 900));
+        blocks.add(new UnDestroyableBlock(600, 900));
+        blocks.add(new UnDestroyableBlock(400, 1000));
+        blocks.add(new UnDestroyableBlock(400, 1100));
+        blocks.add(new UnDestroyableBlock(500, 1100));
+        blocks.add(new UnDestroyableBlock(600, 1100));
+        blocks.add(new UnDestroyableBlock(600, 1000));
+
+        blocks.add(new UnDestroyableBlock(100, 900));
+        blocks.add(new UnDestroyableBlock(100, 1000));
+        blocks.add(new DestroyableBlock(200, 900));
+        blocks.add(new DestroyableBlock(300, 900));
+
+        blocks.add(new UnDestroyableBlock(600, 1200));
+        blocks.add(new UnDestroyableBlock(600, 1300));
+        blocks.add(new UnDestroyableBlock(600, 1400));
+        blocks.add(new UnDestroyableBlock(600, 1500));
+
+        blocks.add(new DestroyableBlock(600 , 1600));
+        blocks.add(new DestroyableBlock(600, 1700));
+        blocks.add(new DestroyableBlock(600, 1800));
+
+
+        for (int i = 0 ; i <= 49 ; i++ ) {
+            blocks.add(new UnDestroyableBlock(i*100, 0));
+            blocks.add(new UnDestroyableBlock(i*100, 1900));
+
+            if (i < 20) {
+                blocks.add(new UnDestroyableBlock(0, i*100));
+                blocks.add(new UnDestroyableBlock(4900, i*100));
+            }
+        }
+
 
 
         // add equipment here
-        equipments.add(new UpdateWeapon(800, 100));
-        equipments.add(new Repair(800, 200));
-        equipments.add(new Cartridge(800, 300));
+        equipments.add(new UpdateWeapon(300, 1000));
+//        equipments.add(new Repair(800, 200));
+//        equipments.add(new Cartridge(800, 300));
 
         //Add moving smiles here :D
-        movingSmiles.add(new MovingSmile(900, 600));
-        movingSmiles.add(new MovingSmile(500, 500));
-        movingSmiles.add(new MovingSmile(400, 500));
-        movingSmiles.add(new MovingSmile(1000, 500));
-        movingSmiles.add(new MovingSmile(1000, 2000));
+        movingSmiles.add(new MovingSmile(500, 1000));
+
 
     }
 
@@ -408,16 +431,23 @@ public class GameState {
 
         for (Block block : blocks) {
             for (int i = 0; i < rockets.size(); i++) {
-                if (rockets.get(i) != null) {
-                    if ((rockets.get(i).getLocX() > block.getLocX()) && (rockets.get(i).getLocX() < block.getEndX()) &&
-                            (rockets.get(i).getLocY() > block.getLocY()) && (rockets.get(i).getLocY() < block.getEndY())) {
+                try {
 
-                        if (rockets.get(i).isFromEnemy() == false)
-                            block.reduceHealth(Rocket.DAMAGE);
 
-                        rockets.remove(i);
+                    if (rockets.get(i) != null) {
+                        if ((rockets.get(i).getLocX() > block.getLocX()) && (rockets.get(i).getLocX() < block.getEndX()) &&
+                                (rockets.get(i).getLocY() > block.getLocY()) && (rockets.get(i).getLocY() < block.getEndY())) {
 
+                            if (rockets.get(i).isFromEnemy() == false)
+                                block.reduceHealth(Rocket.DAMAGE);
+
+                            rockets.remove(i);
+
+                        }
                     }
+                }
+                catch (ArrayIndexOutOfBoundsException e) {
+
                 }
 
             }
