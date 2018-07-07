@@ -13,13 +13,16 @@ public class Block {
     private int health = 6;
     private boolean isAlive;
 
-    private final int xPixels = 100;
-    private final int yPixels = 100;
+    private final int xPixels ;
+    private final int yPixels ;
 
 
-    public Block(int locX, int locY) {
+    public Block(int locX, int locY , int xPixels , int yPixels) {
         this.locX = locX;
         this.locY = locY;
+
+        this.xPixels = xPixels ;
+        this.yPixels = yPixels ;
 
         endX = locX + xPixels;
         endY = locY + yPixels;

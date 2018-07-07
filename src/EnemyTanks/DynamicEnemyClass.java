@@ -91,7 +91,6 @@ public abstract class DynamicEnemyClass extends EnemyTank {
                     movesRight = !movesRight;
                 }
 
-                System.out.println(locX +"  "+ locY);
             }
         } else {
             System.err.println("Your inputs should have at least one same position in either x or y . :D");

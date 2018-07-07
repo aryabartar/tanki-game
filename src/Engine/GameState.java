@@ -90,8 +90,11 @@ public class GameState {
 //        enemyTanks.add(new StaticTankHard(100, 600));
         enemyTanks.add(new DynamicTankEasy(300, 500, 500, 500));
 //        enemyTanks.add(new DynamicTankHard(600, 600, 1000, 600));
-        enemyTanks.add(new DynamicTankEasy(1600, 1300, 1900, 1300));
+        enemyTanks.add(new DynamicTankEasy(1600, 1300, 2200, 1300));
+
         enemyTanks.add(new StaticTankHard(1700, 1500));
+
+        enemyTanks.add(new StaticTankEasy(1300, 1200));
 
 
 
@@ -155,10 +158,47 @@ public class GameState {
         blocks.add(new DestroyableBlock(1400, 1500));
         blocks.add(new DestroyableBlock(1400, 1300));
 
+        blocks.add(new UnDestroyableBlock(1400, 1200));
+        blocks.add(new UnDestroyableBlock(1400, 1100));
+        blocks.add(new UnDestroyableBlock(1400, 1000));
+        blocks.add(new UnDestroyableBlock(1500, 1000));
+        blocks.add(new UnDestroyableBlock(1600, 1000));
+        blocks.add(new UnDestroyableBlock(1700, 1000));
+        blocks.add(new UnDestroyableBlock(1800, 1000));
+        blocks.add(new UnDestroyableBlock(1900, 1000));
+        blocks.add(new UnDestroyableBlock(2000, 1000));
+        blocks.add(new UnDestroyableBlock(2100, 1000));
+
+        blocks.add(new UnDestroyableBlock(1400, 900));
+        blocks.add(new UnDestroyableBlock(1500, 900));
+        blocks.add(new UnDestroyableBlock(1600, 900));
+        blocks.add(new UnDestroyableBlock(1700, 900));
+        blocks.add(new UnDestroyableBlock(1800, 900));
+        blocks.add(new UnDestroyableBlock(1900, 900));
+        blocks.add(new UnDestroyableBlock(2000, 900));
+        blocks.add(new UnDestroyableBlock(2100, 900));
+
+        blocks.add(new DestroyableBlock(1300, 1000));
+        blocks.add(new DestroyableBlock(1200, 1000));
+        blocks.add(new DestroyableBlock(1100, 1000));
+        blocks.add(new DestroyableBlock(1000, 1000));
+        blocks.add(new DestroyableBlock(900, 1000));
+        blocks.add(new DestroyableBlock(800, 1000));
+        blocks.add(new DestroyableBlock(700, 1000));
+        blocks.add(new DestroyableBlock(700, 900));
+        blocks.add(new DestroyableBlock(800, 900));
+        blocks.add(new DestroyableBlock(900, 900));
+        blocks.add(new DestroyableBlock(1000, 900));
+        blocks.add(new DestroyableBlock(1100, 900));
+        blocks.add(new DestroyableBlock(1200, 900));
+        blocks.add(new DestroyableBlock(1300, 900));
+
+
 
 
 
         equipments.add(new UpdateWeapon(300, 1000));
+        equipments.add(new UpdateWeapon(700, 1200));
 //        equipments.add(new Repair(800, 200));
 //        equipments.add(new Cartridgedss(800, 300));
 

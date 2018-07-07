@@ -1,6 +1,7 @@
 package Engine;
 
 import Blocks.Block;
+import Blocks.Chariot;
 import Blocks.DestroyableBlock;
 import Blocks.UnDestroyableBlock;
 import EnemyTanks.*;
@@ -55,6 +56,7 @@ public class GameFrame extends JFrame {
     private BufferedImage movingSleepImage;
     private BufferedImage bigRoofImage;
     private BufferedImage backOfBackground;
+    private BufferedImage chariotImage;
 
     private long lastRender;
     private ArrayList<Float> fpsHistory;
@@ -90,6 +92,7 @@ public class GameFrame extends JFrame {
             movingSleepImage = ImageIO.read(new File("./pictures/sleep.png"));
             bigRoofImage = ImageIO.read(new File("./pictures/big-roof.jpg"));
             backOfBackground = ImageIO.read(new File("./pictures/14.jpg"));
+            chariotImage = ImageIO.read(new File("./pictures/chariot.png"));
 
 
         } catch (IOException e) {
@@ -246,6 +249,9 @@ public class GameFrame extends JFrame {
             }
             if (block instanceof DestroyableBlock) {
                 g2d.drawImage(destroyableBlockImage, block.getLocX() - mainX , block.getLocY() - mainY, null);
+            }
+            if (block instanceof Chariot) {
+                g2d.drawImage(chariotImage, block.getLocX() - mainX , block.getLocY() - mainY, null);
             }
         }
 
