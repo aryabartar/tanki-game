@@ -154,7 +154,7 @@ public abstract class EnemyTank {
 
     private void justMove (int locX , int locY , boolean canMove) {
 
-        if ((locX > 0) && (locX + xPixels < GameFrame.GAME_WIDTH) && (locY > 0) && (locY + yPixels < GameFrame.GAME_HEIGHT)) {
+        if ((locX > 0) && (locX + xPixels < GameFrame.GAME_FULL_WIDTH) && (locY > 0) && (locY + yPixels < GameFrame.GAME_FULL_HEIGHT)) {
             if (canMove == true) {
                 this.locX = locX;
                 this.locY = locY;

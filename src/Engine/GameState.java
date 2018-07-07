@@ -80,18 +80,28 @@ public class GameState {
 
     private void addMapObjects() {
 
+
+        // ------------------------------------------------------------------------
+
+
+
         //add tanks here
-        enemyTanks.add(new StaticTankEasy(600, 100)); // ثابت آسان
-        enemyTanks.add(new StaticTankHard(100, 600)); // ثابت سخت
-        enemyTanks.add(new DynamicTankEasy(300, 500, 500, 500)); // م آ
-        enemyTanks.add(new DynamicTankHard(600, 600, 1000, 600)); // م س
+        enemyTanks.add(new StaticTankEasy(600, 100));
+//        enemyTanks.add(new StaticTankHard(100, 600));
+        enemyTanks.add(new DynamicTankEasy(300, 500, 500, 500));
+//        enemyTanks.add(new DynamicTankHard(600, 600, 1000, 600));
+        enemyTanks.add(new DynamicTankEasy(1600, 1300, 1900, 1300));
+        enemyTanks.add(new StaticTankHard(1700, 1500));
+
+
+
 
         // add blocks here
-        blocks.add(new UnDestroyableBlock(400, 100)); // غیر تخریب پذیر
+        blocks.add(new UnDestroyableBlock(400, 100));
         blocks.add(new UnDestroyableBlock(400, 200));
         blocks.add(new UnDestroyableBlock(400, 300));
 
-        blocks.add(new DestroyableBlock(100, 300)); // تخریب پذیر
+        blocks.add(new DestroyableBlock(100, 300));
         blocks.add(new DestroyableBlock(200, 300));
         blocks.add(new DestroyableBlock(300, 300));
         blocks.add(new DestroyableBlock(500, 100));
@@ -119,6 +129,54 @@ public class GameState {
         blocks.add(new DestroyableBlock(600, 1700));
         blocks.add(new DestroyableBlock(600, 1800));
 
+        blocks.add(new UnDestroyableBlock(700, 1300));
+        blocks.add(new UnDestroyableBlock(700, 1400));
+        blocks.add(new UnDestroyableBlock(700, 1500));
+        blocks.add(new UnDestroyableBlock(800, 1300));
+        blocks.add(new UnDestroyableBlock(800, 1400));
+        blocks.add(new UnDestroyableBlock(800, 1500));
+        blocks.add(new UnDestroyableBlock(900, 1300));
+        blocks.add(new UnDestroyableBlock(900, 1400));
+        blocks.add(new UnDestroyableBlock(900, 1500));
+        blocks.add(new UnDestroyableBlock(1000, 1300));
+        blocks.add(new UnDestroyableBlock(1000, 1400));
+        blocks.add(new UnDestroyableBlock(1000, 1500));
+        blocks.add(new UnDestroyableBlock(1100, 1300));
+        blocks.add(new UnDestroyableBlock(1100, 1400));
+        blocks.add(new UnDestroyableBlock(1100, 1500));
+        blocks.add(new UnDestroyableBlock(1200, 1500));
+        blocks.add(new UnDestroyableBlock(1200, 1300));
+        blocks.add(new UnDestroyableBlock(1200, 1400));
+        blocks.add(new UnDestroyableBlock(1300, 1300));
+        blocks.add(new UnDestroyableBlock(1300, 1400));
+        blocks.add(new UnDestroyableBlock(1300, 1500));
+        blocks.add(new UnDestroyableBlock(1400, 1400));
+
+        blocks.add(new DestroyableBlock(1400, 1500));
+        blocks.add(new DestroyableBlock(1400, 1300));
+
+
+
+
+        equipments.add(new UpdateWeapon(300, 1000));
+//        equipments.add(new Repair(800, 200));
+//        equipments.add(new Cartridgedss(800, 300));
+
+
+
+
+
+
+
+        //Add moving smiles here :D
+        movingSmiles.add(new MovingSmile(500, 1000));
+
+
+
+
+//-------------------------------------------------------------------------------------
+
+
 
         for (int i = 0 ; i <= 49 ; i++ ) {
             blocks.add(new UnDestroyableBlock(i*100, 0));
@@ -129,18 +187,6 @@ public class GameState {
                 blocks.add(new UnDestroyableBlock(4900, i*100));
             }
         }
-
-
-
-        // add equipment here
-        equipments.add(new UpdateWeapon(300, 1000));
-//        equipments.add(new Repair(800, 200));
-//        equipments.add(new Cartridge(800, 300));
-
-        //Add moving smiles here :D
-        movingSmiles.add(new MovingSmile(500, 1000));
-
-
     }
 
     /**
