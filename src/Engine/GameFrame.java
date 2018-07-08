@@ -63,6 +63,8 @@ public class GameFrame extends JFrame {
     private BufferedImage ratImage;
     private BufferedImage cactusImage;
     private BufferedImage papyrusImage;
+    private BufferedImage numberBarImage;
+    private BufferedImage smallRocketImage;
 
     private long lastRender;
     private ArrayList<Float> fpsHistory;
@@ -118,6 +120,8 @@ public class GameFrame extends JFrame {
             ratImage = ImageIO.read(new File("./pictures/rat.png"));
             cactusImage = ImageIO.read(new File("./pictures/cactus.png"));
             papyrusImage = ImageIO.read(new File("./pictures/papyrus.png"));
+            numberBarImage = ImageIO.read(new File("./pictures/number-bar.png"));
+            smallRocketImage = ImageIO.read(new File("./pictures/small-rocket.png"));
 
 
         } catch (IOException e) {
@@ -348,6 +352,24 @@ public class GameFrame extends JFrame {
         g2d.transform(trans);
         g2d.drawImage(mainTankGun, state.getMainTank().getGunLocX() - mainX, state.getMainTank().getGunLocY() - mainY, null);  // the actual location of the sprite
         g2d.setTransform(backup); // restore previous transform
+
+
+        //number bar
+        Composite backupComposite = g2d.getComposite();
+        AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float)0.78);
+        g2d.setComposite(ac);
+        g2d.drawImage(numberBarImage, -240, 20, null);
+        g2d.setComposite(backupComposite);
+
+        g2d.setFont(g2d.getFont().deriveFont(Font.BOLD).deriveFont(28.0f));
+        g2d.setColor(Color.GRAY);
+
+        g2d.drawString("0X" , 15 , 70) ;
+        g2d.drawString("0X", 15 , 95) ;
+        g2d.drawImage(bulletImage , 65 , 54 , null);
+        g2d.drawImage(smallRocketImage , 67 , 79 , null);
+
+
 
 
         // Draw GAME OVER

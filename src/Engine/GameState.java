@@ -97,6 +97,7 @@ public class GameState {
 
         enemyTanks.add(new StaticTankEasy(1300, 1200));
         enemyTanks.add(new StaticTankHard(1200, 200));
+        enemyTanks.add(new StaticTankHard(1850, 800));
         enemyTanks.add(new DynamicTankEasy(2600, 130, 2600, 250));
 
 
