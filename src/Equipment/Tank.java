@@ -31,8 +31,8 @@ public class Tank {
     private double gunAndBodyRadian; //this is tank body and gun radian .
 
     public Tank() {
-        bulletsNumber = 150 ;
-        rocketsNumber = 40 ;
+        bulletsNumber = 999 ;
+        rocketsNumber = 999 ;
         initLocations();
     }
 

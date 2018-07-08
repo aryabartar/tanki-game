@@ -65,6 +65,8 @@ public class GameFrame extends JFrame {
     private BufferedImage papyrusImage;
     private BufferedImage numberBarImage;
     private BufferedImage smallRocketImage;
+    private BufferedImage healthBarImage;
+    private BufferedImage healthBloodImage;
 
     private long lastRender;
     private ArrayList<Float> fpsHistory;
@@ -122,6 +124,8 @@ public class GameFrame extends JFrame {
             papyrusImage = ImageIO.read(new File("./pictures/papyrus.png"));
             numberBarImage = ImageIO.read(new File("./pictures/number-bar.png"));
             smallRocketImage = ImageIO.read(new File("./pictures/small-rocket.png"));
+            healthBarImage = ImageIO.read(new File("./pictures/health-bar.jpg"));
+            healthBloodImage = ImageIO.read(new File("./pictures/health-blood.jpg"));
 
 
         } catch (IOException e) {
@@ -368,6 +372,22 @@ public class GameFrame extends JFrame {
         g2d.drawString(state.getMainTank().getRocketsNumber() + "X", 15, 95);
         g2d.drawImage(bulletImage, 80, 54, null);
         g2d.drawImage(smallRocketImage, 82, 79, null);
+
+
+
+        //health bar
+        backupComposite = g2d.getComposite()  ;
+        ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) 0.6);
+        g2d.setComposite(ac);
+        g2d.drawImage(healthBarImage , 600 , 40 , null );
+
+        ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) 0.90);
+        g2d.setComposite(ac);
+        for (int i = 0 ; i < 10 ; i++) {
+            g2d.drawImage(healthBloodImage , 609 + i * 55 , 45 , null);
+        }
+        g2d.setComposite(backupComposite);
+
 
 
         // Draw GAME OVER
