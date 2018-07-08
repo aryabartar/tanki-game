@@ -85,7 +85,6 @@ public class GameState {
         // ------------------------------------------------------------------------
 
 
-
         //add tanks here
         enemyTanks.add(new StaticTankEasy(600, 100));
 //        enemyTanks.add(new StaticTankHard(100, 600));
@@ -99,8 +98,6 @@ public class GameState {
         enemyTanks.add(new StaticTankHard(1200, 200));
         enemyTanks.add(new StaticTankHard(1850, 800));
         enemyTanks.add(new DynamicTankEasy(2600, 130, 2600, 250));
-
-
 
 
         // add blocks here
@@ -132,7 +129,7 @@ public class GameState {
         blocks.add(new UnDestroyableBlock(600, 1400));
         blocks.add(new UnDestroyableBlock(600, 1500));
 
-        blocks.add(new DestroyableBlock(600 , 1600));
+        blocks.add(new DestroyableBlock(600, 1600));
         blocks.add(new DestroyableBlock(600, 1700));
         blocks.add(new DestroyableBlock(600, 1800));
 
@@ -209,11 +206,11 @@ public class GameState {
         blocks.add(new DestroyableBlock(900, 500));
         blocks.add(new DestroyableBlock(1000, 500));
 
-        for (int i = 4 ; i < 10 ; i++) {
-            blocks.add(new UnDestroyableBlock(1600, i*100));
-            blocks.add(new UnDestroyableBlock(1700, i*100));
-            blocks.add(new UnDestroyableBlock(2000, i*100));
-            blocks.add(new UnDestroyableBlock(2100, i*100));
+        for (int i = 4; i < 10; i++) {
+            blocks.add(new UnDestroyableBlock(1600, i * 100));
+            blocks.add(new UnDestroyableBlock(1700, i * 100));
+            blocks.add(new UnDestroyableBlock(2000, i * 100));
+            blocks.add(new UnDestroyableBlock(2100, i * 100));
         }
         blocks.add(new DestroyableBlock(1800, 400));
         blocks.add(new DestroyableBlock(1900, 400));
@@ -260,21 +257,10 @@ public class GameState {
         blocks.add(new DestroyableBlock(2900, 100));
 
 
-
-
-
-
-
-
         equipments.add(new UpdateWeapon(300, 1000));
         equipments.add(new UpdateWeapon(700, 1200));
 //        equipments.add(new Repair(800, 200));
 //        equipments.add(new Cartridgedss(800, 300));
-
-
-
-
-
 
 
         //Add moving smiles here :D
@@ -282,19 +268,16 @@ public class GameState {
         movingSmiles.add(new MovingSmile(1100, 800));
 
 
-
-
 //-------------------------------------------------------------------------------------
 
 
-
-        for (int i = 0 ; i <= 49 ; i++ ) {
-            blocks.add(new UnDestroyableBlock(i*100, 0));
-            blocks.add(new UnDestroyableBlock(i*100, 1900));
+        for (int i = 0; i <= 49; i++) {
+            blocks.add(new UnDestroyableBlock(i * 100, 0));
+            blocks.add(new UnDestroyableBlock(i * 100, 1900));
 
             if (i < 20) {
-                blocks.add(new UnDestroyableBlock(0, i*100));
-                blocks.add(new UnDestroyableBlock(4900, i*100));
+                blocks.add(new UnDestroyableBlock(0, i * 100));
+                blocks.add(new UnDestroyableBlock(4900, i * 100));
             }
         }
     }
@@ -304,10 +287,14 @@ public class GameState {
      */
     public void update() {
         if (mouseLeftClicked) {
-            if (mouseRightClicked == false) //bullet
-                bullets.add(new Bullet(mainTank.getTankCenterX(), mainTank.getTankCenterY(), mainTank.getGunAndBodyRadian(), false));
-            else {//rocket
-                rockets.add(new Rocket(mainTank.getTankCenterX(), mainTank.getTankCenterY(), mainTank.getGunAndBodyRadian(), false));
+            if (mouseRightClicked == false) {//bullet
+                if (mainTank.getBulletsNumber() > 0)
+                    bullets.add(new Bullet(mainTank.getTankCenterX(), mainTank.getTankCenterY(), mainTank.getGunAndBodyRadian(), false));
+                mainTank.reduceBulletNumber();
+            } else {//rocket
+                if (mainTank.getRocketsNumber() > 0)
+                    rockets.add(new Rocket(mainTank.getTankCenterX(), mainTank.getTankCenterY(), mainTank.getGunAndBodyRadian(), false));
+                mainTank.reduceRocketNumbers();
             }
             mouseLeftClicked = !mouseLeftClicked;
         }
@@ -601,8 +588,7 @@ public class GameState {
 
                         }
                     }
-                }
-                catch (ArrayIndexOutOfBoundsException e) {
+                } catch (ArrayIndexOutOfBoundsException e) {
 
                 }
 

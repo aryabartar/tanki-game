@@ -356,20 +356,18 @@ public class GameFrame extends JFrame {
 
         //number bar
         Composite backupComposite = g2d.getComposite();
-        AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float)0.78);
+        AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) 0.78);
         g2d.setComposite(ac);
-        g2d.drawImage(numberBarImage, -240, 20, null);
+        g2d.drawImage(numberBarImage, -230, 20, null);
         g2d.setComposite(backupComposite);
 
         g2d.setFont(g2d.getFont().deriveFont(Font.BOLD).deriveFont(28.0f));
         g2d.setColor(Color.GRAY);
 
-        g2d.drawString("0X" , 15 , 70) ;
-        g2d.drawString("0X", 15 , 95) ;
-        g2d.drawImage(bulletImage , 65 , 54 , null);
-        g2d.drawImage(smallRocketImage , 67 , 79 , null);
-
-
+        g2d.drawString(state.getMainTank().getBulletsNumber() + "X", 15, 70);
+        g2d.drawString(state.getMainTank().getRocketsNumber() + "X", 15, 95);
+        g2d.drawImage(bulletImage, 80, 54, null);
+        g2d.drawImage(smallRocketImage, 82, 79, null);
 
 
         // Draw GAME OVER

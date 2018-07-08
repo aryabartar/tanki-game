@@ -24,10 +24,15 @@ public class Tank {
     private final static int gunXPixels = 128;
     private final static int gunYPixels = 40 ;
 
+    private int bulletsNumber ;
+    private int rocketsNumber ;
+
 
     private double gunAndBodyRadian; //this is tank body and gun radian .
 
     public Tank() {
+        bulletsNumber = 150 ;
+        rocketsNumber = 40 ;
         initLocations();
     }
 
@@ -167,6 +172,32 @@ public class Tank {
 
     public int getxPixels() {
         return xPixels;
+    }
+
+    public int getBulletsNumber() {
+        return bulletsNumber;
+    }
+
+    public int getRocketsNumber() {
+        return rocketsNumber;
+    }
+
+    public void reduceBulletNumber () {
+        if (bulletsNumber > 0)
+            bulletsNumber-- ;
+    }
+
+    public void reduceRocketNumbers () {
+        if (rocketsNumber > 0)
+            rocketsNumber--;
+    }
+
+    public void addToBullets (int amount) {
+        bulletsNumber += amount ;
+    }
+
+    public void addToRockets (int amount) {
+        rocketsNumber += amount ;
     }
 }
 
