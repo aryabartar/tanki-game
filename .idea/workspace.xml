@@ -2,60 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a54595fe-ce59-4b5f-a0c0-a0dd7bb2ec9a" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tanki/Blocks/Block.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tanki/Blocks/Block.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tanki/Blocks/Chariot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tanki/Blocks/Chariot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tanki/Blocks/DestroyableBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tanki/Blocks/DestroyableBlock.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tanki/Blocks/UndestroyableBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tanki/Blocks/UndestroyableBlock.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tanki/EnemyTanks/DynamicEnemyClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tanki/EnemyTanks/DynamicEnemyClass.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tanki/EnemyTanks/DynamicTankEasy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tanki/EnemyTanks/DynamicTankEasy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tanki/EnemyTanks/DynamicTankHard.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tanki/EnemyTanks/DynamicTankHard.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tanki/EnemyTanks/EnemyTank$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tanki/EnemyTanks/EnemyTank$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tanki/EnemyTanks/EnemyTank.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tanki/EnemyTanks/EnemyTank.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tanki/EnemyTanks/StaticTankEasy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tanki/EnemyTanks/StaticTankEasy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tanki/EnemyTanks/StaticTankHard.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tanki/EnemyTanks/StaticTankHard.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tanki/Engine/GameFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tanki/Engine/GameFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tanki/Engine/GameLoop.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tanki/Engine/GameLoop.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tanki/Engine/GameState$KeyHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tanki/Engine/GameState$KeyHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tanki/Engine/GameState$MouseHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tanki/Engine/GameState$MouseHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tanki/Engine/GameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tanki/Engine/GameState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tanki/Engine/Main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tanki/Engine/Main$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tanki/Engine/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tanki/Engine/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tanki/Engine/ThreadPool.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tanki/Engine/ThreadPool.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tanki/Equipment/Bullet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tanki/Equipment/Bullet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tanki/Equipment/Cartridge.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tanki/Equipment/Cartridge.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tanki/Equipment/Equipment.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tanki/Equipment/Equipment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tanki/Equipment/MovingSmile.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tanki/Equipment/MovingSmile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tanki/Equipment/Repair.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tanki/Equipment/Repair.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tanki/Equipment/Rocket.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tanki/Equipment/Rocket.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tanki/Equipment/Tank.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tanki/Equipment/Tank.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tanki/Equipment/UpdateWeapon.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tanki/Equipment/UpdateWeapon.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tanki/Others/Geometry.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tanki/Others/Geometry.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tanki/Others/Point.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tanki/Others/Point.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Blocks/Block.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Blocks/Block.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Blocks/Chariot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Blocks/Chariot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Blocks/DestroyableBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Blocks/DestroyableBlock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Blocks/UndestroyableBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Blocks/UndestroyableBlock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EnemyTanks/DynamicEnemyClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EnemyTanks/DynamicEnemyClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EnemyTanks/DynamicTankEasy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EnemyTanks/DynamicTankEasy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EnemyTanks/DynamicTankHard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EnemyTanks/DynamicTankHard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EnemyTanks/EnemyTank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EnemyTanks/EnemyTank.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EnemyTanks/StaticTankEasy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EnemyTanks/StaticTankEasy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EnemyTanks/StaticTankHard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EnemyTanks/StaticTankHard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Engine/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/GameFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Engine/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Engine/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Equipment/Bullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Equipment/Bullet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Equipment/Cartridge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Equipment/Cartridge.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Equipment/Equipment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Equipment/Equipment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Equipment/MovingSmile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Equipment/MovingSmile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Equipment/Repair.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Equipment/Repair.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Equipment/Rocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Equipment/Rocket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Equipment/Tank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Equipment/Tank.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Equipment/UpdateWeapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Equipment/UpdateWeapon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Others/Geometry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Others/Geometry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Others/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Others/Point.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -70,11 +18,33 @@
       <file leaf-file-name="GameState.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Engine/GameState.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="104">
-              <caret line="697" column="25" lean-forward="true" selection-start-line="697" selection-start-column="25" selection-end-line="697" selection-end-column="25" />
+            <state relative-caret-position="1864">
+              <caret line="678" column="124" selection-start-line="678" selection-start-column="124" selection-end-line="678" selection-end-column="124" />
               <folding>
                 <element signature="e#26072#26073#0" expanded="true" />
                 <element signature="e#26120#26121#0" expanded="true" />
+                <element signature="e#28350#28351#0" expanded="true" />
+                <element signature="e#28381#28382#0" expanded="true" />
+                <element signature="e#28417#28418#0" expanded="true" />
+                <element signature="e#28452#28453#0" expanded="true" />
+                <element signature="e#28488#28489#0" expanded="true" />
+                <element signature="e#28523#28524#0" expanded="true" />
+                <element signature="e#28575#28576#0" expanded="true" />
+                <element signature="e#28605#28606#0" expanded="true" />
+                <element signature="e#28657#28658#0" expanded="true" />
+                <element signature="e#28687#28688#0" expanded="true" />
+                <element signature="e#28745#28746#0" expanded="true" />
+                <element signature="e#28778#28779#0" expanded="true" />
+                <element signature="e#28832#28833#0" expanded="true" />
+                <element signature="e#28867#28868#0" expanded="true" />
+                <element signature="e#29088#29089#0" expanded="true" />
+                <element signature="e#29117#29118#0" expanded="true" />
+                <element signature="e#29175#29176#0" expanded="true" />
+                <element signature="e#29208#29209#0" expanded="true" />
+                <element signature="e#29285#29286#0" expanded="true" />
+                <element signature="e#29341#29342#0" expanded="true" />
+                <element signature="e#29403#29404#0" expanded="true" />
+                <element signature="e#29438#29439#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -101,9 +71,11 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="width" value="1440" />
-    <option name="height" value="900" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="20" />
+    <option name="y" value="43" />
+    <option name="width" value="1400" />
+    <option name="height" value="770" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -227,15 +199,23 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1531065918587</updated>
-      <workItem from="1531065920838" duration="1318000" />
+      <workItem from="1531065920838" duration="3565000" />
     </task>
+    <task id="LOCAL-00001" summary="sound of bullet tank me">
+      <created>1531085663684</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1531085663684</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1318000" />
+    <option name="totallyTimeSpent" value="3565000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <frame x="20" y="43" width="1400" height="770" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" />
@@ -247,12 +227,12 @@
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" />
       <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2676887" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.31609195" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Terminal" />
       <window_info id="Capture Tool" />
       <window_info id="Designer" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13611111" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14" />
       <window_info anchor="right" id="Database" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -274,14 +254,40 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="sound of bullet tank me" />
+    <option name="LAST_COMMIT_MESSAGE" value="sound of bullet tank me" />
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Engine/GameState.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="697" column="25" lean-forward="true" selection-start-line="697" selection-start-column="25" selection-end-line="697" selection-end-column="25" />
+        <state relative-caret-position="1864">
+          <caret line="678" column="124" selection-start-line="678" selection-start-column="124" selection-end-line="678" selection-end-column="124" />
           <folding>
             <element signature="e#26072#26073#0" expanded="true" />
             <element signature="e#26120#26121#0" expanded="true" />
+            <element signature="e#28350#28351#0" expanded="true" />
+            <element signature="e#28381#28382#0" expanded="true" />
+            <element signature="e#28417#28418#0" expanded="true" />
+            <element signature="e#28452#28453#0" expanded="true" />
+            <element signature="e#28488#28489#0" expanded="true" />
+            <element signature="e#28523#28524#0" expanded="true" />
+            <element signature="e#28575#28576#0" expanded="true" />
+            <element signature="e#28605#28606#0" expanded="true" />
+            <element signature="e#28657#28658#0" expanded="true" />
+            <element signature="e#28687#28688#0" expanded="true" />
+            <element signature="e#28745#28746#0" expanded="true" />
+            <element signature="e#28778#28779#0" expanded="true" />
+            <element signature="e#28832#28833#0" expanded="true" />
+            <element signature="e#28867#28868#0" expanded="true" />
+            <element signature="e#29088#29089#0" expanded="true" />
+            <element signature="e#29117#29118#0" expanded="true" />
+            <element signature="e#29175#29176#0" expanded="true" />
+            <element signature="e#29208#29209#0" expanded="true" />
+            <element signature="e#29285#29286#0" expanded="true" />
+            <element signature="e#29341#29342#0" expanded="true" />
+            <element signature="e#29403#29404#0" expanded="true" />
+            <element signature="e#29438#29439#0" expanded="true" />
           </folding>
         </state>
       </provider>
