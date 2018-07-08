@@ -13,9 +13,9 @@ public class Main {
     public static void main(String[] args) {
 		// Initialize the global thread-pool
 		ThreadPool.init();
-		
+
 		// Show the game menu ...
-		
+
 		// After the player clicks 'PLAY' ...
 		EventQueue.invokeLater(new Runnable() {
 			@Override

@@ -110,7 +110,7 @@ public class GameFrame extends JFrame {
             destroyedTankImage = ImageIO.read(new File("./pictures/destroyed-tank.png"));
             movingSmileImage = ImageIO.read(new File("./pictures/smile.png"));
             movingSleepImage = ImageIO.read(new File("./pictures/sleep.png"));
-            bigRoofImage = ImageIO.read(new File("./pictures/big-roof.jpg"));
+            bigRoofImage = ImageIO.read(new File("./pictures/big-roof.jpeg"));
             backOfBackground = ImageIO.read(new File("./pictures/14.jpg"));
             chariotImage = ImageIO.read(new File("./pictures/chariot.png"));
             rock1Image = ImageIO.read(new File("./pictures/rock1.png"));
