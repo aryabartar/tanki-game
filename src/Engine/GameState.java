@@ -93,9 +93,11 @@ public class GameState {
 //        enemyTanks.add(new DynamicTankHard(600, 600, 1000, 600));
         enemyTanks.add(new DynamicTankEasy(1600, 1300, 2200, 1300));
 
-        enemyTanks.add(new StaticTankHard(1700, 1500));
+        enemyTanks.add(new StaticTankHard(1500, 1100));
 
         enemyTanks.add(new StaticTankEasy(1300, 1200));
+        enemyTanks.add(new StaticTankHard(1200, 200));
+        enemyTanks.add(new DynamicTankEasy(2600, 130, 2600, 250));
 
 
 
@@ -163,8 +165,8 @@ public class GameState {
         blocks.add(new UnDestroyableBlock(1400, 1100));
         blocks.add(new UnDestroyableBlock(1400, 1000));
         blocks.add(new UnDestroyableBlock(1500, 1000));
-        blocks.add(new UnDestroyableBlock(1600, 1000));
-        blocks.add(new UnDestroyableBlock(1700, 1000));
+        blocks.add(new DestroyableBlock(1600, 1000));
+        blocks.add(new DestroyableBlock(1700, 1000));
         blocks.add(new UnDestroyableBlock(1800, 1000));
         blocks.add(new UnDestroyableBlock(1900, 1000));
         blocks.add(new UnDestroyableBlock(2000, 1000));
@@ -172,8 +174,8 @@ public class GameState {
 
         blocks.add(new UnDestroyableBlock(1400, 900));
         blocks.add(new UnDestroyableBlock(1500, 900));
-        blocks.add(new UnDestroyableBlock(1600, 900));
-        blocks.add(new UnDestroyableBlock(1700, 900));
+        blocks.add(new DestroyableBlock(1600, 900));
+        blocks.add(new DestroyableBlock(1700, 900));
         blocks.add(new UnDestroyableBlock(1800, 900));
         blocks.add(new UnDestroyableBlock(1900, 900));
         blocks.add(new UnDestroyableBlock(2000, 900));
@@ -195,6 +197,69 @@ public class GameState {
         blocks.add(new DestroyableBlock(1300, 900));
 
         blocks.add(new Chariot(900, 100));
+        blocks.add(new DestroyableBlock(900, 600));
+        blocks.add(new DestroyableBlock(1000, 600));
+        blocks.add(new DestroyableBlock(900, 700));
+        blocks.add(new DestroyableBlock(1000, 700));
+        blocks.add(new DestroyableBlock(900, 800));
+        blocks.add(new DestroyableBlock(1000, 800));
+        blocks.add(new DestroyableBlock(900, 900));
+        blocks.add(new DestroyableBlock(1000, 900));
+        blocks.add(new DestroyableBlock(900, 500));
+        blocks.add(new DestroyableBlock(1000, 500));
+
+        for (int i = 4 ; i < 10 ; i++) {
+            blocks.add(new UnDestroyableBlock(1600, i*100));
+            blocks.add(new UnDestroyableBlock(1700, i*100));
+            blocks.add(new UnDestroyableBlock(2000, i*100));
+            blocks.add(new UnDestroyableBlock(2100, i*100));
+        }
+        blocks.add(new DestroyableBlock(1800, 400));
+        blocks.add(new DestroyableBlock(1900, 400));
+
+
+        blocks.add(new UnDestroyableBlock(2400, 400));
+        blocks.add(new UnDestroyableBlock(2500, 400));
+        blocks.add(new UnDestroyableBlock(2600, 400));
+        blocks.add(new UnDestroyableBlock(2600, 500));
+        blocks.add(new UnDestroyableBlock(2600, 600));
+        blocks.add(new UnDestroyableBlock(2400, 500));
+        blocks.add(new UnDestroyableBlock(2400, 600));
+        blocks.add(new UnDestroyableBlock(2500, 600));
+        blocks.add(new UnDestroyableBlock(2600, 600));
+        blocks.add(new DestroyableBlock(2500, 500));
+
+        blocks.add(new UnDestroyableBlock(2600, 300));
+        blocks.add(new UnDestroyableBlock(2600, 200));
+        blocks.add(new UnDestroyableBlock(2600, 100));
+        blocks.add(new DestroyableBlock(2400, 100));
+        blocks.add(new DestroyableBlock(2400, 200));
+        blocks.add(new DestroyableBlock(2400, 300));
+
+        blocks.add(new UnDestroyableBlock(2200, 1000));
+        blocks.add(new UnDestroyableBlock(2300, 1000));
+        blocks.add(new UnDestroyableBlock(2400, 1000));
+        blocks.add(new UnDestroyableBlock(2500, 1000));
+        blocks.add(new UnDestroyableBlock(2900, 1000));
+        blocks.add(new UnDestroyableBlock(2600, 1000));
+        blocks.add(new UnDestroyableBlock(2700, 1000));
+        blocks.add(new UnDestroyableBlock(2800, 1000));
+        blocks.add(new UnDestroyableBlock(2500, 1200));
+        blocks.add(new UnDestroyableBlock(2500, 1300));
+        blocks.add(new UnDestroyableBlock(2500, 1100));
+
+        blocks.add(new DestroyableBlock(2900, 900));
+        blocks.add(new DestroyableBlock(2900, 800));
+        blocks.add(new DestroyableBlock(2900, 700));
+        blocks.add(new DestroyableBlock(2900, 600));
+        blocks.add(new DestroyableBlock(2900, 500));
+        blocks.add(new DestroyableBlock(2900, 400));
+        blocks.add(new DestroyableBlock(2900, 300));
+        blocks.add(new DestroyableBlock(2900, 200));
+        blocks.add(new DestroyableBlock(2900, 100));
+
+
+
 
 
 
@@ -213,6 +278,7 @@ public class GameState {
 
         //Add moving smiles here :D
         movingSmiles.add(new MovingSmile(500, 1000));
+        movingSmiles.add(new MovingSmile(1100, 800));
 
 
 

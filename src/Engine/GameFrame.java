@@ -102,8 +102,8 @@ public class GameFrame extends JFrame {
             dynamicTankEasyBodyImage = ImageIO.read(new File("./pictures/enemy-tank-body2.png"));
             dynamicTankHardBodyImage = ImageIO.read(new File("./pictures/enemy-tank-body3.png"));
             enemyTankGunImage = ImageIO.read(new File("./pictures/enemy-gun.jpg"));
-            unDestroyableBlockImage = ImageIO.read(new File("./pictures/wall1.png"));
-            destroyableBlockImage = ImageIO.read(new File("./pictures/wall2.png"));
+            unDestroyableBlockImage = ImageIO.read(new File("./pictures/wall1.jpg"));
+            destroyableBlockImage = ImageIO.read(new File("./pictures/wall2.jpg"));
             updateWeaponImage = ImageIO.read(new File("./pictures/update-weapon.png"));
             repairImage = ImageIO.read(new File("./pictures/repair.png"));
             cartridgeImage = ImageIO.read(new File("./pictures/cartridge.png"));
