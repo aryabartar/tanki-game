@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a54595fe-ce59-4b5f-a0c0-a0dd7bb2ec9a" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Engine/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/GameState.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,8 +17,8 @@
       <file leaf-file-name="GameState.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Engine/GameState.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1864">
-              <caret line="678" column="124" selection-start-line="678" selection-start-column="124" selection-end-line="678" selection-end-column="124" />
+            <state relative-caret-position="3194">
+              <caret line="574" column="110" selection-start-line="574" selection-start-column="110" selection-end-line="574" selection-end-column="110" />
               <folding>
                 <element signature="e#26072#26073#0" expanded="true" />
                 <element signature="e#26120#26121#0" expanded="true" />
@@ -199,7 +198,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1531065918587</updated>
-      <workItem from="1531065920838" duration="3565000" />
+      <workItem from="1531065920838" duration="3919000" />
     </task>
     <task id="LOCAL-00001" summary="sound of bullet tank me">
       <created>1531085663684</created>
@@ -208,11 +207,18 @@
       <option name="project" value="LOCAL" />
       <updated>1531085663684</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="sound of bullet tank me">
+      <created>1531088006339</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1531088006339</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3565000" />
+    <option name="totallyTimeSpent" value="3919000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="20" y="43" width="1400" height="770" extended-state="0" />
@@ -261,8 +267,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Engine/GameState.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1864">
-          <caret line="678" column="124" selection-start-line="678" selection-start-column="124" selection-end-line="678" selection-end-column="124" />
+        <state relative-caret-position="3194">
+          <caret line="574" column="110" selection-start-line="574" selection-start-column="110" selection-end-line="574" selection-end-column="110" />
           <folding>
             <element signature="e#26072#26073#0" expanded="true" />
             <element signature="e#26120#26121#0" expanded="true" />
