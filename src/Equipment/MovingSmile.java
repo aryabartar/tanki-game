@@ -11,6 +11,7 @@ public class MovingSmile {
     public static final int xPixels = 60;
     public static final int yPixels = 73;
     public static final int SPEED = 2;
+    public static final int DAMAGE = 10 ;
 
     public MovingSmile(int locX, int locY) {
         this.locX = locX;

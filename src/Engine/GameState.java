@@ -9,6 +9,9 @@ import Equipment.*;
 import Others.Geometry;
 import Others.Point;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -18,6 +21,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 
@@ -35,6 +39,7 @@ public class GameState {
     private boolean keyUP, keyDOWN, keyRIGHT, keyLEFT;
     private boolean mouseLeftClicked, mouseRightClicked; //mouseRightClicked : false => bullet / true => rocket
     private int mouseX, mouseY; // for clicking
+    private int click=0;
     private int mouseMotionX, mouseMotionY; //for mouse motion
     private KeyHandler keyHandler;
     private MouseHandler mouseHandler;
@@ -287,7 +292,9 @@ public class GameState {
      */
     public void update() {
         if (mouseLeftClicked) {
+
             if (mouseRightClicked == false) {//bullet
+
                 if (mainTank.getBulletsNumber() > 0)
                     bullets.add(new Bullet(mainTank.getTankCenterX(), mainTank.getTankCenterY(), mainTank.getGunAndBodyRadian(), false));
                 mainTank.reduceBulletNumber();
@@ -354,6 +361,7 @@ public class GameState {
             if (smileFaceRec.intersects(mainTankRec)) {
                 Point tempPoint = new Point(movingSmiles.get(i).getLocX(), movingSmiles.get(i).getLocY());
                 destroyedTankTemporaryTrashPoints.add(tempPoint);
+                mainTank.reduceHealth(MovingSmile.DAMAGE);
                 movingSmiles.remove(i);
                 i--;
             }
@@ -497,8 +505,6 @@ public class GameState {
         for (EnemyTank enemyTank : enemyTanks) {
             for (int i = 0; i < rockets.size(); i++) {
                 try {
-
-
                     if (rockets.get(i) != null) {
                         if ((rockets.get(i).getLocX() > enemyTank.getLocX()) && (rockets.get(i).getLocX() < enemyTank.getEndLocX()) &&
                                 (rockets.get(i).getLocY() > enemyTank.getLocY()) && (rockets.get(i).getLocY() < enemyTank.getEndLocY())) {
@@ -616,8 +622,7 @@ public class GameState {
                         (rockets.get(i).getLocY() > mainTank.getLocY()) && (rockets.get(i).getLocY() < mainTank.getEndLocY())) {
 
                     if (rockets.get(i).isFromEnemy() == true) {
-
-                        //do sth here later !
+                        mainTank.reduceHealth(Rocket.DAMAGE);
                     }
                     rockets.remove(i);
                 }
@@ -628,7 +633,7 @@ public class GameState {
                 if ((bullets.get(i).getLocX() > mainTank.getLocX()) && (bullets.get(i).getLocY() > mainTank.getLocY()) &&
                         (bullets.get(i).getLocX() < mainTank.getEndLocX()) && (bullets.get(i).getLocY() < mainTank.getEndLocY())) {
                     if (bullets.get(i).isFromEnemy() == true) {
-                        // do sth here later
+                        mainTank.reduceHealth(Bullet.DAMAGE);
                     }
                     bullets.remove(i);
                 }
@@ -675,9 +680,37 @@ public class GameState {
             mouseY = e.getY();
             if (SwingUtilities.isLeftMouseButton(e)) {
                 mouseLeftClicked = true;
+                if(click%2==1){
+                    try {
+                        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./sound/heavygun.wav").getAbsoluteFile());
+                        Clip clip = AudioSystem.getClip();
+                        clip.open(audioInputStream);
+                        clip.start();
+                        clip.loop( 0);
+                    } catch(Exception ex) {
+                        System.out.println("Error with playing sound.");
+                        ex.printStackTrace();
+                    }
+
+
+                }
+                else {
+                    try {
+                        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./sound/EnemyBulletToMyTank.wav").getAbsoluteFile());
+                        Clip clip = AudioSystem.getClip();
+                        clip.open(audioInputStream);
+                        clip.start();
+                        clip.loop( 0 );
+                    } catch(Exception ex) {
+                        System.out.println("Error with playing sound.");
+                        ex.printStackTrace();
+                    }
+
+                }
             }
             if (SwingUtilities.isRightMouseButton(e)) {
                 mouseRightClicked = !mouseRightClicked;
+                click++;
             }
         }
 

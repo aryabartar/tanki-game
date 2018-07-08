@@ -383,7 +383,8 @@ public class GameFrame extends JFrame {
 
         ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) 0.90);
         g2d.setComposite(ac);
-        for (int i = 0 ; i < 10 ; i++) {
+        int tmp =state.getMainTank().getHealth() / (state.getMainTank().getHealthLimit()/10) ;
+        for (int i = 0 ; i < tmp ; i++) {
             g2d.drawImage(healthBloodImage , 609 + i * 55 , 45 , null);
         }
         g2d.setComposite(backupComposite);

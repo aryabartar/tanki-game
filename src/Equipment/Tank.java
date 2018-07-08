@@ -22,17 +22,25 @@ public class Tank {
     private final int xPixels = 128;
     private final int yPixels = 128;
     private final static int gunXPixels = 128;
-    private final static int gunYPixels = 40 ;
+    private final static int gunYPixels = 40;
 
-    private int bulletsNumber ;
-    private int rocketsNumber ;
+    private int bulletsNumber;
+    private int rocketsNumber;
+    private int health;
+    private final int healthLimit;
 
 
     private double gunAndBodyRadian; //this is tank body and gun radian .
 
     public Tank() {
-        bulletsNumber = 999 ;
-        rocketsNumber = 999 ;
+        bulletsNumber = 999;
+        rocketsNumber = 999;
+
+        locX = 100;
+        locY = 100;
+        healthLimit = 100;
+        health = healthLimit;
+
         initLocations();
     }
 
@@ -40,9 +48,6 @@ public class Tank {
      * This method will initialize tank starting location .
      */
     private void initLocations() {
-        locX = 100;
-        locY = 100;
-
         setEndingLocation();
         setGunLocation();
     }
@@ -83,24 +88,24 @@ public class Tank {
 
         for (EnemyTank enemyTank : enemyTanks) {
 
-            Rectangle r = new Rectangle(locX,locY,xPixels,yPixels);
-            Rectangle p = new Rectangle(enemyTank.getLocX(),enemyTank.getLocY(),enemyTank.getGunXPixels()-20,enemyTank.getyPixels());
+            Rectangle r = new Rectangle(locX, locY, xPixels, yPixels);
+            Rectangle p = new Rectangle(enemyTank.getLocX(), enemyTank.getLocY(), enemyTank.getGunXPixels() - 20, enemyTank.getyPixels());
 
             // Assuming there is an intersect method
             if (r.intersects(p))
-                canMove = false ;
+                canMove = false;
         }
 
         for (Block block : GameState.getBlocks()) {
-            Rectangle p = new Rectangle(block.getLocX(),block.getLocY(),block.getxPixels(),block.getyPixels());
-            Rectangle r = new Rectangle(locX,locY,xPixels,yPixels);
+            Rectangle p = new Rectangle(block.getLocX(), block.getLocY(), block.getxPixels(), block.getyPixels());
+            Rectangle r = new Rectangle(locX, locY, xPixels, yPixels);
 
             if (r.intersects(p))
-                canMove = false ;
+                canMove = false;
 
         }
 
-        if ((locX > 0) && (locX + xPixels< GameFrame.GAME_FULL_WIDTH) && (locY > 0) && (locY+yPixels < GameFrame.GAME_FULL_WIDTH)) {
+        if ((locX > 0) && (locX + xPixels < GameFrame.GAME_FULL_WIDTH) && (locY > 0) && (locY + yPixels < GameFrame.GAME_FULL_WIDTH)) {
             if (canMove == true) {
                 this.locX = locX;
                 this.locY = locY;
@@ -182,22 +187,38 @@ public class Tank {
         return rocketsNumber;
     }
 
-    public void reduceBulletNumber () {
+    public void reduceBulletNumber() {
         if (bulletsNumber > 0)
-            bulletsNumber-- ;
+            bulletsNumber--;
     }
 
-    public void reduceRocketNumbers () {
+    public void reduceRocketNumbers() {
         if (rocketsNumber > 0)
             rocketsNumber--;
     }
 
-    public void addToBullets (int amount) {
-        bulletsNumber += amount ;
+    public void addToBullets(int amount) {
+        bulletsNumber += amount;
     }
 
-    public void addToRockets (int amount) {
-        rocketsNumber += amount ;
+    public void addToRockets(int amount) {
+        rocketsNumber += amount;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void reduceHealth(int amount) {
+        health -= amount;
+    }
+
+    public void addToHealth(int amount) {
+        health += amount;
+    }
+
+    public int getHealthLimit() {
+        return healthLimit;
     }
 }
 
