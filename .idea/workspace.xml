@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a54595fe-ce59-4b5f-a0c0-a0dd7bb2ec9a" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Engine/Start.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Engine/page1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Engine/page2.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tanki/Engine/GameState$KeyHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tanki/Engine/GameState$KeyHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tanki/Engine/GameState$MouseHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tanki/Engine/GameState$MouseHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tanki/Engine/GameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tanki/Engine/GameState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tanki/Engine/Main$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tanki/Engine/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tanki/Engine/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Engine/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Engine/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Engine/Start.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Start.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,8 +19,8 @@
       <file leaf-file-name="GameState.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Engine/GameState.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1482">
-              <caret line="360" column="55" selection-start-line="360" selection-start-column="55" selection-end-line="360" selection-end-column="55" />
+            <state relative-caret-position="303">
+              <caret line="485" column="94" lean-forward="true" selection-start-line="485" selection-start-column="94" selection-end-line="485" selection-end-column="112" />
               <folding>
                 <element signature="e#26072#26073#0" expanded="true" />
                 <element signature="e#26120#26121#0" expanded="true" />
@@ -79,8 +72,8 @@
       <file leaf-file-name="Start.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Engine/Start.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="23" lean-forward="true" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+            <state relative-caret-position="829">
+              <caret line="69" column="9" lean-forward="true" selection-start-line="69" selection-start-column="9" selection-end-line="69" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -267,7 +260,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1531065918587</updated>
-      <workItem from="1531065920838" duration="8060000" />
+      <workItem from="1531065920838" duration="9388000" />
     </task>
     <task id="LOCAL-00001" summary="sound of bullet tank me">
       <created>1531085663684</created>
@@ -290,11 +283,18 @@
       <option name="project" value="LOCAL" />
       <updated>1531088179755</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="import first page">
+      <created>1531150948389</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1531150948389</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8060000" />
+    <option name="totallyTimeSpent" value="9388000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-27" y="67" width="1400" height="770" extended-state="0" />
@@ -314,15 +314,15 @@
       <window_info anchor="bottom" id="Terminal" />
       <window_info id="Capture Tool" />
       <window_info id="Designer" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49856323" visible="true" weight="0.14" />
       <window_info anchor="right" id="Database" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32902297" />
+      <window_info id="Structure" order="1" sideWeight="0.50143677" side_tool="true" weight="0.14" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" />
       <window_info anchor="right" id="Theme Preview" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -339,7 +339,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="sound of bullet tank me" />
     <MESSAGE value="import sound when enemytank is dead" />
-    <option name="LAST_COMMIT_MESSAGE" value="import sound when enemytank is dead" />
+    <MESSAGE value="import first page" />
+    <option name="LAST_COMMIT_MESSAGE" value="import first page" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Blocks/Chariot.java">
@@ -405,10 +406,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Engine/page1.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Engine/page2.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Engine/page2.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Engine/GameState.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1482">
-          <caret line="360" column="55" selection-start-line="360" selection-start-column="55" selection-end-line="360" selection-end-column="55" />
+        <state relative-caret-position="303">
+          <caret line="485" column="94" lean-forward="true" selection-start-line="485" selection-start-column="94" selection-end-line="485" selection-end-column="112" />
           <folding>
             <element signature="e#26072#26073#0" expanded="true" />
             <element signature="e#26120#26121#0" expanded="true" />
@@ -438,16 +448,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Engine/page1.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Engine/page2.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Engine/Start.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="23" lean-forward="true" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+        <state relative-caret-position="829">
+          <caret line="69" column="9" lean-forward="true" selection-start-line="69" selection-start-column="9" selection-end-line="69" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
