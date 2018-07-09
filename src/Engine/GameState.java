@@ -362,6 +362,16 @@ public class GameState {
                 Point tempPoint = new Point(movingSmiles.get(i).getLocX(), movingSmiles.get(i).getLocY());
                 destroyedTankTemporaryTrashPoints.add(tempPoint);
                 mainTank.reduceHealth(MovingSmile.DAMAGE);
+                try {
+                    AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./sound/MineBoom.wav").getAbsoluteFile());
+                    Clip clip = AudioSystem.getClip();
+                    clip.open(audioInputStream);
+                    clip.start();
+                    clip.loop( 0);
+                } catch(Exception ex) {
+                    System.out.println("Error with playing sound.");
+                    ex.printStackTrace();
+                }
                 movingSmiles.remove(i);
                 i--;
             }
@@ -371,6 +381,7 @@ public class GameState {
     private void attackMovingSmiles() {
         for (MovingSmile movingSmile : movingSmiles) {
             movingSmile.attackToThisLocation(mainTank.getTankCenterX(), mainTank.getTankCenterY());
+
         }
     }
 
@@ -389,6 +400,7 @@ public class GameState {
                     (mainTank.getTankCenterY() > equipments.get(i).getLocY()) && (mainTank.getTankCenterY() < equipments.get(i).getEndY())) {
                 //complete here later.
                 equipments.remove(i);
+
                 i--;
                 System.out.println("Hit to equipment . Do sth later !");
             }
@@ -406,6 +418,16 @@ public class GameState {
         for (int i = 0; i < blocks.size(); i++) {
             if (blocks.get(i).isAlive() == false) {
                 blocks.remove(i);
+                try {
+                    AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./sound/softwall.wav").getAbsoluteFile());
+                    Clip clip = AudioSystem.getClip();
+                    clip.open(audioInputStream);
+                    clip.start();
+                    clip.loop( 0);
+                } catch(Exception ex) {
+                    System.out.println("Error with playing sound.");
+                    ex.printStackTrace();
+                }
                 i--;
             }
         }
@@ -460,7 +482,20 @@ public class GameState {
 
         @Override
         public void keyPressed(KeyEvent e) {
+            try {
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./sound/motor1.wav").getAbsoluteFile());
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+                clip.start();
+                clip.loop( 0);
+            } catch(Exception ex) {
+                System.out.println("Error with playing sound.");
+                ex.printStackTrace();
+            }
+
+
             switch (e.getKeyCode()) {
+
                 case KeyEvent.VK_W:
                     keyUP = true;
                     break;
@@ -482,6 +517,7 @@ public class GameState {
         @Override
         public void keyReleased(KeyEvent e) {
             switch (e.getKeyCode()) {
+
                 case KeyEvent.VK_W:
                     keyUP = false;
                     break;
