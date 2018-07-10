@@ -1,22 +1,5 @@
 package Engine; /*** In The Name of Allah ***/
-/**
- *
- *
- *
- *
- *
- *
- *
- *
- * HER E
- *
- *
- *
- * TO
- *
- *
- * HER E
- */
+
 
 import java.awt.EventQueue;
 import java.awt.event.MouseAdapter;
@@ -29,7 +12,6 @@ import javax.swing.*;
  */
 public class Main {
 
-	//MASTER 1
     public static void main(String[] args) {
 		// Initialize the global thread-pool
 		ThreadPool.init();
@@ -53,9 +35,6 @@ public class Main {
 			}
 		});
     }
-
-
-    // in Arya
 
 
 }
