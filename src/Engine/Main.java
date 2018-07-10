@@ -29,7 +29,7 @@ import javax.swing.*;
  */
 public class Main {
 
-	
+	//MASTER 1
     public static void main(String[] args) {
 		// Initialize the global thread-pool
 		ThreadPool.init();
