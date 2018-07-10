@@ -35,6 +35,4 @@ public class Main {
 			}
 		});
     }
-arya arya arya 
-
 }
