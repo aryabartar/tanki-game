@@ -6,6 +6,8 @@ import Blocks.DestroyableBlock;
 import Blocks.UnDestroyableBlock;
 import EnemyTanks.*;
 import Equipment.*;
+import Network.GameClient;
+import Network.GameServer;
 import Others.Geometry;
 import Others.Point;
 
@@ -45,6 +47,8 @@ public class GameState {
     private MouseHandler mouseHandler;
 
     private Tank mainTank;
+    private GameClient gameClient ;
+    private GameServer gameServer ;
 
     private static ArrayList<Bullet> bullets;
     private static ArrayList<Rocket> rockets;
