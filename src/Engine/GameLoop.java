@@ -1,6 +1,8 @@
 package Engine;
 
 import Engine.GameFrame;
+import Network.GameClient;
+import Network.GameServer;
 
 /**
  * A very simple structure for the main game loop.
@@ -26,6 +28,8 @@ public class GameLoop implements Runnable {
 	
 	private GameFrame canvas;
 	private GameState state;
+	private GameServer gameServer ;
+	private GameClient gameClient ;
 
 	public GameLoop(GameFrame frame) {
 		canvas = frame;
@@ -40,6 +44,13 @@ public class GameLoop implements Runnable {
 		canvas.addMouseListener(state.getMouseListener());
 		canvas.addMouseMotionListener(state.getMouseMotionListener());
 
+		gameServer = new GameServer(this) ;
+		gameServer.start();
+
+		gameClient = new GameClient(this , "localhost") ;
+		gameClient.start();
+
+		gameClient.sendData("ping".getBytes());
 	}
 
 	@Override

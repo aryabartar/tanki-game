@@ -1,9 +1,13 @@
 package Engine; /*** In The Name of Allah ***/
 
 
+import Network.GameClient;
+import Network.GameServer;
+
 import java.awt.EventQueue;
 import java.awt.event.MouseAdapter;
 import javax.swing.*;
+
 
 /**
  * Program start.
@@ -11,6 +15,8 @@ import javax.swing.*;
  * @author Seyed Mohammad Ghaffarian
  */
 public class Main {
+
+
 
     public static void main(String[] args) {
 		// Initialize the global thread-pool
@@ -31,6 +37,7 @@ public class Main {
 				GameLoop game = new GameLoop(frame);
 				game.init();
 				ThreadPool.execute(game);
+
 				// and the game starts ...
 			}
 		});
