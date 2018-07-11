@@ -3,7 +3,9 @@ package Engine;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -11,22 +13,22 @@ import java.io.File;
 public class Start extends MouseAdapter {
     JFrame frame=new JFrame();
     JLabel label=new JLabel();
-
+    Clip clip = AudioSystem.getClip();
     JLabel label2=new JLabel();
     private int mouseX;
     private int mouseY;
+
     private boolean flag=false;
     private boolean flag2=false;
 
 
-    public Start(){
+    public Start() throws LineUnavailableException {
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./sound/start.wav").getAbsoluteFile());
 
-            Clip clip = AudioSystem.getClip();
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./sound/start.wav").getAbsoluteFile());
             clip.open(audioInputStream);
             clip.start();
-            clip.loop( 1 );
+            clip.loop( 2 );
         } catch(Exception ex) {
             System.out.println("Error with playing sound.");
             ex.printStackTrace();
@@ -53,19 +55,44 @@ public class Start extends MouseAdapter {
         System.out.println(mouseX);
         System.out.println(mouseY);
         //click on page2
-        if(mouseX<239 && mouseX>129 && mouseY<322 && mouseY>257 && flag==true) {
+        if(mouseX<239 && mouseX>129 && mouseY<322 && mouseY>257 && flag) {
             System.out.println("Easy");
             flag2=true;
+            clip.stop();
+            frame.setVisible(false);
+
 
         }
         if(mouseX<255 && mouseX>113 && mouseY<442 && mouseY>360 && flag==true) {
+            EventQueue.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    GameFrame frame = new GameFrame("Tanki !");
+                    frame.setLocationRelativeTo(null); // put frame at center of screen
+                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    frame.setVisible(true);
+                    frame.initBufferStrategy();
+                    // Create and execute the game-loop
+                    GameLoop game = new GameLoop(frame);
+                    game.init();
+                    ThreadPool.execute(game);
+                    // and the game starts ...
+                }
+            });
             System.out.println("Normal");
             flag2=true;
+
+            clip.stop();
+            frame.setVisible(false);
+
+
 
         }
         if(mouseX<231 && mouseX>130 && mouseY<579 && mouseY>514 && flag==true) {
             System.out.println("Hard");
             flag2=true;
+            clip.stop();
+            frame.setVisible(false);
 
         }
         //click on page1
@@ -86,6 +113,7 @@ public class Start extends MouseAdapter {
             frame.invalidate();
             frame.validate();
             frame.repaint();
+            System.out.printf("phl2");
             flag=true;
 
         }
