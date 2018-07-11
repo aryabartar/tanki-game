@@ -300,23 +300,23 @@ public class GameState {
             //Add moving smiles here :D
             movingSmiles.add(new MovingSmile(500, 1000));
             movingSmiles.add(new MovingSmile(1100, 800));
-
-
-//-------------------------------------------------------------------------------------
-
-
-            for (int i = 0; i <= 49; i++) {
-                blocks.add(new UnDestroyableBlock(i * 100, 0));
-                blocks.add(new UnDestroyableBlock(i * 100, 1900));
-
-                if (i < 20) {
-                    blocks.add(new UnDestroyableBlock(0, i * 100));
-                    blocks.add(new UnDestroyableBlock(4900, i * 100));
-                }
-            }
+            setBorders();
 
         } else {
 
+        }
+    }
+
+    private void setBorders() {
+
+        for (int i = 0; i <= 49; i++) {
+            blocks.add(new UnDestroyableBlock(i * 100, 0));
+            blocks.add(new UnDestroyableBlock(i * 100, 1900));
+
+            if (i < 20) {
+                blocks.add(new UnDestroyableBlock(0, i * 100));
+                blocks.add(new UnDestroyableBlock(4900, i * 100));
+            }
         }
     }
 
@@ -398,7 +398,7 @@ public class GameState {
 
             firstLevel = false;
 
-            for ( EnemyTank enemyTank : enemyTanks) {
+            for (EnemyTank enemyTank : enemyTanks) {
                 enemyTank.die();
             }
 
@@ -409,16 +409,40 @@ public class GameState {
             setLevelTwoMap();
 
 
-
         }
     }
 
     private void setLevelTwoMap() {
         setArrayLists();
+        setBorders();
+
+        keyDOWN = false;
+        keyUP = false;
+        keyLEFT = false;
+        keyRIGHT = false;
+
+
+        /**
+         *
+         *
+         *
+         *
+         *
+         *
+         *
+         *
+         *
+         *
+         *
+         *
+         *
+         *
+         *
+         */
     }
 
     private void setArrayLists() {
-        mainTank = new Tank() ;
+        mainTank = new Tank();
         bullets = new ArrayList<>();
         rockets = new ArrayList<>();
         enemyTanks = new ArrayList<>();
