@@ -58,6 +58,7 @@ public class GameState {
     private static ArrayList<Point> destroyedTankTemporaryTrashPoints;
     private static ArrayList<MovingSmile> movingSmiles;
 
+
     public GameState() {
 
         mainTank = new Tank();
@@ -68,6 +69,7 @@ public class GameState {
         equipments = new ArrayList<>();
         destroyedTankTemporaryTrashPoints = new ArrayList<>();
         movingSmiles = new ArrayList<>();
+
 
         addMapObjects();
 
@@ -276,8 +278,8 @@ public class GameState {
         blocks.add(new UnDestroyableBlock(2500, 1100));
 
         blocks.add(new DestroyableBlock(2900, 900));
-        blocks.add(new DestroyableBlock(2900, 800));
-        blocks.add(new DestroyableBlock(2900, 700));
+        blocks.add(new UnDestroyableBlock(2900, 800));
+        blocks.add(new UnDestroyableBlock(2900, 700));
         blocks.add(new DestroyableBlock(2900, 600));
         blocks.add(new DestroyableBlock(2900, 500));
         blocks.add(new DestroyableBlock(2900, 400));
@@ -286,9 +288,18 @@ public class GameState {
         blocks.add(new DestroyableBlock(2900, 100));
 
 
+
+
+
+
+
+
+        enemyTanks.add(new StaticTankEasy(3000, 100));
+
+
         equipments.add(new UpdateWeapon(300, 1000));
         equipments.add(new UpdateWeapon(700, 1200));
-//        equipments.add(new Repair(800, 200));
+        equipments.add(new UpdateWeapon(2500, 100));
 //        equipments.add(new Cartridgedss(800, 300));
 
 
