@@ -1,4 +1,8 @@
 .idea/
 out/
+
+*.iml
+
 *.class
 tst4.txt
+
