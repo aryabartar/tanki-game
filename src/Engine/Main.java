@@ -29,7 +29,7 @@ public class Main {
         ThreadPool.init();
 
 
-      Start start=new Start();
+//      Start start=new Start();
 
 
         EventQueue.invokeLater(new Runnable() {
@@ -48,6 +48,8 @@ public class Main {
                 // and the game starts ...
             }
         });
+
+        GameState.setDifficultyLevel(2);
 
 		// After the player clicks 'PLAY' ...
     }

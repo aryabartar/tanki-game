@@ -37,18 +37,21 @@ public class GameState {
 
     //	public int locX, locY, diam;
     public boolean gameOver;
+    public boolean firstLevel;
+    public static int difficultyLevel = 2 ; // use this later
+    public boolean fullyFinished;
 
     private boolean keyUP, keyDOWN, keyRIGHT, keyLEFT;
     private boolean mouseLeftClicked, mouseRightClicked; //mouseRightClicked : false => bullet / true => rocket
     private int mouseX, mouseY; // for clicking
-    private int click=0;
+    private int click = 0;
     private int mouseMotionX, mouseMotionY; //for mouse motion
     private KeyHandler keyHandler;
     private MouseHandler mouseHandler;
 
     private Tank mainTank;
-    private GameClient gameClient ;
-    private GameServer gameServer ;
+    private GameClient gameClient;
+    private GameServer gameServer;
 
     private static ArrayList<Bullet> bullets;
     private static ArrayList<Rocket> rockets;
@@ -59,6 +62,10 @@ public class GameState {
     private static ArrayList<MovingSmile> movingSmiles;
 
     public GameState() {
+
+
+        firstLevel = true;
+        fullyFinished = false;
 
         mainTank = new Tank();
         bullets = new ArrayList<>();
@@ -89,20 +96,20 @@ public class GameState {
 //        initClientServer();
     }
 
-    private void initClientServer () {
-        boolean optionPaneNumber ;
-        optionPaneNumber = JOptionPane.showConfirmDialog(null , "Do you want to run the server ?") == 0 ;
+    private void initClientServer() {
+        boolean optionPaneNumber;
+        optionPaneNumber = JOptionPane.showConfirmDialog(null, "Do you want to run the server ?") == 0;
 
 
-        GameServer gameServer ;
-        GameClient gameClient ;
+        GameServer gameServer;
+        GameClient gameClient;
 
         if (optionPaneNumber == true) {
             gameServer = new GameServer(null);
             gameServer.start();
         }
 
-        gameClient = new GameClient(null , "localhost") ;
+        gameClient = new GameClient(null, "localhost");
         gameClient.start();
 
         gameClient.sendData("ping".getBytes());
@@ -375,19 +382,20 @@ public class GameState {
         renderDestroyedTankPoints();
         attackMovingSmiles();
         findSmileFacesIntersects();
-        checkTheGameFinish() ;
+        checkTheGameFinish();
     }
 
-    private void checkTheGameFinish () {
+    private void checkTheGameFinish() {
         Rectangle mainTankRec = new Rectangle(mainTank.getLocX(), mainTank.getLocY(), mainTank.getxPixels(), mainTank.getyPixels());
         Rectangle door = new Rectangle(4800, 1800, 100, 100);
 
-        if (door.intersects(mainTankRec)) {
+        if ((door.intersects(mainTankRec)) && (firstLevel == true)) {
             ImageIcon icon = new ImageIcon("./pictures/skull.png");
             JOptionPane.showMessageDialog(null,
-                    "LEVEL 1 IS COMPLETED !", "FINISHED!",
-                    JOptionPane.INFORMATION_MESSAGE, icon);        }
-
+                    "LEVEL 1 IS COMPLETED !", "  FINISHED!",
+                    JOptionPane.INFORMATION_MESSAGE, icon);
+            firstLevel = false;
+        }
     }
 
     private void findSmileFacesIntersects() {
@@ -404,8 +412,8 @@ public class GameState {
                     Clip clip = AudioSystem.getClip();
                     clip.open(audioInputStream);
                     clip.start();
-                    clip.loop( 0);
-                } catch(Exception ex) {
+                    clip.loop(0);
+                } catch (Exception ex) {
                     System.out.println("Error with playing sound.");
                     ex.printStackTrace();
                 }
@@ -460,8 +468,8 @@ public class GameState {
                     Clip clip = AudioSystem.getClip();
                     clip.open(audioInputStream);
                     clip.start();
-                    clip.loop( 0);
-                } catch(Exception ex) {
+                    clip.loop(0);
+                } catch (Exception ex) {
                     System.out.println("Error with playing sound.");
                     ex.printStackTrace();
                 }
@@ -524,8 +532,8 @@ public class GameState {
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInputStream);
                 clip.start();
-                clip.loop( 0);
-            } catch(Exception ex) {
+                clip.loop(0);
+            } catch (Exception ex) {
                 System.out.println("Error with playing sound.");
                 ex.printStackTrace();
             }
@@ -753,8 +761,8 @@ public class GameState {
                     Clip clip = AudioSystem.getClip();
                     clip.open(audioInputStream);
                     clip.start();
-                    clip.loop( 0);
-                } catch(Exception ex) {
+                    clip.loop(0);
+                } catch (Exception ex) {
                     System.out.println("Error with playing sound.");
                     ex.printStackTrace();
                 }
@@ -774,28 +782,27 @@ public class GameState {
             mouseY = e.getY();
             if (SwingUtilities.isLeftMouseButton(e)) {
                 mouseLeftClicked = true;
-                if(click%2==1){
+                if (click % 2 == 1) {
                     try {
                         AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./sound/heavygun.wav").getAbsoluteFile());
                         Clip clip = AudioSystem.getClip();
                         clip.open(audioInputStream);
                         clip.start();
-                        clip.loop( 0);
-                    } catch(Exception ex) {
+                        clip.loop(0);
+                    } catch (Exception ex) {
                         System.out.println("Error with playing sound.");
                         ex.printStackTrace();
                     }
 
 
-                }
-                else {
+                } else {
                     try {
                         AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./sound/EnemyBulletToMyTank.wav").getAbsoluteFile());
                         Clip clip = AudioSystem.getClip();
                         clip.open(audioInputStream);
                         clip.start();
-                        clip.loop( 0 );
-                    } catch(Exception ex) {
+                        clip.loop(0);
+                    } catch (Exception ex) {
                         System.out.println("Error with playing sound.");
                         ex.printStackTrace();
                     }
@@ -877,5 +884,9 @@ public class GameState {
 
     public static ArrayList<MovingSmile> getMovingSmiles() {
         return movingSmiles;
+    }
+
+    public static void setDifficultyLevel(int difficultyLevel) {
+        GameState.difficultyLevel = difficultyLevel;
     }
 }
