@@ -128,6 +128,10 @@ public class GameState {
 
         enemyTanks.add(new StaticTankEasy(1300, 1200));
         enemyTanks.add(new StaticTankHard(1200, 200));
+
+        enemyTanks.add(new StaticTankHard(800, 1300));
+        enemyTanks.add(new StaticTankHard(2600, 1300));
+
         enemyTanks.add(new StaticTankHard(1850, 800));
         enemyTanks.add(new DynamicTankEasy(2600, 130, 2600, 250));
 
@@ -393,7 +397,7 @@ public class GameState {
 
 
 
-
+        enemyTanks.add(new DynamicTankEasy(300, 1800, 800, 1800));
 
 
 
@@ -407,7 +411,11 @@ public class GameState {
         equipments.add(new UpdateWeapon(700, 1200));
         equipments.add(new UpdateWeapon(2500, 100));
 
-//        equipments.add(new Cartridgedss(800, 300));
+
+        equipments.add(new Repair(3800, 100));
+        equipments.add(new Repair(2400, 1800));
+
+//       equipments.add(new Cartridgedss(800, 300));
 
 
         //Add moving smiles here :D
