@@ -86,7 +86,7 @@ public class GameState {
         //
         keyHandler = new KeyHandler();
         mouseHandler = new MouseHandler();
-        initClientServer();
+//        initClientServer();
     }
 
     private void initClientServer () {
@@ -375,6 +375,17 @@ public class GameState {
         renderDestroyedTankPoints();
         attackMovingSmiles();
         findSmileFacesIntersects();
+        checkTheGameFinish() ;
+    }
+
+    private void checkTheGameFinish () {
+        Rectangle mainTankRec = new Rectangle(mainTank.getLocX(), mainTank.getLocY(), mainTank.getxPixels(), mainTank.getyPixels());
+        Rectangle door = new Rectangle(4800, 1800, 100, 100);
+
+        if (door.intersects(mainTankRec)) {
+            JOptionPane.showMessageDialog(null , "Enemy is destroyed , ");
+        }
+
     }
 
     private void findSmileFacesIntersects() {

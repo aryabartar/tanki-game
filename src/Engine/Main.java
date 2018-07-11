@@ -15,9 +15,6 @@ import javax.swing.*;
  * @author Seyed Mohammad Ghaffarian
  */
 public class Main {
-
-
-
     public static void main(String[] args) {
 		// Initialize the global thread-pool
 		ThreadPool.init();
@@ -45,4 +42,3 @@ public class Main {
     }
 }
 
-//test
