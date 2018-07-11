@@ -27,6 +27,7 @@ public class Start extends MouseAdapter {
 
         frame = new JFrame();
         label = new JLabel();
+        label2 = new JLabel();
         clip = null;
 
         frame.setResizable(false);
@@ -37,7 +38,7 @@ public class Start extends MouseAdapter {
         } catch (LineUnavailableException e) {
             e.printStackTrace();
         }
-        JLabel label2 = new JLabel();
+
         frame.setLocationRelativeTo(null);
 
         try {
@@ -58,7 +59,7 @@ public class Start extends MouseAdapter {
         label.addMouseListener(this);
 
 
-        Icon icon_page1=new ImageIcon("./pictures/page1.jpg");
+        Icon icon_page1 = new ImageIcon("./pictures/page1.jpg");
         Icon icon_page2 = new ImageIcon("./pictures/page2.jpg");
 
         label.setIcon(icon_page1);
@@ -78,6 +79,8 @@ public class Start extends MouseAdapter {
         System.out.println(mouseY);
         //click on page2
         if (mouseX < 239 && mouseX > 129 && mouseY < 322 && mouseY > 257 && flag) {
+            runTheGame();
+
             System.out.println("Easy");
             flag2 = true;
             clip.stop();
@@ -86,21 +89,7 @@ public class Start extends MouseAdapter {
 
         }
         if (mouseX < 255 && mouseX > 113 && mouseY < 442 && mouseY > 360 && flag == true) {
-            EventQueue.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    GameFrame frame = new GameFrame("Tanki !");
-                    frame.setLocationRelativeTo(null); // put frame at center of screen
-                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    frame.setVisible(true);
-                    frame.initBufferStrategy();
-                    // Create and execute the game-loop
-                    GameLoop game = new GameLoop(frame);
-                    game.init();
-                    ThreadPool.execute(game);
-                    // and the game starts ...
-                }
-            });
+            runTheGame();
             System.out.println("Normal");
             flag2 = true;
 
@@ -110,12 +99,16 @@ public class Start extends MouseAdapter {
 
         }
         if (mouseX < 231 && mouseX > 130 && mouseY < 579 && mouseY > 514 && flag == true) {
+
+
             System.out.println("Hard");
             flag2 = true;
             clip.stop();
             frame.setVisible(false);
 
         }
+
+
         //click on page1
         if (mouseX < 255 && mouseX > 113 && mouseY < 442 && mouseY > 360 && flag == false) {
             System.out.println("Co-op");
@@ -145,6 +138,25 @@ public class Start extends MouseAdapter {
         }
 
 
+    }
+
+    private void runTheGame() {
+        EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                GameFrame frame = new GameFrame("Tanki !");
+                frame.setLocationRelativeTo(null); // put frame at center of screen
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setVisible(true);
+                frame.initBufferStrategy();
+                // Create and execute the game-loop
+                GameLoop game = new GameLoop(frame);
+                game.init();
+                ThreadPool.execute(game);
+
+                // and the game starts ...
+            }
+        });
     }
 
     public boolean isFlag2() {
