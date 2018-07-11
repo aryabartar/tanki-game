@@ -1,6 +1,10 @@
 package Engine;
 
 import Engine.GameFrame;
+import Network.GameClient;
+import Network.GameServer;
+
+import javax.swing.*;
 
 /**
  * A very simple structure for the main game loop.
@@ -26,6 +30,7 @@ public class GameLoop implements Runnable {
 	
 	private GameFrame canvas;
 	private GameState state;
+
 
 	public GameLoop(GameFrame frame) {
 		canvas = frame;

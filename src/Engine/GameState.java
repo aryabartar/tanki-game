@@ -6,6 +6,8 @@ import Blocks.DestroyableBlock;
 import Blocks.UnDestroyableBlock;
 import EnemyTanks.*;
 import Equipment.*;
+import Network.GameClient;
+import Network.GameServer;
 import Others.Geometry;
 import Others.Point;
 
@@ -45,6 +47,8 @@ public class GameState {
     private MouseHandler mouseHandler;
 
     private Tank mainTank;
+    private GameClient gameClient ;
+    private GameServer gameServer ;
 
     private static ArrayList<Bullet> bullets;
     private static ArrayList<Rocket> rockets;
@@ -82,6 +86,26 @@ public class GameState {
         //
         keyHandler = new KeyHandler();
         mouseHandler = new MouseHandler();
+        initClientServer();
+    }
+
+    private void initClientServer () {
+        boolean optionPaneNumber ;
+        optionPaneNumber = JOptionPane.showConfirmDialog(null , "Do you want to run the server ?") == 0 ;
+
+
+        GameServer gameServer ;
+        GameClient gameClient ;
+
+        if (optionPaneNumber == true) {
+            gameServer = new GameServer(null);
+            gameServer.start();
+        }
+
+        gameClient = new GameClient(null , "localhost") ;
+        gameClient.start();
+
+        gameClient.sendData("ping".getBytes());
     }
 
     private void addMapObjects() {
