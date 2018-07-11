@@ -383,8 +383,10 @@ public class GameState {
         Rectangle door = new Rectangle(4800, 1800, 100, 100);
 
         if (door.intersects(mainTankRec)) {
-            JOptionPane.showMessageDialog(null , "Enemy is destroyed , ");
-        }
+            ImageIcon icon = new ImageIcon("./pictures/skull.png");
+            JOptionPane.showMessageDialog(null,
+                    "LEVEL 1 IS COMPLETED !", "FINISHED!",
+                    JOptionPane.INFORMATION_MESSAGE, icon);        }
 
     }
 

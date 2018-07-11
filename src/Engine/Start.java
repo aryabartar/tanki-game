@@ -24,16 +24,21 @@ public class Start extends MouseAdapter {
 
     public Start() {
 
-        JFrame frame = new JFrame();
-        JLabel label = new JLabel();
-        Clip clip = null;
+
+        frame = new JFrame();
+        label = new JLabel();
+        clip = null;
+
+        frame.setResizable(false);
+        frame.setSize(GameFrame.GAME_WIDTH, GameFrame.GAME_HEIGHT);
+
         try {
             clip = AudioSystem.getClip();
         } catch (LineUnavailableException e) {
             e.printStackTrace();
         }
         JLabel label2 = new JLabel();
-
+        frame.setLocationRelativeTo(null);
 
         try {
 
@@ -52,8 +57,9 @@ public class Start extends MouseAdapter {
         label2.addMouseListener(this);
         label.addMouseListener(this);
 
-        Icon icon_page1=new ImageIcon(getClass().getResource("page1.jpg"));
-        Icon icon_page2 = new ImageIcon(getClass().getResource("page2.jpg"));
+
+        Icon icon_page1=new ImageIcon("./pictures/page1.jpg");
+        Icon icon_page2 = new ImageIcon("./pictures/page2.jpg");
 
         label.setIcon(icon_page1);
         label2.setIcon(icon_page2);
