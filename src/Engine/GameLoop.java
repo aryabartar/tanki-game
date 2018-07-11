@@ -30,8 +30,7 @@ public class GameLoop implements Runnable {
 	
 	private GameFrame canvas;
 	private GameState state;
-	private GameServer gameServer ;
-	private GameClient gameClient ;
+
 
 	public GameLoop(GameFrame frame) {
 		canvas = frame;
@@ -46,15 +45,6 @@ public class GameLoop implements Runnable {
 		canvas.addMouseListener(state.getMouseListener());
 		canvas.addMouseMotionListener(state.getMouseMotionListener());
 
-        if (JOptionPane.showConfirmDialog(null , "Do you want to run the server ?") == 0) {
-            gameServer = new GameServer(this);
-            gameServer.start();
-        }
-
-		gameClient = new GameClient(this , "localhost") ;
-		gameClient.start();
-
-		gameClient.sendData("ping".getBytes());
 	}
 
 	@Override

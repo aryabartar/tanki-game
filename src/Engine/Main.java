@@ -11,7 +11,7 @@ import javax.swing.*;
 
 /**
  * Program start.
- * 
+ *
  * @author Seyed Mohammad Ghaffarian
  */
 public class Main {
@@ -28,6 +28,7 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {
+
 				GameFrame frame = new GameFrame("Tanki !");
 				frame.setLocationRelativeTo(null); // put frame at center of screen
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -2,6 +2,7 @@ package Network;
 
 import Engine.GameLoop;
 import Engine.Main;
+import Equipment.Tank;
 
 import java.io.IOException;
 import java.io.StreamCorruptedException;
@@ -11,10 +12,10 @@ public class GameClient extends Thread {
 
     private InetAddress ipAddress;
     private DatagramSocket socket;
-    private GameLoop main;
+    private Tank tank;
 
-    public GameClient(GameLoop main, String ipAddress) {
-        this.main = main;
+    public GameClient(Tank tank, String ipAddress) {
+        this.tank = tank;
         try {
             this.socket = new DatagramSocket();
         } catch (SocketException e) {
@@ -49,5 +50,7 @@ public class GameClient extends Thread {
             e.printStackTrace();
         }
     }
+
+
 
 }

@@ -86,6 +86,26 @@ public class GameState {
         //
         keyHandler = new KeyHandler();
         mouseHandler = new MouseHandler();
+        initClientServer();
+    }
+
+    private void initClientServer () {
+        boolean optionPaneNumber ;
+        optionPaneNumber = JOptionPane.showConfirmDialog(null , "Do you want to run the server ?") == 0 ;
+
+
+        GameServer gameServer ;
+        GameClient gameClient ;
+
+        if (optionPaneNumber == true) {
+            gameServer = new GameServer(null);
+            gameServer.start();
+        }
+
+        gameClient = new GameClient(null , "localhost") ;
+        gameClient.start();
+
+        gameClient.sendData("ping".getBytes());
     }
 
     private void addMapObjects() {
