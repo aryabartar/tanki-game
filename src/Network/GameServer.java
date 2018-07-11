@@ -31,9 +31,8 @@ public class GameServer extends Thread {
                 e.printStackTrace();
             }
             String massage = new String(packet.getData());
-            System.out.println("Client > " + new String(packet.getData()));
+            System.out.println("Client [" + packet.getAddress() +":" + packet.getPort() + "] > " + new String(packet.getData()));
             sendData("pong".getBytes(), packet.getAddress(), packet.getPort());
-//
         }
     }
 

@@ -4,6 +4,8 @@ import Engine.GameFrame;
 import Network.GameClient;
 import Network.GameServer;
 
+import javax.swing.*;
+
 /**
  * A very simple structure for the main game loop.
  * THIS IS NOT PERFECT, but works for most situations.
@@ -44,8 +46,10 @@ public class GameLoop implements Runnable {
 		canvas.addMouseListener(state.getMouseListener());
 		canvas.addMouseMotionListener(state.getMouseMotionListener());
 
-		gameServer = new GameServer(this) ;
-		gameServer.start();
+        if (JOptionPane.showConfirmDialog(null , "Do you want to run the server ?") == 0) {
+            gameServer = new GameServer(this);
+            gameServer.start();
+        }
 
 		gameClient = new GameClient(this , "localhost") ;
 		gameClient.start();
