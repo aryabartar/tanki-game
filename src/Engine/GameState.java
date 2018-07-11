@@ -24,6 +24,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.File;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 
@@ -38,7 +39,7 @@ public class GameState {
     //	public int locX, locY, diam;
     public boolean gameOver;
     public boolean firstLevel;
-    public static int difficultyLevel = 2 ; // use this later
+    public static int difficultyLevel = 2; // use this later
     public boolean fullyFinished;
 
     private boolean keyUP, keyDOWN, keyRIGHT, keyLEFT;
@@ -68,13 +69,7 @@ public class GameState {
         fullyFinished = false;
 
         mainTank = new Tank();
-        bullets = new ArrayList<>();
-        rockets = new ArrayList<>();
-        enemyTanks = new ArrayList<>();
-        blocks = new ArrayList<>();
-        equipments = new ArrayList<>();
-        destroyedTankTemporaryTrashPoints = new ArrayList<>();
-        movingSmiles = new ArrayList<>();
+        setArrayLists();
 
         addMapObjects();
 
@@ -136,185 +131,192 @@ public class GameState {
         enemyTanks.add(new DynamicTankEasy(2600, 130, 2600, 250));
 
 
-        // add blocks here
-        blocks.add(new UnDestroyableBlock(400, 100));
-        blocks.add(new UnDestroyableBlock(400, 200));
-        blocks.add(new UnDestroyableBlock(400, 300));
+        if (firstLevel == true) {
 
-        blocks.add(new DestroyableBlock(100, 300));
-        blocks.add(new DestroyableBlock(200, 300));
-        blocks.add(new DestroyableBlock(300, 300));
-        blocks.add(new DestroyableBlock(500, 100));
+            // add blocks here
+            blocks.add(new UnDestroyableBlock(400, 100));
+            blocks.add(new UnDestroyableBlock(400, 200));
+            blocks.add(new UnDestroyableBlock(400, 300));
 
-        blocks.add(new UnDestroyableBlock(400, 900));
-        blocks.add(new UnDestroyableBlock(500, 900));
-        blocks.add(new UnDestroyableBlock(600, 900));
-        blocks.add(new UnDestroyableBlock(400, 1000));
-        blocks.add(new UnDestroyableBlock(400, 1100));
-        blocks.add(new UnDestroyableBlock(500, 1100));
-        blocks.add(new UnDestroyableBlock(600, 1100));
-        blocks.add(new UnDestroyableBlock(600, 1000));
+            blocks.add(new DestroyableBlock(100, 300));
+            blocks.add(new DestroyableBlock(200, 300));
+            blocks.add(new DestroyableBlock(300, 300));
+            blocks.add(new DestroyableBlock(500, 100));
 
-        blocks.add(new UnDestroyableBlock(100, 900));
-        blocks.add(new UnDestroyableBlock(100, 1000));
-        blocks.add(new DestroyableBlock(200, 900));
-        blocks.add(new DestroyableBlock(300, 900));
+            blocks.add(new UnDestroyableBlock(400, 900));
+            blocks.add(new UnDestroyableBlock(500, 900));
+            blocks.add(new UnDestroyableBlock(600, 900));
+            blocks.add(new UnDestroyableBlock(400, 1000));
+            blocks.add(new UnDestroyableBlock(400, 1100));
+            blocks.add(new UnDestroyableBlock(500, 1100));
+            blocks.add(new UnDestroyableBlock(600, 1100));
+            blocks.add(new UnDestroyableBlock(600, 1000));
 
-        blocks.add(new UnDestroyableBlock(600, 1200));
-        blocks.add(new UnDestroyableBlock(600, 1300));
-        blocks.add(new UnDestroyableBlock(600, 1400));
-        blocks.add(new UnDestroyableBlock(600, 1500));
+            blocks.add(new UnDestroyableBlock(100, 900));
+            blocks.add(new UnDestroyableBlock(100, 1000));
+            blocks.add(new DestroyableBlock(200, 900));
+            blocks.add(new DestroyableBlock(300, 900));
 
-        blocks.add(new DestroyableBlock(600, 1600));
-        blocks.add(new DestroyableBlock(600, 1700));
-        blocks.add(new DestroyableBlock(600, 1800));
+            blocks.add(new UnDestroyableBlock(600, 1200));
+            blocks.add(new UnDestroyableBlock(600, 1300));
+            blocks.add(new UnDestroyableBlock(600, 1400));
+            blocks.add(new UnDestroyableBlock(600, 1500));
 
-        blocks.add(new UnDestroyableBlock(700, 1300));
-        blocks.add(new UnDestroyableBlock(700, 1400));
-        blocks.add(new UnDestroyableBlock(700, 1500));
-        blocks.add(new UnDestroyableBlock(800, 1300));
-        blocks.add(new UnDestroyableBlock(800, 1400));
-        blocks.add(new UnDestroyableBlock(800, 1500));
-        blocks.add(new UnDestroyableBlock(900, 1300));
-        blocks.add(new UnDestroyableBlock(900, 1400));
-        blocks.add(new UnDestroyableBlock(900, 1500));
-        blocks.add(new UnDestroyableBlock(1000, 1300));
-        blocks.add(new UnDestroyableBlock(1000, 1400));
-        blocks.add(new UnDestroyableBlock(1000, 1500));
-        blocks.add(new UnDestroyableBlock(1100, 1300));
-        blocks.add(new UnDestroyableBlock(1100, 1400));
-        blocks.add(new UnDestroyableBlock(1100, 1500));
-        blocks.add(new UnDestroyableBlock(1200, 1500));
-        blocks.add(new UnDestroyableBlock(1200, 1300));
-        blocks.add(new UnDestroyableBlock(1200, 1400));
-        blocks.add(new UnDestroyableBlock(1300, 1300));
-        blocks.add(new UnDestroyableBlock(1300, 1400));
-        blocks.add(new UnDestroyableBlock(1300, 1500));
-        blocks.add(new UnDestroyableBlock(1400, 1400));
+            blocks.add(new DestroyableBlock(600, 1600));
+            blocks.add(new DestroyableBlock(600, 1700));
+            blocks.add(new DestroyableBlock(600, 1800));
 
-        blocks.add(new DestroyableBlock(1400, 1500));
-        blocks.add(new DestroyableBlock(1400, 1300));
+            blocks.add(new UnDestroyableBlock(700, 1300));
+            blocks.add(new UnDestroyableBlock(700, 1400));
+            blocks.add(new UnDestroyableBlock(700, 1500));
+            blocks.add(new UnDestroyableBlock(800, 1300));
+            blocks.add(new UnDestroyableBlock(800, 1400));
+            blocks.add(new UnDestroyableBlock(800, 1500));
+            blocks.add(new UnDestroyableBlock(900, 1300));
+            blocks.add(new UnDestroyableBlock(900, 1400));
+            blocks.add(new UnDestroyableBlock(900, 1500));
+            blocks.add(new UnDestroyableBlock(1000, 1300));
+            blocks.add(new UnDestroyableBlock(1000, 1400));
+            blocks.add(new UnDestroyableBlock(1000, 1500));
+            blocks.add(new UnDestroyableBlock(1100, 1300));
+            blocks.add(new UnDestroyableBlock(1100, 1400));
+            blocks.add(new UnDestroyableBlock(1100, 1500));
+            blocks.add(new UnDestroyableBlock(1200, 1500));
+            blocks.add(new UnDestroyableBlock(1200, 1300));
+            blocks.add(new UnDestroyableBlock(1200, 1400));
+            blocks.add(new UnDestroyableBlock(1300, 1300));
+            blocks.add(new UnDestroyableBlock(1300, 1400));
+            blocks.add(new UnDestroyableBlock(1300, 1500));
+            blocks.add(new UnDestroyableBlock(1400, 1400));
 
-        blocks.add(new UnDestroyableBlock(1400, 1200));
-        blocks.add(new UnDestroyableBlock(1400, 1100));
-        blocks.add(new UnDestroyableBlock(1400, 1000));
-        blocks.add(new UnDestroyableBlock(1500, 1000));
-        blocks.add(new DestroyableBlock(1600, 1000));
-        blocks.add(new DestroyableBlock(1700, 1000));
-        blocks.add(new UnDestroyableBlock(1800, 1000));
-        blocks.add(new UnDestroyableBlock(1900, 1000));
-        blocks.add(new UnDestroyableBlock(2000, 1000));
-        blocks.add(new UnDestroyableBlock(2100, 1000));
+            blocks.add(new DestroyableBlock(1400, 1500));
+            blocks.add(new DestroyableBlock(1400, 1300));
 
-        blocks.add(new UnDestroyableBlock(1400, 900));
-        blocks.add(new UnDestroyableBlock(1500, 900));
-        blocks.add(new DestroyableBlock(1600, 900));
-        blocks.add(new DestroyableBlock(1700, 900));
-        blocks.add(new UnDestroyableBlock(1800, 900));
-        blocks.add(new UnDestroyableBlock(1900, 900));
-        blocks.add(new UnDestroyableBlock(2000, 900));
-        blocks.add(new UnDestroyableBlock(2100, 900));
+            blocks.add(new UnDestroyableBlock(1400, 1200));
+            blocks.add(new UnDestroyableBlock(1400, 1100));
+            blocks.add(new UnDestroyableBlock(1400, 1000));
+            blocks.add(new UnDestroyableBlock(1500, 1000));
+            blocks.add(new DestroyableBlock(1600, 1000));
+            blocks.add(new DestroyableBlock(1700, 1000));
+            blocks.add(new UnDestroyableBlock(1800, 1000));
+            blocks.add(new UnDestroyableBlock(1900, 1000));
+            blocks.add(new UnDestroyableBlock(2000, 1000));
+            blocks.add(new UnDestroyableBlock(2100, 1000));
 
-        blocks.add(new DestroyableBlock(1300, 1000));
-        blocks.add(new DestroyableBlock(1200, 1000));
-        blocks.add(new DestroyableBlock(1100, 1000));
-        blocks.add(new DestroyableBlock(1000, 1000));
-        blocks.add(new DestroyableBlock(900, 1000));
-        blocks.add(new DestroyableBlock(800, 1000));
-        blocks.add(new DestroyableBlock(700, 1000));
-        blocks.add(new DestroyableBlock(700, 900));
-        blocks.add(new DestroyableBlock(800, 900));
-        blocks.add(new DestroyableBlock(900, 900));
-        blocks.add(new DestroyableBlock(1000, 900));
-        blocks.add(new DestroyableBlock(1100, 900));
-        blocks.add(new DestroyableBlock(1200, 900));
-        blocks.add(new DestroyableBlock(1300, 900));
+            blocks.add(new UnDestroyableBlock(1400, 900));
+            blocks.add(new UnDestroyableBlock(1500, 900));
+            blocks.add(new DestroyableBlock(1600, 900));
+            blocks.add(new DestroyableBlock(1700, 900));
+            blocks.add(new UnDestroyableBlock(1800, 900));
+            blocks.add(new UnDestroyableBlock(1900, 900));
+            blocks.add(new UnDestroyableBlock(2000, 900));
+            blocks.add(new UnDestroyableBlock(2100, 900));
 
-        blocks.add(new Chariot(900, 100));
-        blocks.add(new DestroyableBlock(900, 600));
-        blocks.add(new DestroyableBlock(1000, 600));
-        blocks.add(new DestroyableBlock(900, 700));
-        blocks.add(new DestroyableBlock(1000, 700));
-        blocks.add(new DestroyableBlock(900, 800));
-        blocks.add(new DestroyableBlock(1000, 800));
-        blocks.add(new DestroyableBlock(900, 900));
-        blocks.add(new DestroyableBlock(1000, 900));
-        blocks.add(new DestroyableBlock(900, 500));
-        blocks.add(new DestroyableBlock(1000, 500));
+            blocks.add(new DestroyableBlock(1300, 1000));
+            blocks.add(new DestroyableBlock(1200, 1000));
+            blocks.add(new DestroyableBlock(1100, 1000));
+            blocks.add(new DestroyableBlock(1000, 1000));
+            blocks.add(new DestroyableBlock(900, 1000));
+            blocks.add(new DestroyableBlock(800, 1000));
+            blocks.add(new DestroyableBlock(700, 1000));
+            blocks.add(new DestroyableBlock(700, 900));
+            blocks.add(new DestroyableBlock(800, 900));
+            blocks.add(new DestroyableBlock(900, 900));
+            blocks.add(new DestroyableBlock(1000, 900));
+            blocks.add(new DestroyableBlock(1100, 900));
+            blocks.add(new DestroyableBlock(1200, 900));
+            blocks.add(new DestroyableBlock(1300, 900));
 
-        for (int i = 4; i < 10; i++) {
-            blocks.add(new UnDestroyableBlock(1600, i * 100));
-            blocks.add(new UnDestroyableBlock(1700, i * 100));
-            blocks.add(new UnDestroyableBlock(2000, i * 100));
-            blocks.add(new UnDestroyableBlock(2100, i * 100));
-        }
-        blocks.add(new DestroyableBlock(1800, 400));
-        blocks.add(new DestroyableBlock(1900, 400));
+            blocks.add(new Chariot(900, 100));
+            blocks.add(new DestroyableBlock(900, 600));
+            blocks.add(new DestroyableBlock(1000, 600));
+            blocks.add(new DestroyableBlock(900, 700));
+            blocks.add(new DestroyableBlock(1000, 700));
+            blocks.add(new DestroyableBlock(900, 800));
+            blocks.add(new DestroyableBlock(1000, 800));
+            blocks.add(new DestroyableBlock(900, 900));
+            blocks.add(new DestroyableBlock(1000, 900));
+            blocks.add(new DestroyableBlock(900, 500));
+            blocks.add(new DestroyableBlock(1000, 500));
 
-
-        blocks.add(new UnDestroyableBlock(2400, 400));
-        blocks.add(new UnDestroyableBlock(2500, 400));
-        blocks.add(new UnDestroyableBlock(2600, 400));
-        blocks.add(new UnDestroyableBlock(2600, 500));
-        blocks.add(new UnDestroyableBlock(2600, 600));
-        blocks.add(new UnDestroyableBlock(2400, 500));
-        blocks.add(new UnDestroyableBlock(2400, 600));
-        blocks.add(new UnDestroyableBlock(2500, 600));
-        blocks.add(new UnDestroyableBlock(2600, 600));
-        blocks.add(new DestroyableBlock(2500, 500));
-
-        blocks.add(new UnDestroyableBlock(2600, 300));
-        blocks.add(new UnDestroyableBlock(2600, 200));
-        blocks.add(new UnDestroyableBlock(2600, 100));
-        blocks.add(new DestroyableBlock(2400, 100));
-        blocks.add(new DestroyableBlock(2400, 200));
-        blocks.add(new DestroyableBlock(2400, 300));
-
-        blocks.add(new UnDestroyableBlock(2200, 1000));
-        blocks.add(new UnDestroyableBlock(2300, 1000));
-        blocks.add(new UnDestroyableBlock(2400, 1000));
-        blocks.add(new UnDestroyableBlock(2500, 1000));
-        blocks.add(new UnDestroyableBlock(2900, 1000));
-        blocks.add(new UnDestroyableBlock(2600, 1000));
-        blocks.add(new UnDestroyableBlock(2700, 1000));
-        blocks.add(new UnDestroyableBlock(2800, 1000));
-        blocks.add(new UnDestroyableBlock(2500, 1200));
-        blocks.add(new UnDestroyableBlock(2500, 1300));
-        blocks.add(new UnDestroyableBlock(2500, 1100));
-
-        blocks.add(new DestroyableBlock(2900, 900));
-        blocks.add(new DestroyableBlock(2900, 800));
-        blocks.add(new DestroyableBlock(2900, 700));
-        blocks.add(new DestroyableBlock(2900, 600));
-        blocks.add(new DestroyableBlock(2900, 500));
-        blocks.add(new DestroyableBlock(2900, 400));
-        blocks.add(new DestroyableBlock(2900, 300));
-        blocks.add(new DestroyableBlock(2900, 200));
-        blocks.add(new DestroyableBlock(2900, 100));
+            for (int i = 4; i < 10; i++) {
+                blocks.add(new UnDestroyableBlock(1600, i * 100));
+                blocks.add(new UnDestroyableBlock(1700, i * 100));
+                blocks.add(new UnDestroyableBlock(2000, i * 100));
+                blocks.add(new UnDestroyableBlock(2100, i * 100));
+            }
+            blocks.add(new DestroyableBlock(1800, 400));
+            blocks.add(new DestroyableBlock(1900, 400));
 
 
-        equipments.add(new UpdateWeapon(300, 1000));
-        equipments.add(new UpdateWeapon(700, 1200));
-//        equipments.add(new Repair(800, 200));
-//        equipments.add(new Cartridgedss(800, 300));
+            blocks.add(new UnDestroyableBlock(2400, 400));
+            blocks.add(new UnDestroyableBlock(2500, 400));
+            blocks.add(new UnDestroyableBlock(2600, 400));
+            blocks.add(new UnDestroyableBlock(2600, 500));
+            blocks.add(new UnDestroyableBlock(2600, 600));
+            blocks.add(new UnDestroyableBlock(2400, 500));
+            blocks.add(new UnDestroyableBlock(2400, 600));
+            blocks.add(new UnDestroyableBlock(2500, 600));
+            blocks.add(new UnDestroyableBlock(2600, 600));
+            blocks.add(new DestroyableBlock(2500, 500));
+
+            blocks.add(new UnDestroyableBlock(2600, 300));
+            blocks.add(new UnDestroyableBlock(2600, 200));
+            blocks.add(new UnDestroyableBlock(2600, 100));
+            blocks.add(new DestroyableBlock(2400, 100));
+            blocks.add(new DestroyableBlock(2400, 200));
+            blocks.add(new DestroyableBlock(2400, 300));
+
+            blocks.add(new UnDestroyableBlock(2200, 1000));
+            blocks.add(new UnDestroyableBlock(2300, 1000));
+            blocks.add(new UnDestroyableBlock(2400, 1000));
+            blocks.add(new UnDestroyableBlock(2500, 1000));
+            blocks.add(new UnDestroyableBlock(2900, 1000));
+            blocks.add(new UnDestroyableBlock(2600, 1000));
+            blocks.add(new UnDestroyableBlock(2700, 1000));
+            blocks.add(new UnDestroyableBlock(2800, 1000));
+            blocks.add(new UnDestroyableBlock(2500, 1200));
+            blocks.add(new UnDestroyableBlock(2500, 1300));
+            blocks.add(new UnDestroyableBlock(2500, 1100));
+
+            blocks.add(new DestroyableBlock(2900, 900));
+            blocks.add(new DestroyableBlock(2900, 800));
+            blocks.add(new DestroyableBlock(2900, 700));
+            blocks.add(new DestroyableBlock(2900, 600));
+            blocks.add(new DestroyableBlock(2900, 500));
+            blocks.add(new DestroyableBlock(2900, 400));
+            blocks.add(new DestroyableBlock(2900, 300));
+            blocks.add(new DestroyableBlock(2900, 200));
+            blocks.add(new DestroyableBlock(2900, 100));
 
 
-        //Add moving smiles here :D
-        movingSmiles.add(new MovingSmile(500, 1000));
-        movingSmiles.add(new MovingSmile(1100, 800));
+            equipments.add(new UpdateWeapon(300, 1000));
+            equipments.add(new UpdateWeapon(700, 1200));
+            equipments.add(new Cartridge(100, 1800));
+            equipments.add(new Cartridge(200, 300));
+            equipments.add(new Repair(100, 600));
+
+
+            //Add moving smiles here :D
+            movingSmiles.add(new MovingSmile(500, 1000));
+            movingSmiles.add(new MovingSmile(1100, 800));
 
 
 //-------------------------------------------------------------------------------------
 
 
-        for (int i = 0; i <= 49; i++) {
-            blocks.add(new UnDestroyableBlock(i * 100, 0));
-            blocks.add(new UnDestroyableBlock(i * 100, 1900));
+            for (int i = 0; i <= 49; i++) {
+                blocks.add(new UnDestroyableBlock(i * 100, 0));
+                blocks.add(new UnDestroyableBlock(i * 100, 1900));
 
-            if (i < 20) {
-                blocks.add(new UnDestroyableBlock(0, i * 100));
-                blocks.add(new UnDestroyableBlock(4900, i * 100));
+                if (i < 20) {
+                    blocks.add(new UnDestroyableBlock(0, i * 100));
+                    blocks.add(new UnDestroyableBlock(4900, i * 100));
+                }
             }
+
+        } else {
+
         }
     }
 
@@ -372,9 +374,7 @@ public class GameState {
 
         moveDynamicTanks();
         updateAlphaInEquipments();
-
         checkShootHits();
-
         removeDeadBullets();
         removeDeadTanks();
         removeDestroyedBlocks();
@@ -383,6 +383,7 @@ public class GameState {
         attackMovingSmiles();
         findSmileFacesIntersects();
         checkTheGameFinish();
+
     }
 
     private void checkTheGameFinish() {
@@ -394,9 +395,39 @@ public class GameState {
             JOptionPane.showMessageDialog(null,
                     "LEVEL 1 IS COMPLETED !", "  FINISHED!",
                     JOptionPane.INFORMATION_MESSAGE, icon);
+
             firstLevel = false;
+
+            for ( EnemyTank enemyTank : enemyTanks) {
+                enemyTank.die();
+            }
+
+            equipments = new ArrayList<>();
+            enemyTanks = new ArrayList<>();
+            bullets = new ArrayList<>();
+            rockets = new ArrayList<>();
+            setLevelTwoMap();
+
+
+
         }
     }
+
+    private void setLevelTwoMap() {
+        setArrayLists();
+    }
+
+    private void setArrayLists() {
+        mainTank = new Tank() ;
+        bullets = new ArrayList<>();
+        rockets = new ArrayList<>();
+        enemyTanks = new ArrayList<>();
+        blocks = new ArrayList<>();
+        equipments = new ArrayList<>();
+        destroyedTankTemporaryTrashPoints = new ArrayList<>();
+        movingSmiles = new ArrayList<>();
+    }
+
 
     private void findSmileFacesIntersects() {
         for (int i = 0; i < movingSmiles.size(); i++) {
@@ -440,14 +471,31 @@ public class GameState {
     }
 
     private void checkHitToEquipments() {
-        for (int i = 0; i < equipments.size(); i++) {
-            if ((mainTank.getTankCenterX() > equipments.get(i).getLocX()) && (mainTank.getTankCenterX() < equipments.get(i).getEndX()) &&
-                    (mainTank.getTankCenterY() > equipments.get(i).getLocY()) && (mainTank.getTankCenterY() < equipments.get(i).getEndY())) {
-                //complete here later.
-                equipments.remove(i);
 
-                i--;
-                System.out.println("Hit to equipment . Do sth later !");
+        for (int i = 0; i < equipments.size(); i++) {
+            try {
+
+                Rectangle mainTankRec = new Rectangle(mainTank.getLocX(), mainTank.getLocY(), mainTank.getxPixels(), mainTank.getyPixels());
+                Rectangle equipmentRec = new Rectangle(equipments.get(i).getLocX(), equipments.get(i).getLocY(), equipments.get(i).getxPixels(), equipments.get(i).getyPixels());
+
+                if (mainTankRec.intersects(equipmentRec)) {
+
+                    if (equipments.get(i) instanceof Cartridge) {
+                        mainTank.addToBullets(50);
+                        mainTank.addToRockets(30);
+                    }
+                    if (equipments.get(i) instanceof UpdateWeapon) {
+                        mainTank.updateWeapon();
+                    }
+                    if (equipments.get(i) instanceof Repair) {
+                        mainTank.addToHealth(30);
+                    }
+
+                    equipments.remove(i);
+                    i--;
+                }
+            } catch (ArrayIndexOutOfBoundsException e) {
+
             }
         }
     }
@@ -591,7 +639,7 @@ public class GameState {
                                 (rockets.get(i).getLocY() > enemyTank.getLocY()) && (rockets.get(i).getLocY() < enemyTank.getEndLocY())) {
                             if (rockets.get(i).isFromEnemy() == false) {
                                 System.out.println("zamani ke tir sangin khodam mizanam va barkhord mikonad");
-                                enemyTank.reduceHealth(Rocket.DAMAGE);
+                                enemyTank.reduceHealth(Rocket.DAMAGE + mainTank.getGunLevel() * 2);
                             }
                             rockets.remove(i);
                         }
@@ -654,7 +702,7 @@ public class GameState {
                             (bullets.get(i).getLocX() < enemyTank.getEndLocX()) && (bullets.get(i).getLocY() < enemyTank.getEndLocY())) {
                         if (bullets.get(i).isFromEnemy() == false) {
                             System.out.println("zamani ke tir sabok khodam mizanam va barkhord mikonad be tank");
-                            enemyTank.reduceHealth(Bullet.DAMAGE);
+                            enemyTank.reduceHealth(Bullet.DAMAGE + mainTank.getGunLevel() * 3);
                         }
                         bullets.remove(i);
                     }
@@ -755,6 +803,25 @@ public class GameState {
             if (enemyTanks.get(i).getHealth() < 1) {
                 Point tempPoint = new Point(enemyTanks.get(i).getLocX(), enemyTanks.get(i).getLocY());
                 destroyedTankTemporaryTrashPoints.add(tempPoint);
+
+                //Random equipment
+                SecureRandom random = new SecureRandom();
+                int rand = random.nextInt(7);
+
+                if (rand == 0) {
+                    equipments.add(new Cartridge(enemyTanks.get(i).getLocX(), enemyTanks.get(i).getLocY()));
+                }
+                if (rand == 1) {
+                    equipments.add(new Repair(enemyTanks.get(i).getLocX(), enemyTanks.get(i).getLocY()));
+                }
+                if (rand == 2) {
+                    equipments.add(new UpdateWeapon(enemyTanks.get(i).getLocX(), enemyTanks.get(i).getLocY()));
+                }
+                if (rand == 3) {
+                    movingSmiles.add(new MovingSmile(enemyTanks.get(i).getLocX(), enemyTanks.get(i).getLocY()));
+                }
+
+
                 enemyTanks.remove(i);
                 try {
                     AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./sound/enemydestroyed.wav").getAbsoluteFile());
@@ -814,6 +881,7 @@ public class GameState {
                 click++;
             }
         }
+
 
         @Override
         public void mouseReleased(MouseEvent e) {

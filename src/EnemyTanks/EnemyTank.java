@@ -72,7 +72,6 @@ public abstract class EnemyTank {
                 }
             }
         };
-
     }
 
 
@@ -128,8 +127,7 @@ public abstract class EnemyTank {
                 canMove = false;
             }
         }
-
-        justMove(locX , locY , canMove);
+        justMove(locX, locY, canMove);
 
     }
 
@@ -149,10 +147,10 @@ public abstract class EnemyTank {
             }
         }
 
-        justMove(locX , locY , canMove);
+        justMove(locX, locY, canMove);
     }
 
-    private void justMove (int locX , int locY , boolean canMove) {
+    private void justMove(int locX, int locY, boolean canMove) {
 
         if ((locX > 0) && (locX + xPixels < GameFrame.GAME_FULL_WIDTH) && (locY > 0) && (locY + yPixels < GameFrame.GAME_FULL_HEIGHT)) {
             if (canMove == true) {
@@ -225,4 +223,9 @@ public abstract class EnemyTank {
         if (health < 1)
             isAlive = false;
     }
+
+    public void die () {
+        isAlive = false;
+    }
+
 }

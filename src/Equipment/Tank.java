@@ -23,11 +23,13 @@ public class Tank {
     private final int yPixels = 128;
     private final static int gunXPixels = 128;
     private final static int gunYPixels = 40;
+    private int gunLevel = 0 ;
 
     private int bulletsNumber;
     private int rocketsNumber;
     private int health;
     private final int healthLimit;
+
 
 
     private double gunAndBodyRadian; //this is tank body and gun radian .
@@ -215,10 +217,23 @@ public class Tank {
 
     public void addToHealth(int amount) {
         health += amount;
+        if (health > healthLimit) {
+            health = healthLimit ;
+        }
     }
 
     public int getHealthLimit() {
         return healthLimit;
+    }
+
+    public void updateWeapon () {
+        if (gunLevel < 3) {
+            gunLevel++ ;
+        }
+    }
+
+    public int getGunLevel() {
+        return gunLevel;
     }
 }
 
