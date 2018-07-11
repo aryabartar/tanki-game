@@ -67,6 +67,7 @@ public class GameFrame extends JFrame {
     private BufferedImage smallRocketImage;
     private BufferedImage healthBarImage;
     private BufferedImage healthBloodImage;
+    private BufferedImage doorImage;
 
     private long lastRender;
     private ArrayList<Float> fpsHistory;
@@ -126,6 +127,7 @@ public class GameFrame extends JFrame {
             smallRocketImage = ImageIO.read(new File("./pictures/small-rocket.png"));
             healthBarImage = ImageIO.read(new File("./pictures/health-bar.jpg"));
             healthBloodImage = ImageIO.read(new File("./pictures/health-blood.jpg"));
+            doorImage = ImageIO.read(new File("./pictures/door.png"));
 
 
         } catch (IOException e) {
@@ -204,6 +206,8 @@ public class GameFrame extends JFrame {
 
         g2d.drawImage(backOfBackground, -(mainX / 3) - 500, -(mainY / 3) - 500, null);
         g2d.drawImage(bigRoofImage, 0 - mainX, 0 - mainY, null);
+
+        g2d.drawImage(doorImage, 4810 - mainX, 1790 - mainY, null);
 
         for (Point point : rock1Points) {
             g2d.drawImage(rock1Image, point.getX() - mainX, point.getY() - mainY, null);
