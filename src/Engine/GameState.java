@@ -1060,24 +1060,31 @@ public class GameState {
                 case KeyEvent.VK_ESCAPE:
                     GameLoop.isPaused = !GameLoop.isPaused;
                     break;
-                case KeyEvent.VK_1:
+                case KeyEvent.VK_1: {
                     mainTank.addToHealth(30);
-                case KeyEvent.VK_2:
+                    break;
+                }
+                case KeyEvent.VK_2: {
                     mainTank.updateWeapon();
+                    break;
+                }
                 case KeyEvent.VK_3: {
                     mainTank.addToBullets(100);
                     mainTank.addToRockets(60);
+                    break;
                 }
                 case KeyEvent.VK_4:{
                     int X=mainTank.getLocX();
                     int Y=mainTank.getLocY();
                     blocks.add(new DestroyableBlock(X+140, Y));
+                    break;
                 }
 
                 case KeyEvent.VK_5:{
                     int X=mainTank.getLocX();
                     int Y=mainTank.getLocY();
                     blocks.add(new DestroyableBlock(X, Y+140));
+                    break;
 
                 }
 
