@@ -1259,6 +1259,10 @@ public class GameState {
                     GameLoop.isPaused = false;
                     playSelectMusic();
                 }
+                if ((GameLoop.isPaused == true) && ((mouseX > 132) && (mouseX < 280) && (mouseY > 613) && (mouseY < 678))) {
+                    playSelectMusic();
+                    System.exit(0);
+                }
 
 
                 mouseLeftClicked = true;
