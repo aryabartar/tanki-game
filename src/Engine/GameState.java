@@ -602,7 +602,10 @@ public class GameState {
             try {
                 AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./sound/motor1.wav").getAbsoluteFile());
                 Clip clip = AudioSystem.getClip();
-                clip.open(audioInputStream);
+
+                if (GameLoop.isPaused == false)
+                    clip.open(audioInputStream);
+
                 clip.start();
                 clip.loop(0);
             } catch (Exception ex) {
@@ -625,9 +628,13 @@ public class GameState {
                 case KeyEvent.VK_D:
                     keyRIGHT = true;
                     break;
+//                case KeyEvent.VK_ESCAPE:
+//                    gameOver = true;
+//                    break;
                 case KeyEvent.VK_ESCAPE:
-                    gameOver = true;
+                    GameLoop.isPaused = !GameLoop.isPaused;
                     break;
+
             }
         }
 
@@ -876,10 +883,13 @@ public class GameState {
                 if (click % 2 == 1) {
                     try {
                         AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./sound/heavygun.wav").getAbsoluteFile());
-                        Clip clip = AudioSystem.getClip();
-                        clip.open(audioInputStream);
-                        clip.start();
-                        clip.loop(0);
+
+                        if (GameLoop.isPaused == false) {
+                            Clip clip = AudioSystem.getClip();
+                            clip.open(audioInputStream);
+                            clip.start();
+                            clip.loop(0);
+                        }
                     } catch (Exception ex) {
                         System.out.println("Error with playing sound.");
                         ex.printStackTrace();
@@ -890,9 +900,11 @@ public class GameState {
                     try {
                         AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./sound/EnemyBulletToMyTank.wav").getAbsoluteFile());
                         Clip clip = AudioSystem.getClip();
-                        clip.open(audioInputStream);
-                        clip.start();
-                        clip.loop(0);
+                        if (GameLoop.isPaused == false) {
+                            clip.open(audioInputStream);
+                            clip.start();
+                            clip.loop(0);
+                        }
                     } catch (Exception ex) {
                         System.out.println("Error with playing sound.");
                         ex.printStackTrace();

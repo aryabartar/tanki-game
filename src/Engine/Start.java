@@ -39,7 +39,8 @@ public class Start extends MouseAdapter {
             e.printStackTrace();
         }
 
-        frame.setLocationRelativeTo(null);
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        frame.setLocation(dim.width/2-frame.getSize().width/2 + 300, dim.height/2-frame.getSize().height/2);
 
         try {
 

@@ -20,8 +20,11 @@ import javax.swing.*;
  * 
  * @author
  */
+
 public class GameLoop implements Runnable {
-	
+
+	public static boolean isPaused = false ;
+
 	/**
 	 * Frame Per Second.
 	 * Higher is better, but any value above 24 is fine.
@@ -52,12 +55,16 @@ public class GameLoop implements Runnable {
 		boolean gameOver = false;
 		while (!gameOver) {
 			try {
+				while (isPaused) {
+					System.out.println("1");
+				}
 				long start = System.currentTimeMillis();
 				//
 				state.update();
 				canvas.render(state);
 				gameOver = state.gameOver;
 				//
+				System.out.println("2");
 				long delay = (1000 / FPS) - (System.currentTimeMillis() - start);
 					if (delay > 0)
 					Thread.sleep(delay);
