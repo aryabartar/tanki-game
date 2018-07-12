@@ -29,7 +29,6 @@ import javax.swing.JFrame;
  * http://docs.oracle.com/javase/8/docs/api/java/awt/image/BufferStrategy.html
  */
 public class GameFrame extends JFrame {
-
     public static final int GAME_HEIGHT = 1000;                  // 720p game resolution
     public static final int GAME_WIDTH = 16 * GAME_HEIGHT / 9;  // wide aspect ratio
     public static final int GAME_FULL_HEIGHT = 3000;
@@ -37,7 +36,6 @@ public class GameFrame extends JFrame {
     public static final int TANK_IN_MAP_X = 888;
     public static final int TANK_IN_MAP_Y = 500;
     public static boolean isCheated = false;
-
 
     private BufferedImage mainTankImage;
     private BufferedImage mainTankGun;
@@ -80,7 +78,6 @@ public class GameFrame extends JFrame {
     private ArrayList<Point> ratPoints;
     private ArrayList<Point> cactusPoints;
     private ArrayList<Point> papyrusPoints;
-
 
     private int mainX;
     private int mainY;
@@ -129,7 +126,7 @@ public class GameFrame extends JFrame {
             smallRocketImage = ImageIO.read(new File("./pictures/small-rocket.png"));
             healthBarImage = ImageIO.read(new File("./pictures/health-bar.jpg"));
             healthBloodImage = ImageIO.read(new File("./pictures/health-blood.jpg"));
-            doorImage = ImageIO.read(new File("./pictures/door.png"));
+            doorImage = ImageIO.read(new File("./pictures/carpet.png"));
             pausePageImage = ImageIO.read(new File("./pictures/pausePage.jpg"));
 
 
@@ -212,30 +209,28 @@ public class GameFrame extends JFrame {
         if (isCheated != true)
             g2d.drawImage(bigRoofImage, 0 - mainX, 0 - mainY, null);
 
-        g2d.drawImage(doorImage, 4810 - mainX, 1790 - mainY, null);
+        g2d.drawImage(doorImage, 4780 - mainX, 1700 - mainY, null);
 
 
-//        for (Point point : rock1Points) {
-//            g2d.drawImage(rock1Image, point.getX() - mainX, point.getY() - mainY, null);
-//        }
-//        for (Point point : rock2Points) {
-//            g2d.drawImage(rock2Image, point.getX() - mainX, point.getY() - mainY, null);
-//        }
-//        for (Point point : ratPoints) {
-//            g2d.drawImage(ratImage, point.getX() - mainX, point.getY() - mainY, null);
-//        }
-//        for (Point point : cactusPoints) {
-//            g2d.drawImage(cactusImage, point.getX() - mainX, point.getY() - mainY, null);
-//        }
-//        for (Point point : papyrusPoints) {
-//            g2d.drawImage(papyrusImage, point.getX() - mainX, point.getY() - mainY, null);
-//        }
-
+        for (Point point : rock1Points) {
+            g2d.drawImage(rock1Image, point.getX() - mainX, point.getY() - mainY, null);
+        }
+        for (Point point : rock2Points) {
+            g2d.drawImage(rock2Image, point.getX() - mainX, point.getY() - mainY, null);
+        }
+        for (Point point : ratPoints) {
+            g2d.drawImage(ratImage, point.getX() - mainX, point.getY() - mainY, null);
+        }
+        for (Point point : cactusPoints) {
+            g2d.drawImage(cactusImage, point.getX() - mainX, point.getY() - mainY, null);
+        }
+        for (Point point : papyrusPoints) {
+            g2d.drawImage(papyrusImage, point.getX() - mainX, point.getY() - mainY, null);
+        }
 
         g2d.setRenderingHint(
                 RenderingHints.KEY_RENDERING,
                 RenderingHints.VALUE_RENDER_QUALITY);
-
 
         for (Point destroyedTankPoint : state.getDestroyedTankTemporaryTrashPoints()) {
             Composite backupComposite = g2d.getComposite();
@@ -412,6 +407,5 @@ public class GameFrame extends JFrame {
             int strWidth = g2d.getFontMetrics().stringWidth(str);
             g2d.drawString(str, (GAME_WIDTH - strWidth) / 2, GAME_HEIGHT / 2);
         }
-
     }
 }

@@ -1,5 +1,7 @@
 package Engine;
 
+import Serialization.Serialize;
+
 import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
@@ -78,12 +80,10 @@ public class Start extends MouseAdapter {
 
         mouseX = e.getX();
         mouseY = e.getY();
-        System.out.println(mouseX);
-        System.out.println(mouseY);
+
         //click on page2
         if (mouseX < 296 && mouseX > 128 && mouseY < 406 && mouseY > 330 && flag) {
             runTheGame();
-            System.out.println("Easy");
             flag2 = true;
             frame.setVisible(false);
             playSelectMusic();
@@ -160,7 +160,6 @@ public class Start extends MouseAdapter {
                 GameLoop game = new GameLoop(frame);
                 game.init();
                 ThreadPool.execute(game);
-
                 // and the game starts ...
             }
         });
