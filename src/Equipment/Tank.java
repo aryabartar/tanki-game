@@ -213,6 +213,8 @@ public class Tank {
 
     public void reduceHealth(int amount) {
         health -= amount;
+        if (health <= 0)
+            GameState.gameOver = true ;
     }
 
     public void addToHealth(int amount) {

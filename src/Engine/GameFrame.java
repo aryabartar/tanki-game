@@ -68,6 +68,7 @@ public class GameFrame extends JFrame {
     private BufferedImage healthBarImage;
     private BufferedImage healthBloodImage;
     private BufferedImage doorImage;
+    private BufferedImage pausePageImage;
 
     private long lastRender;
     private ArrayList<Float> fpsHistory;
@@ -128,6 +129,7 @@ public class GameFrame extends JFrame {
             healthBarImage = ImageIO.read(new File("./pictures/health-bar.jpg"));
             healthBloodImage = ImageIO.read(new File("./pictures/health-blood.jpg"));
             doorImage = ImageIO.read(new File("./pictures/door.png"));
+            pausePageImage = ImageIO.read(new File("./pictures/pausePage.jpg"));
 
 
         } catch (IOException e) {
@@ -146,6 +148,7 @@ public class GameFrame extends JFrame {
             cactusPoints.add(new Point(random.nextInt(4800), random.nextInt(1600)));
         }
 
+        Start.clip.stop();
 
     }
 
@@ -395,13 +398,19 @@ public class GameFrame extends JFrame {
 
 
 
+        if(GameLoop.isPaused == true) {
+            g2d.drawImage(pausePageImage, 0,0, null);
+        }
+
+
         // Draw GAME OVER
         if (state.gameOver) {
             String str = "GAME OVER";
-            g2d.setColor(Color.WHITE);
+            g2d.setColor(Color.RED);
             g2d.setFont(g2d.getFont().deriveFont(Font.BOLD).deriveFont(64.0f));
             int strWidth = g2d.getFontMetrics().stringWidth(str);
             g2d.drawString(str, (GAME_WIDTH - strWidth) / 2, GAME_HEIGHT / 2);
         }
+
     }
 }

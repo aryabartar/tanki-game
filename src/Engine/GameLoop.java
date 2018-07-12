@@ -53,23 +53,28 @@ public class GameLoop implements Runnable {
 	@Override
 	public void run() {
 		boolean gameOver = false;
+		int tmp = 0 ; //For a smooth pause !
 		while (!gameOver) {
 			try {
-				while (isPaused) {
-					System.out.println("1");
-				}
+
 				long start = System.currentTimeMillis();
 				//
 				state.update();
 				canvas.render(state);
 				gameOver = state.gameOver;
 				//
-				System.out.println("2");
 				long delay = (1000 / FPS) - (System.currentTimeMillis() - start);
 					if (delay > 0)
 					Thread.sleep(delay);
 			} catch (InterruptedException ex) {
 			}
+            if (isPaused == true)
+                tmp ++ ;
+            else
+                tmp = 0 ;
+            while ((isPaused == true) && (tmp > 5)) {
+                System.out.print("");
+            }
 		}
 		canvas.render(state);
 	}
