@@ -58,14 +58,14 @@ public class Start extends MouseAdapter {
             ex.printStackTrace();
         }
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setSize(1363, 770);
-        label.setSize(1363, 770);
-        label2.setSize(1363, 770);
+        frame.setSize(1280, 723);
+        label.setSize(1280, 723);
+        label2.setSize(1280, 723);
         label2.addMouseListener(this);
         label.addMouseListener(this);
 
 
-        Icon icon_page1 = new ImageIcon("./pictures/page1.jpg");
+        Icon icon_page1 = new ImageIcon("./pictures/page1112.jpg");
         Icon icon_page2 = new ImageIcon("./pictures/page2.jpg");
 
         label.setIcon(icon_page1);
@@ -114,7 +114,7 @@ public class Start extends MouseAdapter {
 
 
         //click on page1
-        if (mouseX < 255 && mouseX > 113 && mouseY < 442 && mouseY > 360 && flag == false) {
+        if (mouseX < 272 && mouseX > 111 && mouseY < 421 && mouseY > 361 && flag == false) {
             System.out.println("Co-op");
             frame.remove(label);
             frame.add(label2);
@@ -124,7 +124,7 @@ public class Start extends MouseAdapter {
             flag = true;
 
         }
-        if (mouseX < 239 && mouseX > 129 && mouseY < 322 && mouseY > 257 && flag == false) {
+        if (211 < 239 && mouseX > 98 && mouseY < 279 && mouseY > 223 && flag == false) {
             System.out.println("play");
             frame.remove(label);
             frame.add(label2);
@@ -134,7 +134,7 @@ public class Start extends MouseAdapter {
             flag = true;
 
         }
-        if (mouseX < 231 && mouseX > 130 && mouseY < 579 && mouseY > 514 && flag == false) {
+        if (mouseX < 236 && mouseX > 120 && mouseY < 574 && mouseY > 498 && flag == false) {
             System.out.println("Exit");
             System.exit(0);
             flag = true;
