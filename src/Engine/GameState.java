@@ -628,13 +628,43 @@ public class GameState {
                 if (mainTankRec.intersects(equipmentRec)) {
 
                     if (equipments.get(i) instanceof Cartridge) {
+                        try {
+                            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./sound/select.wav").getAbsoluteFile());
+                            Clip clip = AudioSystem.getClip();
+                            clip.open(audioInputStream);
+                            clip.start();
+                            clip.loop(0);
+                        } catch (Exception ex) {
+                            System.out.println("Error with playing sound.");
+                            ex.printStackTrace();
+                        }
                         mainTank.addToBullets(50);
                         mainTank.addToRockets(30);
                     }
                     if (equipments.get(i) instanceof UpdateWeapon) {
+                        try {
+                            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./sound/agree.wav").getAbsoluteFile());
+                            Clip clip = AudioSystem.getClip();
+                            clip.open(audioInputStream);
+                            clip.start();
+                            clip.loop(0);
+                        } catch (Exception ex) {
+                            System.out.println("Error with playing sound.");
+                            ex.printStackTrace();
+                        }
                         mainTank.updateWeapon();
                     }
                     if (equipments.get(i) instanceof Repair) {
+                        try {
+                            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./sound/repair.wav").getAbsoluteFile());
+                            Clip clip = AudioSystem.getClip();
+                            clip.open(audioInputStream);
+                            clip.start();
+                            clip.loop(0);
+                        } catch (Exception ex) {
+                            System.out.println("Error with playing sound.");
+                            ex.printStackTrace();
+                        }
                         mainTank.addToHealth(30);
                     }
 
@@ -792,7 +822,16 @@ public class GameState {
                         if ((rockets.get(i).getLocX() > enemyTank.getLocX()) && (rockets.get(i).getLocX() < enemyTank.getEndLocX()) &&
                                 (rockets.get(i).getLocY() > enemyTank.getLocY()) && (rockets.get(i).getLocY() < enemyTank.getEndLocY())) {
                             if (rockets.get(i).isFromEnemy() == false) {
-                                System.out.println("zamani ke tir sangin khodam mizanam va barkhord mikonad");
+                                try {
+                                    AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./sound/enemyshot.wav").getAbsoluteFile());
+                                    Clip clip = AudioSystem.getClip();
+                                    clip.open(audioInputStream);
+                                    clip.start();
+                                    clip.loop(0);
+                                } catch (Exception ex) {
+                                    System.out.println("Error with playing sound.");
+                                    ex.printStackTrace();
+                                }
                                 enemyTank.reduceHealth(Rocket.DAMAGE + mainTank.getGunLevel() * 2);
                             }
                             rockets.remove(i);
@@ -855,7 +894,16 @@ public class GameState {
                     if ((bullets.get(i).getLocX() > enemyTank.getLocX()) && (bullets.get(i).getLocY() > enemyTank.getLocY()) &&
                             (bullets.get(i).getLocX() < enemyTank.getEndLocX()) && (bullets.get(i).getLocY() < enemyTank.getEndLocY())) {
                         if (bullets.get(i).isFromEnemy() == false) {
-                            System.out.println("zamani ke tir sabok khodam mizanam va barkhord mikonad be tank");
+                            try {
+                                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./sound/enemyshot.wav").getAbsoluteFile());
+                                Clip clip = AudioSystem.getClip();
+                                clip.open(audioInputStream);
+                                clip.start();
+                                clip.loop(0);
+                            } catch (Exception ex) {
+                                System.out.println("Error with playing sound.");
+                                ex.printStackTrace();
+                            }
                             enemyTank.reduceHealth(Bullet.DAMAGE + mainTank.getGunLevel() * 3);
                         }
                         bullets.remove(i);
@@ -875,7 +923,6 @@ public class GameState {
                                 (rockets.get(i).getLocY() > block.getLocY()) && (rockets.get(i).getLocY() < block.getEndY())) {
 
                             if (rockets.get(i).isFromEnemy() == false) {
-                                System.out.println("ba tir sangin bezanam be divar");
                                 block.reduceHealth(Rocket.DAMAGE);
                             }
 
@@ -897,7 +944,6 @@ public class GameState {
                     if ((bullets.get(i).getLocX() > block.getLocX()) && (bullets.get(i).getLocY() > block.getLocY()) &&
                             (bullets.get(i).getLocX() < block.getEndX()) && (bullets.get(i).getLocY() < block.getEndY())) {
                         if (bullets.get(i).isFromEnemy() == false) {
-                            System.out.println("ba tir sabok bezanam be divar");
                             block.reduceHealth(Bullet.DAMAGE);
                         }
                         bullets.remove(i);
@@ -914,7 +960,16 @@ public class GameState {
 
                     if (rockets.get(i).isFromEnemy() == true) {
 
-                        System.out.println("zamani ke khodam tir mikhoram-rocket mikhoram");
+                        try {
+                            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./sound/enemyshot.wav").getAbsoluteFile());
+                            Clip clip = AudioSystem.getClip();
+                            clip.open(audioInputStream);
+                            clip.start();
+                            clip.loop(0);
+                        } catch (Exception ex) {
+                            System.out.println("Error with playing sound.");
+                            ex.printStackTrace();
+                        }
                         mainTank.reduceHealth(Rocket.DAMAGE);
                     }
                     rockets.remove(i);
@@ -926,7 +981,16 @@ public class GameState {
                 if ((bullets.get(i).getLocX() > mainTank.getLocX()) && (bullets.get(i).getLocY() > mainTank.getLocY()) &&
                         (bullets.get(i).getLocX() < mainTank.getEndLocX()) && (bullets.get(i).getLocY() < mainTank.getEndLocY())) {
                     if (bullets.get(i).isFromEnemy() == true) {
-                        System.out.println("zamani ke khodam tir mikhoram-bullet mikhoram");
+                        try {
+                            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./sound/enemyshot.wav").getAbsoluteFile());
+                            Clip clip = AudioSystem.getClip();
+                            clip.open(audioInputStream);
+                            clip.start();
+                            clip.loop(0);
+                        } catch (Exception ex) {
+                            System.out.println("Error with playing sound.");
+                            ex.printStackTrace();
+                        }
                         mainTank.reduceHealth(Bullet.DAMAGE);
                     }
                     bullets.remove(i);
