@@ -22,12 +22,15 @@ public class Start extends MouseAdapter {
     private boolean flag2 = false;
 
 
+
     public Start() {
 
 
         frame = new JFrame();
         label = new JLabel();
+
         label2 = new JLabel();
+
         clip = null;
 
         frame.setResizable(false);
@@ -41,6 +44,8 @@ public class Start extends MouseAdapter {
 
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setLocation(dim.width/2-frame.getSize().width/2 + 300, dim.height/2-frame.getSize().height/2);
+        frame.setLocationRelativeTo(null);
+
 
         try {
 
@@ -81,7 +86,6 @@ public class Start extends MouseAdapter {
         //click on page2
         if (mouseX < 239 && mouseX > 129 && mouseY < 322 && mouseY > 257 && flag) {
             runTheGame();
-
             System.out.println("Easy");
             flag2 = true;
             clip.stop();
@@ -100,8 +104,7 @@ public class Start extends MouseAdapter {
 
         }
         if (mouseX < 231 && mouseX > 130 && mouseY < 579 && mouseY > 514 && flag == true) {
-
-
+            runTheGame();
             System.out.println("Hard");
             flag2 = true;
             clip.stop();
@@ -128,7 +131,6 @@ public class Start extends MouseAdapter {
             frame.invalidate();
             frame.validate();
             frame.repaint();
-            System.out.printf("phl2");
             flag = true;
 
         }
