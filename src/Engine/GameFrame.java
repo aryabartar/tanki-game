@@ -36,6 +36,7 @@ public class GameFrame extends JFrame {
     public static final int GAME_FULL_WIDTH = 5000;
     public static final int TANK_IN_MAP_X = 888;
     public static final int TANK_IN_MAP_Y = 500;
+    public static boolean isCheated = false;
 
 
     private BufferedImage mainTankImage;
@@ -208,25 +209,27 @@ public class GameFrame extends JFrame {
         g2d.fillRect(-500, -500, GAME_WIDTH, GAME_HEIGHT);
 
         g2d.drawImage(backOfBackground, -(mainX / 3) - 500, -(mainY / 3) - 500, null);
-        g2d.drawImage(bigRoofImage, 0 - mainX, 0 - mainY, null);
+        if (isCheated != true)
+            g2d.drawImage(bigRoofImage, 0 - mainX, 0 - mainY, null);
 
         g2d.drawImage(doorImage, 4810 - mainX, 1790 - mainY, null);
 
-        for (Point point : rock1Points) {
-            g2d.drawImage(rock1Image, point.getX() - mainX, point.getY() - mainY, null);
-        }
-        for (Point point : rock2Points) {
-            g2d.drawImage(rock2Image, point.getX() - mainX, point.getY() - mainY, null);
-        }
-        for (Point point : ratPoints) {
-            g2d.drawImage(ratImage, point.getX() - mainX, point.getY() - mainY, null);
-        }
-        for (Point point : cactusPoints) {
-            g2d.drawImage(cactusImage, point.getX() - mainX, point.getY() - mainY, null);
-        }
-        for (Point point : papyrusPoints) {
-            g2d.drawImage(papyrusImage, point.getX() - mainX, point.getY() - mainY, null);
-        }
+
+//        for (Point point : rock1Points) {
+//            g2d.drawImage(rock1Image, point.getX() - mainX, point.getY() - mainY, null);
+//        }
+//        for (Point point : rock2Points) {
+//            g2d.drawImage(rock2Image, point.getX() - mainX, point.getY() - mainY, null);
+//        }
+//        for (Point point : ratPoints) {
+//            g2d.drawImage(ratImage, point.getX() - mainX, point.getY() - mainY, null);
+//        }
+//        for (Point point : cactusPoints) {
+//            g2d.drawImage(cactusImage, point.getX() - mainX, point.getY() - mainY, null);
+//        }
+//        for (Point point : papyrusPoints) {
+//            g2d.drawImage(papyrusImage, point.getX() - mainX, point.getY() - mainY, null);
+//        }
 
 
         g2d.setRenderingHint(
@@ -381,25 +384,23 @@ public class GameFrame extends JFrame {
         g2d.drawImage(smallRocketImage, 82, 79, null);
 
 
-
         //health bar
-        backupComposite = g2d.getComposite()  ;
+        backupComposite = g2d.getComposite();
         ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) 0.6);
         g2d.setComposite(ac);
-        g2d.drawImage(healthBarImage , 600 , 40 , null );
+        g2d.drawImage(healthBarImage, 600, 40, null);
 
         ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) 0.90);
         g2d.setComposite(ac);
-        int tmp =state.getMainTank().getHealth() / (state.getMainTank().getHealthLimit()/10) ;
-        for (int i = 0 ; i < tmp ; i++) {
-            g2d.drawImage(healthBloodImage , 609 + i * 55 , 45 , null);
+        int tmp = state.getMainTank().getHealth() / (state.getMainTank().getHealthLimit() / 10);
+        for (int i = 0; i < tmp; i++) {
+            g2d.drawImage(healthBloodImage, 609 + i * 55, 45, null);
         }
         g2d.setComposite(backupComposite);
 
 
-
-        if(GameLoop.isPaused == true) {
-            g2d.drawImage(pausePageImage, 0,0, null);
+        if (GameLoop.isPaused == true) {
+            g2d.drawImage(pausePageImage, 0, 0, null);
         }
 
 

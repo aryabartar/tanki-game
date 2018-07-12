@@ -57,6 +57,7 @@ public class Start extends MouseAdapter {
         frame.setSize(1778, 1000);
         label.setSize(1778, 1000);
         label2.setSize(1778, 1000);
+
         label2.addMouseListener(this);
         label.addMouseListener(this);
 
@@ -109,6 +110,7 @@ public class Start extends MouseAdapter {
 
         //click on page1
         if (mouseX < 315 && mouseX > 134 && mouseY < 400 && mouseY > 331 && flag == false) {
+
             System.out.println("Co-op");
             frame.remove(label);
             frame.add(label2);
@@ -121,6 +123,7 @@ public class Start extends MouseAdapter {
 
         }
         if (mouseX < 403 && mouseX > 131 && mouseY < 536 && mouseY > 470 && flag == false) {
+
             System.out.println("play");
             frame.remove(label);
             frame.add(label2);
@@ -133,6 +136,7 @@ public class Start extends MouseAdapter {
 
         }
         if (mouseX < 313 && mouseX > 135 && mouseY < 677 && mouseY > 611 && flag == false) {
+
             System.out.println("Exit");
             System.exit(0);
             playSelectMusic();
