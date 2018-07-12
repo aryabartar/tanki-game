@@ -124,7 +124,7 @@ public class Start extends MouseAdapter {
             flag = true;
 
         }
-        if (211 < 239 && mouseX > 98 && mouseY < 279 && mouseY > 223 && flag == false) {
+        if (mouseX < 208 && mouseX > 93 && mouseY < 279 && mouseY > 208 && flag == false) {
             System.out.println("play");
             frame.remove(label);
             frame.add(label2);
