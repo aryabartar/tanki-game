@@ -32,12 +32,14 @@ public class GameLoop implements Runnable {
      */
     public static final int FPS = 60;
 
+    private boolean load ;
     private GameFrame canvas;
     private GameState state;
     GameStateSuperInfo gameStateSuperInfo ;
 
 
-    public GameLoop(GameFrame frame , GameStateSuperInfo gameStateSuperInfo) {
+    public GameLoop(GameFrame frame , GameStateSuperInfo gameStateSuperInfo , boolean load ) {
+        this.load = load ;
         this.gameStateSuperInfo = gameStateSuperInfo;
         canvas = frame;
 
@@ -47,7 +49,7 @@ public class GameLoop implements Runnable {
      * This must be called before the game loop starts.
      */
     public void init() {
-        state = new GameState();
+        state = new GameState(load);
         canvas.addKeyListener(state.getKeyListener());
         canvas.addMouseListener(state.getMouseListener());
         canvas.addMouseMotionListener(state.getMouseMotionListener());

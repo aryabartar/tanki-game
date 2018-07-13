@@ -20,6 +20,7 @@ public class Start extends MouseAdapter {
 
     private boolean flag = false;
     private boolean flag2 = false;
+    private boolean load = false;
     private GameStateSuperInfo gameStateSuperInfo ;
 
     public Start(GameStateSuperInfo gameStateSuperInfo ) {
@@ -106,6 +107,15 @@ public class Start extends MouseAdapter {
             playSelectMusic();
             GameState.setDifficultyLevel(3);
         }
+        if (mouseX < 310 && mouseX > 127 && mouseY < 806 && mouseY > 740 && flag == true) {
+            load = true ;
+            runTheGame();
+            System.out.println("Load");
+            flag2 = true;
+            frame.setVisible(false);
+            playSelectMusic();
+            GameState.setDifficultyLevel(2);
+        }
 
 
         //click on page1
@@ -157,7 +167,7 @@ public class Start extends MouseAdapter {
                 frame.setVisible(true);
                 frame.initBufferStrategy();
                 // Create and execute the game-loop
-                GameLoop game = new GameLoop(frame , gameStateSuperInfo);
+                GameLoop game = new GameLoop(frame , gameStateSuperInfo , load);
                 game.init();
                 ThreadPool.execute(game);
                 // and the game starts ...

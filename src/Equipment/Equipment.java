@@ -1,8 +1,11 @@
 package Equipment;
 
+import Serialization.Serialize;
+
+import java.io.Serializable;
 import java.security.SecureRandom;
 
-public class Equipment {
+public class Equipment implements Serializable{
 
     private int locX ;
     private int locY ;

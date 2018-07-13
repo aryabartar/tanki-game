@@ -7,12 +7,13 @@ import Equipment.Rocket;
 import Others.Point;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public abstract class EnemyTank {
+public abstract class EnemyTank implements Serializable {
 
     protected int health;
     protected boolean isAlive;
