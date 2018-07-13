@@ -53,13 +53,13 @@ public class GameState {
     private GameClient gameClient;
     private GameServer gameServer;
 
-    private static ArrayList<Bullet> bullets;
-    private static ArrayList<Rocket> rockets;
-    private static ArrayList<EnemyTank> enemyTanks;
-    private static ArrayList<Block> blocks;
-    private static ArrayList<Equipment> equipments;
-    private static ArrayList<Point> destroyedTankTemporaryTrashPoints;
-    private static ArrayList<MovingSmile> movingSmiles;
+    private ArrayList<Bullet> bullets;
+    private ArrayList<Rocket> rockets;
+    private ArrayList<EnemyTank> enemyTanks;
+    private ArrayList<Block> blocks;
+    private ArrayList<Equipment> equipments;
+    private ArrayList<Point> destroyedTankTemporaryTrashPoints;
+    private ArrayList<MovingSmile> movingSmiles;
 
 
     public GameState() {
@@ -68,7 +68,7 @@ public class GameState {
         firstLevel = true;
         fullyFinished = false;
 
-        mainTank = new Tank();
+        mainTank = new Tank(this);
         setArrayLists();
 
 
@@ -115,18 +115,18 @@ public class GameState {
     private void addMapObjects() {
 
         //add tanks here
-        enemyTanks.add(new StaticTankEasy(600, 100));
-        enemyTanks.add(new DynamicTankEasy(300, 500, 500, 500));
-        enemyTanks.add(new DynamicTankEasy(1500, 1300, 1800, 1300));
+        enemyTanks.add(new StaticTankEasy(600, 100, this));
+        enemyTanks.add(new DynamicTankEasy(300, 500, 500, 500, this));
+        enemyTanks.add(new DynamicTankEasy(1500, 1300, 1800, 1300, this));
 
-        enemyTanks.add(new StaticTankHard(1500, 1100));
-        enemyTanks.add(new StaticTankEasy(1300, 1200));
-        enemyTanks.add(new StaticTankHard(1200, 200));
-        enemyTanks.add(new StaticTankHard(700, 1200));
-        enemyTanks.add(new StaticTankHard(2600, 1300));
+        enemyTanks.add(new StaticTankHard(1500, 1100, this));
+        enemyTanks.add(new StaticTankEasy(1300, 1200, this));
+        enemyTanks.add(new StaticTankHard(1200, 200, this));
+        enemyTanks.add(new StaticTankHard(700, 1200, this));
+        enemyTanks.add(new StaticTankHard(2600, 1300, this));
 
-        enemyTanks.add(new StaticTankHard(1850, 800));
-        enemyTanks.add(new DynamicTankEasy(2600, 130, 2600, 250));
+        enemyTanks.add(new StaticTankHard(1850, 800, this));
+        enemyTanks.add(new DynamicTankEasy(2600, 130, 2600, 250, this));
 
 
         // add blocks here
@@ -336,7 +336,7 @@ public class GameState {
         for (int i = 0; i < 10; i++) {
             blocks.add(new UnDestroyableBlock(3700, 1000 + i * 100));
         }
-        enemyTanks.add(new DynamicTankEasy(3700, 500, 3700, 900));
+        enemyTanks.add(new DynamicTankEasy(3700, 500, 3700, 900, this));
         blocks.add(new DestroyableBlock(3700, 400));
         blocks.add(new DestroyableBlock(3700, 300));
         blocks.add(new DestroyableBlock(3700, 200));
@@ -370,11 +370,11 @@ public class GameState {
         blocks.add(new UnDestroyableBlock(4300, 1500));
         blocks.add(new UnDestroyableBlock(4400, 1500));
 
-        enemyTanks.add(new DynamicTankEasy(120, 1800, 350, 1800));
+        enemyTanks.add(new DynamicTankEasy(120, 1800, 350, 1800, this));
 
-        enemyTanks.add(new StaticTankEasy(3000, 100));
-        enemyTanks.add(new StaticTankEasy(4000, 100));
-        enemyTanks.add(new StaticTankEasy(4400, 1100));
+        enemyTanks.add(new StaticTankEasy(3000, 100, this));
+        enemyTanks.add(new StaticTankEasy(4000, 100, this));
+        enemyTanks.add(new StaticTankEasy(4400, 1100, this));
 
 
         equipments.add(new UpdateWeapon(300, 1000));
@@ -511,20 +511,20 @@ public class GameState {
         keyRIGHT = false;
 
 //map two
-        enemyTanks.add(new StaticTankEasy(600, 100));
-        enemyTanks.add(new DynamicTankEasy(300, 500, 500, 500));
-        enemyTanks.add(new DynamicTankHard(1600, 1300, 2200, 1300));
+        enemyTanks.add(new StaticTankEasy(600, 100, this));
+        enemyTanks.add(new DynamicTankEasy(300, 500, 500, 500, this));
+        enemyTanks.add(new DynamicTankHard(1600, 1300, 2200, 1300, this));
 
-        enemyTanks.add(new StaticTankHard(1500, 1100));
+        enemyTanks.add(new StaticTankHard(1500, 1100, this));
 
-        enemyTanks.add(new StaticTankEasy(1300, 1200));
-        enemyTanks.add(new StaticTankHard(1200, 200));
+        enemyTanks.add(new StaticTankEasy(1300, 1200, this));
+        enemyTanks.add(new StaticTankHard(1200, 200, this));
 
-        enemyTanks.add(new StaticTankHard(800, 1300));
-        enemyTanks.add(new StaticTankHard(2600, 1300));
+        enemyTanks.add(new StaticTankHard(800, 1300, this));
+        enemyTanks.add(new StaticTankHard(2600, 1300, this));
 
-        enemyTanks.add(new StaticTankHard(1850, 800));
-        enemyTanks.add(new DynamicTankEasy(2600, 130, 2600, 250));
+        enemyTanks.add(new StaticTankHard(1850, 800, this));
+        enemyTanks.add(new DynamicTankEasy(2600, 130, 2600, 250, this));
 
 
         // add blocks here
@@ -729,8 +729,8 @@ public class GameState {
         for (int i = 0; i < 10; i++) {
             blocks.add(new UnDestroyableBlock(3700, 1000 + i * 100));
         }
-        enemyTanks.add(new DynamicTankEasy(3700, 500, 3700, 900));
-        enemyTanks.add(new DynamicTankEasy(4900, 1500, 4900, 1900));
+        enemyTanks.add(new DynamicTankEasy(3700, 500, 3700, 900, this));
+        enemyTanks.add(new DynamicTankEasy(4900, 1500, 4900, 1900, this));
         blocks.add(new DestroyableBlock(3700, 400));
         blocks.add(new DestroyableBlock(3700, 300));
         blocks.add(new DestroyableBlock(3700, 200));
@@ -767,15 +767,15 @@ public class GameState {
         blocks.add(new DestroyableBlock(4400, 1700));
 
 
-        enemyTanks.add(new DynamicTankEasy(300, 1800, 800, 1800));
+        enemyTanks.add(new DynamicTankEasy(300, 1800, 800, 1800, this));
 
 
-        enemyTanks.add(new StaticTankEasy(3000, 100));
-        enemyTanks.add(new StaticTankEasy(4000, 100));
-        enemyTanks.add(new StaticTankEasy(4400, 1100));
-        enemyTanks.add(new StaticTankEasy(3400, 1100));
-        enemyTanks.add(new StaticTankEasy(4400, 1100));
-        enemyTanks.add(new StaticTankEasy(4400, 1100));
+        enemyTanks.add(new StaticTankEasy(3000, 100, this));
+        enemyTanks.add(new StaticTankEasy(4000, 100, this));
+        enemyTanks.add(new StaticTankEasy(4400, 1100, this));
+        enemyTanks.add(new StaticTankEasy(3400, 1100, this));
+        enemyTanks.add(new StaticTankEasy(4400, 1100, this));
+        enemyTanks.add(new StaticTankEasy(4400, 1100, this));
 
 
         //equipments.add(new UpdateWeapon(300, 1000));
@@ -818,7 +818,7 @@ public class GameState {
     }
 
     private void setArrayLists() {
-        mainTank = new Tank();
+        mainTank = new Tank(this);
         bullets = new ArrayList<>();
         rockets = new ArrayList<>();
         enemyTanks = new ArrayList<>();
@@ -1332,23 +1332,23 @@ public class GameState {
         return mouseMotionY;
     }
 
-    public static ArrayList<Bullet> getBullets() {
+    public ArrayList<Bullet> getBullets() {
         return bullets;
     }
 
-    public static ArrayList<Rocket> getRockets() {
+    public ArrayList<Rocket> getRockets() {
         return rockets;
     }
 
-    public static ArrayList<EnemyTank> getEnemyTanks() {
+    public ArrayList<EnemyTank> getEnemyTanks() {
         return enemyTanks;
     }
 
-    public static void addToBullets(Bullet bullet) {
+    public void addToBullets(Bullet bullet) {
         bullets.add(bullet);
     }
 
-    public static void addToRockets(Rocket rocket) {
+    public void addToRockets(Rocket rocket) {
         try {
             rockets.add(rocket);
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -1356,19 +1356,19 @@ public class GameState {
         }
     }
 
-    public static ArrayList<Block> getBlocks() {
+    public ArrayList<Block> getBlocks() {
         return blocks;
     }
 
-    public static ArrayList<Equipment> getEquipments() {
+    public ArrayList<Equipment> getEquipments() {
         return equipments;
     }
 
-    public static ArrayList<Point> getDestroyedTankTemporaryTrashPoints() {
+    public ArrayList<Point> getDestroyedTankTemporaryTrashPoints() {
         return destroyedTankTemporaryTrashPoints;
     }
 
-    public static ArrayList<MovingSmile> getMovingSmiles() {
+    public ArrayList<MovingSmile> getMovingSmiles() {
         return movingSmiles;
     }
 

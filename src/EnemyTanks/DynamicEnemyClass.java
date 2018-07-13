@@ -1,5 +1,6 @@
 package EnemyTanks;
 
+import Engine.GameState;
 import Equipment.Tank;
 
 import java.awt.*;
@@ -15,8 +16,8 @@ public abstract class DynamicEnemyClass extends EnemyTank {
     private boolean movesDown;
     private boolean movesRight;
 
-    public DynamicEnemyClass(int locX, int locY, int toThisXLocation, int toThisYLocation , int health , int wholeProbability) {
-        super(health, locX, locY, wholeProbability);
+    public DynamicEnemyClass(int locX, int locY, int toThisXLocation, int toThisYLocation , int health , int wholeProbability , GameState gameState) {
+        super(health, locX, locY, wholeProbability , gameState);
 
         this.fromThisXLocation = locX;
         this.fromThisYLocation = locY;

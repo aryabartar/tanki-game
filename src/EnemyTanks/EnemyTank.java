@@ -30,6 +30,7 @@ public abstract class EnemyTank {
     protected final int yPixels = 100;
     protected final int gunXPixels = 110;
     protected final int gunYPixels = 33;
+    private GameState gameState;
 
     protected double gunAndBodyRadian; //this is tank body and gun radian .
     private TimerTask task;
@@ -37,11 +38,12 @@ public abstract class EnemyTank {
     private SecureRandom random = new SecureRandom();
     private final int wholeProbability;
 
-    public EnemyTank(int health, int locX, int locY, int wholeProbability) {
+    public EnemyTank(int health, int locX, int locY, int wholeProbability, GameState gameState) {
         this.health = health;
         this.locX = locX;
         this.locY = locY;
         this.wholeProbability = wholeProbability;
+        this.gameState = gameState;
 
         isAlive = true;
 
@@ -53,8 +55,7 @@ public abstract class EnemyTank {
         long intervalPeriod = 1 * 1000;
 
         // schedules the task to be run in an interval
-        timer.scheduleAtFixedRate(task, delay,
-                intervalPeriod);
+        timer.scheduleAtFixedRate(task, delay, intervalPeriod);
 
     }
 
@@ -65,9 +66,9 @@ public abstract class EnemyTank {
             public void run() {
                 if (isAlive == true) {
                     if (random.nextInt(wholeProbability) != 0) {
-                        GameState.addToBullets(new Bullet(getTankCenterX(), getTankCenterY(), getGunAndBodyRadian(), true));
+                        gameState.addToBullets(new Bullet(getTankCenterX(), getTankCenterY(), getGunAndBodyRadian(), true));
                     } else {
-                        GameState.addToRockets(new Rocket(getTankCenterX(), getTankCenterY(), getGunAndBodyRadian(), true));
+                        gameState.addToRockets(new Rocket(getTankCenterX(), getTankCenterY(), getGunAndBodyRadian(), true));
                     }
                 }
             }
@@ -114,7 +115,7 @@ public abstract class EnemyTank {
     }
 
     public void setLocation(int locX, int locY) {
-        ArrayList<EnemyTank> enemyTanks = GameState.getEnemyTanks();
+        ArrayList<EnemyTank> enemyTanks = gameState.getEnemyTanks();
         boolean canMove = true;
 
         for (EnemyTank enemyTank : enemyTanks) {
@@ -132,7 +133,7 @@ public abstract class EnemyTank {
     }
 
     public void setLocation(int locX, int locY, EnemyTank et) {
-        ArrayList<EnemyTank> enemyTanks = GameState.getEnemyTanks();
+        ArrayList<EnemyTank> enemyTanks = gameState.getEnemyTanks();
         boolean canMove = true;
 
         for (EnemyTank enemyTank : enemyTanks) {
@@ -224,7 +225,7 @@ public abstract class EnemyTank {
             isAlive = false;
     }
 
-    public void die () {
+    public void die() {
         isAlive = false;
     }
 

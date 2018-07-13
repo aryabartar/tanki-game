@@ -31,11 +31,12 @@ public class Tank implements Serializable{
     private int health;
     private final int healthLimit;
 
+    private GameState gameState ;
 
 
     private double gunAndBodyRadian; //this is tank body and gun radian .
 
-    public Tank() {
+    public Tank(GameState gameState) {
         bulletsNumber = 999;
         rocketsNumber = 999;
 
@@ -44,6 +45,7 @@ public class Tank implements Serializable{
         healthLimit = 100;
         health = healthLimit;
 
+        this.gameState = gameState ;
         initLocations();
     }
 
@@ -86,7 +88,7 @@ public class Tank implements Serializable{
     }
 
     public void setLocation(int locX, int locY) {
-        ArrayList<EnemyTank> enemyTanks = GameState.getEnemyTanks();
+        ArrayList<EnemyTank> enemyTanks = gameState.getEnemyTanks();
         boolean canMove = true;
 
         for (EnemyTank enemyTank : enemyTanks) {
@@ -99,7 +101,7 @@ public class Tank implements Serializable{
                 canMove = false;
         }
 
-        for (Block block : GameState.getBlocks()) {
+        for (Block block : gameState.getBlocks()) {
             Rectangle p = new Rectangle(block.getLocX(), block.getLocY(), block.getxPixels(), block.getyPixels());
             Rectangle r = new Rectangle(locX, locY, xPixels, yPixels);
 
@@ -123,7 +125,7 @@ public class Tank implements Serializable{
     }
 
     private boolean canMove() {
-        ArrayList<EnemyTank> enemyTanks = GameState.getEnemyTanks();
+        ArrayList<EnemyTank> enemyTanks = gameState.getEnemyTanks();
         boolean canMove = true;
 
         for (EnemyTank tank : enemyTanks) {
