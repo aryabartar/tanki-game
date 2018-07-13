@@ -6,9 +6,10 @@ import Engine.GameFrame;
 import Engine.GameState;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Tank {
+public class Tank implements Serializable{
 
     private int locX;
     private int locY;

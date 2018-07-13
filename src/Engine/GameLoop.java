@@ -34,10 +34,13 @@ public class GameLoop implements Runnable {
 
     private GameFrame canvas;
     private GameState state;
+    GameStateSuperInfo gameStateSuperInfo ;
 
 
-    public GameLoop(GameFrame frame) {
+    public GameLoop(GameFrame frame , GameStateSuperInfo gameStateSuperInfo) {
+        this.gameStateSuperInfo = gameStateSuperInfo;
         canvas = frame;
+
     }
 
     /**
@@ -48,7 +51,6 @@ public class GameLoop implements Runnable {
         canvas.addKeyListener(state.getKeyListener());
         canvas.addMouseListener(state.getMouseListener());
         canvas.addMouseMotionListener(state.getMouseMotionListener());
-//        Serialize.serializeObject(state);
     }
 
     @Override

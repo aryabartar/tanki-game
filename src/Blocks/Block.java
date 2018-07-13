@@ -1,6 +1,8 @@
 package Blocks;
 
-public class Block {
+import java.io.Serializable;
+
+public class Block implements Serializable{
     private int locX;
     private int locY;
 

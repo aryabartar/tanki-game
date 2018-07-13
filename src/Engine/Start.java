@@ -20,11 +20,11 @@ public class Start extends MouseAdapter {
 
     private boolean flag = false;
     private boolean flag2 = false;
+    private GameStateSuperInfo gameStateSuperInfo ;
 
+    public Start(GameStateSuperInfo gameStateSuperInfo ) {
 
-    public Start() {
-
-
+        this.gameStateSuperInfo = gameStateSuperInfo;
         frame = new JFrame();
         label = new JLabel();
 
@@ -157,7 +157,7 @@ public class Start extends MouseAdapter {
                 frame.setVisible(true);
                 frame.initBufferStrategy();
                 // Create and execute the game-loop
-                GameLoop game = new GameLoop(frame);
+                GameLoop game = new GameLoop(frame , gameStateSuperInfo);
                 game.init();
                 ThreadPool.execute(game);
                 // and the game starts ...
